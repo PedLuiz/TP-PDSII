@@ -15,16 +15,16 @@ public:
     /* Construtor */
     Jogo (int M, int N); 
 
-    // Funcao que retorna qual jogador venceu 'X' 'O' ou '' (nenhum)
+    // Retorna qual jogador venceu 'X' 'O' ou '' (nenhum)
     virtual char getVencedor() = 0;
 
-    // Funcao retorna verdadeiro se o jogo terminou
+    // Retorna verdadeiro se o jogo terminou
     virtual bool isEstadoFinal() = 0;
 
-    // Funcao retorna qual jogador tem o turno 'X' ou 'O'
+    // Retorna qual jogador tem o turno 'X' ou 'O'
     virtual char getTurno() = 0;
 
-    // Funcao recebe um par de coordenadas (i, j) e se for uma jogada valida, atualiza o tabuleiro, conforme o jogador q tem o turno
+    // Recebe um par de coordenadas (i, j) e, se for uma jogada valida, atualiza o tabuleiro conforme o jogador que tem o turno
     virtual void fazerJogada(pair<int, int> jogada) = 0;
 
     /* Retorna verdadeiro se a jogada é valida
@@ -35,7 +35,7 @@ public:
      */
     virtual bool isJogadaValida(pair<int,int> jogada) = 0;
 
-    // Printa o tabuleiro, formatação do pdf, tem uma implementação padrao (ver PDF do TP), mas pode ser sobrecarregada
+    // Printa o tabuleiro, tem uma implementação padrao (ver PDF do TP), mas pode ser sobrecarregada
     // a depender do jogo
     virtual void printTabuleiro();
 };
