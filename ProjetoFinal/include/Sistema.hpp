@@ -3,18 +3,22 @@
 
 #include "Jogador.hpp"
 #include <iostream>
-#include <vector>
+#include <list>
 #include <fstream>
 
 class Sistema {
     private:
-        std::vector<Jogador> jogadores;
-        std::fstream jogadores("jogadores.txt");
+        std::list<Jogador> lista_jogadores;
+        std::fstream arq_jogadores("jogadores.txt");
+        int num_jogadores_cadastrados;
     public:
+        Sistema();
         void loadSistema();
         void saveSistema();
         void cadastrarJogador(std::string apelido, std::string nome);
-        void printSistema();
+        bool comparaApelido(Jogador & J1, Jogador & J2);
+        bool comparaNome(Jogador & J1, Jogador & J2);
+        void printSistema(char parametro);
         void printLeaderBoard();
         void removerJogador(std::string apelido);
 };
