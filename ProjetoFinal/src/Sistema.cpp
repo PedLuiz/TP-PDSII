@@ -10,6 +10,9 @@ Sistema::~Sistema(){
     arq_jogadores.close();
 }
 
+
+std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
+
 void Sistema::cadastrarJogador(std::string apelido, std::string nome){
     Jogador aux(apelido, nome);
     vetor_jogadores.push_back(aux);
@@ -80,7 +83,6 @@ void Sistema::printSistema(char parametro){
         vetor_jogadores.sort(comparaNome);
     }
     std::vector<Jogador> iterator it;
-    std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
     for (it = vetor_jogadores.begin(); it!=vetor_jogadores.end(); it++){
         std::cout << it->nome << std::endl << it->apelido << std::endl;
         for (int i=0; i<3; i++){
@@ -120,12 +122,30 @@ bool Sistema::comparaStatsVelha(Jogador & J1, Jogador & J2){
 
 void Sistema::printLeaderBoard(){
     std::vector<Jogador> iterator it;
-    vetor_jogadores.sort(comparaStatsReversi);
-    std::cout << "REVERSI:" << std::endl;
-    for (it = vetor_jogadores.begin(); it!=vetor_jogadores.end; it++){
-        std::cout << it->getNome() << " [" << it->getApelido() << "]:" << std::endl;
-        std::cout << it->getStat(0,0) << " VITÓRIAS" << std::endl;
-        std::cout << it->getStat(0,1) << " DERROTAS" << std::endl;
+    for (int i=0; i<3; i++){
+        if (i==0) vetor_jogadores.sort(comparaStatsReversi);
+        if (i==1) vetor_jogadores.sort(comparaStatsLig4);
+        if (i==2) vetor_jogadores.sort(comparaStatsVelha);
+        for (it = vetor_jogadores.begin(); it!=vetor_jogadores.end; it++){
+            std::cout << nomes_jogos[i] << ":" << std::endl;
+            std::cout << it->getNome() << " [" << it->getApelido() << "]:" << std::endl;
+            std::cout << it->getStat(i,0) << " VITÓRIAS" << std::endl;
+            std::cout << it->getStat(i,1) << " DERROTAS" << std::endl;
+        }
     }
-    //ainda em desenvolvimento
+}
+
+void Sistema::removerJogador(std::string apelido){
+    std::vector<Jogador> iterator it;
+    for (it = vetor_jogadores.begin(); it!= vetor_jogadores.end(); it++){
+        if (it->getApelido() == apelido){
+            vetor_jogadores.erase(it);
+            break;
+        }
+    }
+    arq_jogadores.close();
+    arq_jogadores.open("jogadores.txt", std::fstream::out);
+    saveSistema();
+    arq_jogadores.close();
+    arq_jogadores.open("jogadores.txt", std::fstream::in | std::fstream::out | std::fstream::app);
 }
