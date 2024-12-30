@@ -1,39 +1,44 @@
 #include "ProjetoFinal/include/Sistema.hpp"
 #include <algorithm>
-#include <vector>
 
 Sistema::Sistema(){
+    arq_jogadores.open("jogadores.txt", std::fstream::in | std::fstream::out | std::fstream::app);
     num_jogadores_cadastrados = 0;
 }
 
+Sistema::~Sistema(){
+    arq_jogadores.close();
+}
 
 void Sistema::cadastrarJogador(std::string apelido, std::string nome){
     Jogador aux(apelido, nome);
-    lista_jogadores.push_back(aux);
+    vetor_jogadores.push_back(aux);
     num_jogadores_cadastrados++;
 }
 
 void Sistema::loadSistema(){
     while (!arq_jogadores.eof()){
         Jogador aux;
-        arq_jogadores >> aux.nome;
         arq_jogadores >> aux.apelido;
+        arq_jogadores >> aux.nome;
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
-                arq_jogadores >> aux.stats[i][j];
+                int stat;
+                arq_jogadores >> stat;
+                aux->setStat(i, j, stat);
             }
         }
-        lista_jogadores.push_back(aux);
+        vetor_jogadores.push_back(aux);
     }
 }
 
 void Sistema::saveSistema(){
-    std::list<Jogador> iterator it;
-    for (it = lista_jogadores.begin(); it!=lista_jogadores.end(); it++){
+    std::vector<Jogador> iterator it;
+    for (it = vetor_jogadores.begin(); it!=vetor_jogadores.end(); it++){
         arq_jogadores << it->nome << std::endl << it->apelido << std::endl;
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
-                arq_jogadores << it->stats[i][j];
+                arq_jogadores << it->getStat(i, j);
                 if(j=0){
                     arq_jogadores << " ";
                 }
@@ -69,17 +74,58 @@ bool Sistema::comparaNome(Jogador & J1, Jogador & J2){
 
 void Sistema::printSistema(char parametro){
     if (parametro == 'A') {
-        lista_jogadores.sort(comparaApelido);
+        vetor_jogadores.sort(comparaApelido);
     }
     if (parametro == 'N') {
-        lista_jogadores.sort(comparaNome);
+        vetor_jogadores.sort(comparaNome);
     }
-    std::list<Jogador> iterator it;
-    std::vector<std::string> nomes_jogos = {"REVERSI - ", "LIG4 - ", "VELHA - "};
-    for (it = lista_jogadores.begin(); it!=lista_jogadores.end(); it++){
+    std::vector<Jogador> iterator it;
+    std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
+    for (it = vetor_jogadores.begin(); it!=vetor_jogadores.end(); it++){
         std::cout << it->nome << std::endl << it->apelido << std::endl;
         for (int i=0; i<3; i++){
-            std::cout << nomes_jogos[i] << "V: " << it->stats[i][0] << " D: " << it->stats[i][1] << std::endl;
+            std::cout << nomes_jogos[i] << " - V: " << it->getStat(i, 0) << " D: " << it->getStat(i, 1) << std::endl;
         }
     }
+}
+/*
+int Jogador::getStat(int linha, int coluna){
+    return this->stats[linha][coluna];
+}
+
+void Jogador::setStat(int linha, int coluna, int value){
+    this->stats[linha][coluna] = value;
+}
+*/
+bool Sistema::comparaStatsReversi(Jogador & J1, Jogador & J2){ //o critério de colocação considerado será a diferença de vitórias e derrotas de cada jogador em cada jogo
+    int desempenho_J1 = J1.getStat(0, 0) - J1.getStat(0, 1); 
+    int desempenho_J2 = J2.getStat(0, 0) - J2.getStat(0, 1);
+    if (desempenho_J1 <= desempenho_J2) return true;
+    else return false;
+}
+
+bool Sistema::comparaStatsLig4(Jogador & J1, Jogador & J2){ 
+    int desempenho_J1 = J1.getStat(1, 0) - J1.getStat(1, 1); 
+    int desempenho_J2 = J2.getStat(1, 0) - J2.getStat(1, 1);
+    if (desempenho_J1 <= desempenho_J2) return true;
+    else return false;
+}
+
+bool Sistema::comparaStatsVelha(Jogador & J1, Jogador & J2){ 
+    int desempenho_J1 = J1.getStat(2, 0) - J1.getStat(2, 1); 
+    int desempenho_J2 = J2.getStat(2, 0) - J2.getStat(2, 1);
+    if (desempenho_J1 >= desempenho_J2) return true;
+    else return false;
+}
+
+void Sistema::printLeaderBoard(){
+    std::vector<Jogador> iterator it;
+    vetor_jogadores.sort(comparaStatsReversi);
+    std::cout << "REVERSI:" << std::endl;
+    for (it = vetor_jogadores.begin(); it!=vetor_jogadores.end; it++){
+        std::cout << it->getNome() << " [" << it->getApelido() << "]:" << std::endl;
+        std::cout << it->getStat(0,0) << " VITÓRIAS" << std::endl;
+        std::cout << it->getStat(0,1) << " DERROTAS" << std::endl;
+    }
+    //ainda em desenvolvimento
 }
