@@ -10,13 +10,13 @@ private:
     int contador_jogadas = 0;
     char turno_atual = 'X';
 public:
-
     Liga4();
     char getVencedor() override;
     bool isEstadoFinal() override;
     char getTurno() override;
-    void fazerJogada(pair<int, int> jogada) override;
-    bool isJogadaValida(pair<int,int> jogada) override;
+    void setTurno();
+    void fazerJogada(pair<int, int> jogada);
+    bool isJogadaValida(pair<int, int> jogada);
     ~Liga4();
 };
 
