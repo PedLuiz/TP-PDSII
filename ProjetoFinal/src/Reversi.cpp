@@ -67,3 +67,14 @@ vector<int> Reversi::countPieces() const {
 
     return resultado;
 }
+
+bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
+    int i = jogada.first;  
+    int j = jogada.second; 
+
+    if (i >= 0 && i < 8 && j >= 0 && j < 8) {
+        return true; 
+    } else {
+        return false; 
+    }
+}
