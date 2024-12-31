@@ -78,3 +78,19 @@ bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
         return false; 
     }
 }
+
+char Reversi::getVencedor(){
+    vector<int> resultado;
+    if (resultado[0]>resultado[1]){
+        return 'X';
+    }
+
+    else if (resultado[0]<resultado[1]){
+        return 'O';
+    }
+
+    else{
+        return ' ';
+    } 
+
+}
