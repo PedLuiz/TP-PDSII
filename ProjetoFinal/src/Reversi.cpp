@@ -8,10 +8,77 @@ Reversi::Reversi() : isTurnoX(true), Jogo(8, 8) {
     tabuleiro[4][3] = 'O';
 }
 
-
-char Reversi::getVencedor() {
+vector<pair<int,int>> Reversi::getPossiveisJogadaas() {
 
 }
+
+vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
+    // Retorna uma lista de pecas que serao convertidas ao fazer determinada jogada;
+    int x_start = jogada.first;
+    int y_start = jogada.second;
+
+    if (!estaNoTabuleiro(jogada)) {
+        return {};
+    }
+    
+    char jogador = getTurno();
+
+    char other_piece;
+    if (jogador == 'X') {
+        other_piece = 'O';
+    } else {
+        other_piece = 'X';
+    }
+
+    tabuleiro[x_start][y_start] = jogador;
+    
+    vector<pair<int, int>> directions = {
+        {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
+    
+    vector<pair<int, int>> pecas_convertidas;
+
+    for (const auto& direcao : directions) {
+        int next_x = direcao.first; 
+        int next_y = direcao.second; 
+
+        int x = jogada.first;
+        int y = jogada.second;
+
+        x += next_x;
+        y += next_y;
+
+        if (!estaNoTabuleiro({x, y})) 
+            continue;
+
+        while (tabuleiro[x][y] == other_piece) {
+            x += next_x;
+            y += next_y;
+
+            if (!estaNoTabuleiro({x, y})) 
+                break;
+        }
+
+        if (!estaNoTabuleiro({x, y}))
+            continue;
+
+        if (tabuleiro[x][y] == jogador) {
+            // Encontramos a outra peca do mesmo tipo, agora fazemos o caminho inverso e adicionando as
+            //  coordenadas ao vetor de pecas convertidas
+            while (true) {
+                x -= next_x;
+                y -= next_y;
+                if ((x == x_start) && (y == y_start)) {
+                    break;
+                }
+                pecas_convertidas.push_back({x, y});
+            }
+        }
+
+        tabuleiro[x_start][y_start] = ' ';
+        return pecas_convertidas;
+    }
+}
+
 
 bool Reversi::isEstadoFinal() {}
 
@@ -25,8 +92,6 @@ char Reversi::getTurno() {
     }
 }
 
-
-
 void Reversi::fazerJogada(pair<int, int> jogada) { //jogada = (x, y)
     int x = jogada.first;
     int y = jogada.second;
@@ -39,13 +104,20 @@ void Reversi::fazerJogada(pair<int, int> jogada) { //jogada = (x, y)
     }
 }
 
-bool Reversi::isJogadaValida(pair<int,int> jogada) {}
+bool Reversi::isJogadaValida(pair<int,int> jogada) {
+    int curr_x = jogada.first;
+    int curr_y = jogada.second;
 
-int main () {
-    Reversi* test = new Reversi(); 
+    if ((tabuleiro[curr_x][curr_y] != ' ') || (!estaNoTabuleiro(jogada))) {
+        return false;
+    }
 
-    test->printTabuleiro();
-    return 0;
+    vector<pair<int, int>> pecas_convertidas = getPecasConvertidas(jogada);
+
+    if (pecas_convertidas.size() == 0) 
+        return false; 
+
+    return true;
 }
 
 vector<int> Reversi::countPieces() const {
@@ -79,8 +151,8 @@ bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
     }
 }
 
-char Reversi::getVencedor(){
-    vector<int> resultado;
+char Reversi::getVencedor() {
+vector<int> resultado;
     if (resultado[0]>resultado[1]){
         return 'X';
     }
@@ -92,5 +164,15 @@ char Reversi::getVencedor(){
     else{
         return ' ';
     } 
-
 }
+
+int main () {
+    Reversi* test = new Reversi(); 
+
+    test->printTabuleiro();
+    return 0;
+}
+
+
+
+

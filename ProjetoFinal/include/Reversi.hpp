@@ -15,6 +15,8 @@ public:
 
     vector<pair<int,int>> getPossiveisJogadaas();
 
+    vector<pair<int, int>> getPecasConvertidas(pair<int,int> jogada);
+
     bool estaNoTabuleiro(pair<int,int> jogada);
 
     vector<int> countPieces() const; 
