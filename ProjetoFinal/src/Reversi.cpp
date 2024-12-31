@@ -96,8 +96,6 @@ char Reversi::getTurno() {
     }
 }
 
-
-
 void Reversi::fazerJogada(pair<int, int> jogada) { //jogada = (x, y)
     int x = jogada.first;
     int y = jogada.second;
@@ -124,13 +122,6 @@ bool Reversi::isJogadaValida(pair<int,int> jogada) {
         return false; 
 
     return true;
-}
-
-int main () {
-    Reversi* test = new Reversi(); 
-
-    test->printTabuleiro();
-    return 0;
 }
 
 vector<int> Reversi::countPieces() const {
@@ -162,4 +153,11 @@ bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
     } else {
         return false; 
     }
+}
+
+int main () {
+    Reversi* test = new Reversi(); 
+
+    test->printTabuleiro();
+    return 0;
 }
