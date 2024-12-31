@@ -132,3 +132,34 @@ int main () {
     test->printTabuleiro();
     return 0;
 }
+
+vector<int> Reversi::countPieces() const {
+    int countX = 0;
+    int countO = 0;
+    vector<int> resultado;
+
+    for (const auto &linha : tabuleiro) { 
+        for (const char &unidade : linha) { 
+            if (unidade == 'X') {
+                countX++;
+            } else if (unidade == 'O') {
+                countO++;
+            }
+        }
+    }
+    resultado.push_back(countX);
+    resultado.push_back(countO);
+
+    return resultado;
+}
+
+bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
+    int i = jogada.first;  
+    int j = jogada.second; 
+
+    if (i >= 0 && i < 8 && j >= 0 && j < 8) {
+        return true; 
+    } else {
+        return false; 
+    }
+}
