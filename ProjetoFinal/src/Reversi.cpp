@@ -8,7 +8,7 @@ Reversi::Reversi() : isTurnoX(true), Jogo(8, 8) {
     tabuleiro[4][3] = 'O';
 }
 
-vector<pair<int,int>> Reversi::getPossiveisJogadaas() {
+vector<pair<int,int>> Reversi::getPossiveisJogadas() {
 
 }
 
@@ -20,8 +20,7 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
     if (!estaNoTabuleiro(jogada)) {
         return {};
     }
-    
-    char jogador = getTurno();
+    char jogador = getTurno(); 
 
     char other_piece;
     if (jogador == 'X') {
@@ -83,13 +82,14 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
 bool Reversi::isEstadoFinal() {}
 
 char Reversi::getTurno() {
-    if (isTurnoX) {
-        isTurnoX = false;
+    if (isTurnoX) 
         return 'X';
-    } else {
-        isTurnoX = true;
+    else
         return 'O';
-    }
+}
+
+void Reversi::trocaTurno() {
+    isTurnoX = !isTurnoX;
 }
 
 void Reversi::fazerJogada(pair<int, int> jogada) { //jogada = (x, y)
@@ -99,6 +99,17 @@ void Reversi::fazerJogada(pair<int, int> jogada) { //jogada = (x, y)
     if (isJogadaValida(jogada)) {
         char jogador = getTurno();
         tabuleiro[x][y] = jogador;
+
+        vector<pair<int, int>> pecas_convertidas = getPecasConvertidas(jogada);
+        for (const auto& peca : pecas_convertidas) {
+            int peca_x = peca.first;
+            int peca_y = peca.second;
+
+            tabuleiro[peca_x][peca_y] = jogador;
+        }
+
+        trocaTurno();
+
     } else {
         cout << "ERRO: jogada invalida" << endl;
     }
@@ -172,7 +183,3 @@ int main () {
     test->printTabuleiro();
     return 0;
 }
-
-
-
-

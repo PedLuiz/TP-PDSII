@@ -13,7 +13,7 @@ private:
 public:
     Reversi();
 
-    vector<pair<int,int>> getPossiveisJogadaas();
+    vector<pair<int,int>> getPossiveisJogadas();
 
     vector<pair<int, int>> getPecasConvertidas(pair<int,int> jogada);
 
@@ -26,6 +26,8 @@ public:
     bool isEstadoFinal() override;
 
     char getTurno() override;
+
+    void trocaTurno();
 
     void fazerJogada(pair<int, int> jogada) override;
 
