@@ -33,6 +33,7 @@ public:
 
     bool isJogadaValida(pair<int,int> jogada);
 
+    vector <vector<char>> getTabuleiroPossivel();
 };
 
 #endif

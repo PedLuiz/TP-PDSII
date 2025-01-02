@@ -185,6 +185,20 @@ vector<int> resultado;
     } 
 }
 
+vector<vector<char>> Reversi::getTabuleiroPossivel(){
+    vector<vector<char>> tabuleiro_possivel = tabuleiro;
+
+    vector<pair<int, int>> jogadas_possiveis = getPossiveisJogadas();
+
+    for (const auto& jogada : jogadas_possiveis) {
+        int x = jogada.first;
+        int y = jogada.second;
+        tabuleiro_possivel[x][y] = '+';
+    }
+
+    return tabuleiro_possivel;
+}
+
 int main () {
     Reversi* test = new Reversi(); 
 
