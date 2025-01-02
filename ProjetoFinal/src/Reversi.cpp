@@ -9,7 +9,15 @@ Reversi::Reversi() : isTurnoX(true), Jogo(8, 8) {
 }
 
 vector<pair<int,int>> Reversi::getPossiveisJogadas() {
+    vector<pair <int, int>> jogadas_possiveis;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (isJogadaValida({i, j})) 
+                jogadas_possiveis.push_back({i, j});
+        }
+    }  
 
+    return jogadas_possiveis;
 }
 
 vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
@@ -137,10 +145,10 @@ vector<int> Reversi::countPieces() const {
     vector<int> resultado;
 
     for (const auto &linha : tabuleiro) { 
-        for (const char &unidade : linha) { 
-            if (unidade == 'X') {
+        for (const char &pos : linha) { 
+            if (pos == 'X') {
                 countX++;
-            } else if (unidade == 'O') {
+            } else if (pos == 'O') {
                 countO++;
             }
         }
