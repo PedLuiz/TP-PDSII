@@ -22,13 +22,16 @@ void Sistema::cadastrarJogador(std::string apelido, std::string nome){
 void Sistema::loadSistema(){
     while (!arq_jogadores.eof()){
         Jogador aux;
-        arq_jogadores >> aux.apelido;
-        arq_jogadores >> aux.nome;
+        std::string input;
+        arq_jogadores >> input;
+        aux.setNome(input);
+        arq_jogadores >> input;
+        aux.setApelido(input);
+        int stat;
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
-                int stat;
                 arq_jogadores >> stat;
-                aux->setStat(i, j, stat);
+                aux.setStat(i, j, stat);
             }
         }
         vetor_jogadores.push_back(aux);
@@ -38,7 +41,7 @@ void Sistema::loadSistema(){
 void Sistema::saveSistema(){
     std::vector<Jogador> iterator it;
     for (it = vetor_jogadores.begin(); it!=vetor_jogadores.end(); it++){
-        arq_jogadores << it->nome << std::endl << it->apelido << std::endl;
+        arq_jogadores << it->getNome() << std::endl << it->getApelido() << std::endl;
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
                 arq_jogadores << it->getStat(i, j);
@@ -90,15 +93,7 @@ void Sistema::printSistema(char parametro){
         }
     }
 }
-/*
-int Jogador::getStat(int linha, int coluna){
-    return this->stats[linha][coluna];
-}
 
-void Jogador::setStat(int linha, int coluna, int value){
-    this->stats[linha][coluna] = value;
-}
-*/
 bool Sistema::comparaStatsReversi(Jogador & J1, Jogador & J2){ //o critério de colocação considerado será a diferença de vitórias e derrotas de cada jogador em cada jogo
     int desempenho_J1 = J1.getStat(0, 0) - J1.getStat(0, 1); 
     int desempenho_J2 = J2.getStat(0, 0) - J2.getStat(0, 1);
