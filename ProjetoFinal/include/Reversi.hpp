@@ -35,9 +35,7 @@ public:
 
     vector <vector<char>> getTabuleiroPossivel();
 
-    void printTabuleiroPossivel(){
-        
-    }
+    void printTabuleiroPossivel();
 };
 
 #endif
