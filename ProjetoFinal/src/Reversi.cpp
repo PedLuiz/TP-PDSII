@@ -201,9 +201,14 @@ vector<vector<char>> Reversi::getTabuleiroPossivel(){
 
 void Reversi::printTabuleiroPossivel() {
 vector<vector<char>> tabuleiro_possivel=getTabuleiroPossivel();
+
+for (int i=0; i<8; i++){
+    cout << i << " ";
+}
     for (int i = 0; i < M; i++) {
+        cout<< i << " ";
         for (int j = 0; j < N; j++) {
-            cout << "| " << tabuleiro_possivel[i][j]  << " ";
+            cout<<  "| " << tabuleiro_possivel[i][j]  << " ";
         }
         cout << "|" << endl << endl;
     }
