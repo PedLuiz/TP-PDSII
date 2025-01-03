@@ -200,13 +200,17 @@ vector<vector<char>> Reversi::getTabuleiroPossivel(){
 }
 
 void Reversi::printTabuleiroPossivel() {
-vector<vector<char>> tabuleiro_possivel=getTabuleiroPossivel();
+    vector<vector<char>> tabuleiro_possivel=getTabuleiroPossivel();
 
-for (int i=0; i<8; i++){
-    cout << i << " ";
-}
+    cout << "    ";
+
+    for (int i=0; i<8; i++){
+        cout << i+1 << "   ";
+    }
+    cout << endl;
+
     for (int i = 0; i < M; i++) {
-        cout<< i << " ";
+        cout<< i+1 << " ";
         for (int j = 0; j < N; j++) {
             cout<<  "| " << tabuleiro_possivel[i][j]  << " ";
         }
@@ -217,23 +221,23 @@ for (int i=0; i<8; i++){
 int main () {
     Reversi* test = new Reversi(); 
 
-    test->printTabuleiro();
-
     int x, y; 
 
     int rodada = 1;
     while (true) {
-        cout << endl << "Rodada: " << rodada << endl;
+        cout << endl << "Rodada " << rodada << ", vez do jogador " << test->getTurno() << ":" <<  endl << endl;
 
         test->printTabuleiroPossivel(); 
 
         cin >> x >> y;
+        x--; y--;
         if ((x < 0) || (y < 0))  {
             break;
         }
 
         while (!(test->isJogadaValida({x, y}))) {
-            cin >> x >> y; 
+            cin >> x >> y;
+            x--, y--; 
         }
 
         test->fazerJogada({x, y});
