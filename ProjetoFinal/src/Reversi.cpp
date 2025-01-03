@@ -37,7 +37,7 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
         other_piece = 'X';
     }
 
-    tabuleiro[x_start][y_start] = jogador;
+    
     
     vector<pair<int, int>> directions = {
         {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
@@ -81,9 +81,9 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
             }
         }
 
-        tabuleiro[x_start][y_start] = ' ';
-        return pecas_convertidas;
     }
+    
+    return pecas_convertidas;
 }
 
 
@@ -213,5 +213,28 @@ int main () {
     Reversi* test = new Reversi(); 
 
     test->printTabuleiro();
+
+    int x, y; 
+
+    int rodada = 1;
+    while (true) {
+        cout << endl << "Rodada: " << rodada << endl;
+
+        test->printTabuleiroPossivel(); 
+
+        cin >> x >> y;
+        if ((x < 0) || (y < 0))  {
+            break;
+        }
+
+        while (!(test->isJogadaValida({x, y}))) {
+            cin >> x >> y; 
+        }
+
+        test->fazerJogada({x, y});
+
+        rodada++;
+    }
+
     return 0;
 }
