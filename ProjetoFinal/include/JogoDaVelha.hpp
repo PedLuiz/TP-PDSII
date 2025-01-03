@@ -2,15 +2,17 @@
 #define VELHA_H
 #include "Jogo.hpp"
 
-class JogoDaVelha : public Jogo::Jogo {
+class JogoDaVelha : public Jogo {
+    private:
+        char turno;
     public:
         JogoDaVelha();
-        char Jogo::getVencedor() override;
-        bool Jogo::isEstadoFinal() override;
-        char Jogo::getTurno() override;
-        void Jogo::fazerJogada(pair<int, int> jogada) override;
-        bool Jogo::isJogadaValida(pair<int,int> jogada) override;
-          
+        char getVencedor() override;
+        bool isEstadoFinal() override;
+        void alternaTurno();
+        char getTurno() override;
+        bool isJogadaValida(std::pair<int,int> jogada) override;
+        void fazerJogada(std::pair<int, int> jogada) override;
 }
 
 #endif
