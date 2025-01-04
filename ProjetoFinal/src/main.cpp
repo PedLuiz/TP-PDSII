@@ -9,45 +9,40 @@
 
 using namespace std;
 
-void processarEntrada(string& entrada, string& comando, string& nome, string apelido[], char& ordem, char& jogo);
-
 int main(){
-    
+
+    Sistema sistema;
+
     while(true) {
         
-        string entrada, comando, nome, apelido[2];
+        string entrada, comando, nome, apelido1, apelido2;
         char ordem, jogo;
-        Sistema sistema;
-
         getline(cin, entrada);
 
-        processarEntrada(entrada, comando, nome, apelido, ordem, jogo);
+        istringstream iss(entrada);
+        iss >> comando;
 
         if(comando == "CJ"){
-            if(apelido[0].empty() || nome.empty()){
-                cout << "Nome ou apelido inválidos." << endl;
-                continue;
-            }
-            else
-                sistema.cadastrarJogador(apelido[0], nome);
+            iss >> apelido1;
+            getline(iss, nome);
+            nome = nome.substr(1);
+            sistema.cadastrarJogador(apelido1, nome);
         }
 
         else if(comando == "RJ"){
-            if(apelido[0].empty())
-                cout << "Apelido inválido." << endl;
-            else{
-                sistema.removerJogador(apelido[0]);
-                cout << "Jogador " << apelido[0] << " removido com sucesso" << endl;
-            }
+            iss >> apelido1;
+            sistema.removerJogador(apelido1);
         }
 
         else if(comando == "LJ"){
-            if(ordem == 'A' || ordem == 'N')
-                sistema.printSistema(ordem);
-            else  cout << "Parametro de ordenação inválido." << endl;
+            iss >> ordem;
+            sistema.printSistema(ordem);
         }
 
         else if(comando == "EP"){
+            iss >> jogo;
+            iss >> apelido1;
+            iss >> apelido2;
             /* Jogo* jogo;
             Liga4 liga4;
             Reversi reversi;
@@ -59,30 +54,5 @@ int main(){
 
         else cout << "Comando Inválido!" << endl;
 
-    }
-}
-
-void processarEntrada(string& entrada, string& comando, string& nome, string apelido[], char& ordem, char& jogo){
-    istringstream iss(entrada);
-    iss >> comando;
-    
-    if(comando == "CJ"){
-        iss >> apelido[0];
-        getline(iss, nome);
-        nome = nome.substr(1);
-    }
-
-    else if(comando == "RJ"){
-        iss >> apelido[0];
-    }
-
-    else if(comando == "LJ"){
-        iss >> ordem;
-    }
-
-    else if(comando == "EP"){
-        iss >> jogo;
-        iss >> apelido[0];
-        iss >> apelido[1];
     }
 }
