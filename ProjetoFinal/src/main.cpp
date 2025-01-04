@@ -9,6 +9,10 @@
 
 using namespace std;
 
+void executarReversi();
+void executarLiga4();
+void executarJogoDaVelha();
+
 int main(){
 
     Sistema sistema;
@@ -17,8 +21,8 @@ int main(){
         
         string entrada, comando, nome, apelido1, apelido2;
         char ordem, jogo;
-        getline(cin, entrada);
 
+        getline(cin, entrada);
         istringstream iss(entrada);
         iss >> comando;
 
@@ -43,11 +47,10 @@ int main(){
             iss >> jogo;
             iss >> apelido1;
             iss >> apelido2;
-            /* Jogo* jogo;
-            Liga4 liga4;
-            Reversi reversi;
-            JogoDaVelha velha;
-            ???*/
+            if(jogo == 'R') executarReversi();
+            else if(jogo == 'V') executarJogoDaVelha();
+            else if(jogo == 'L') executarLiga4();
+            else cout << "Jogo inválido" << endl;
         }
 
         else if(comando == "FS") break;
@@ -56,3 +59,16 @@ int main(){
 
     }
 }
+
+void executarReversi(){
+
+}
+
+void executarLiga4(){
+
+}
+
+void executarJogoDaVelha(){
+
+}
+
