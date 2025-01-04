@@ -75,12 +75,15 @@ char JogoDaVelha::getTurno(){
 }
 
 bool JogoDaVelha::isJogadaValida(std::pair<int,int> jogada){
-    if (tabuleiro[jogada.first][jogada.second] == " ") return true;
-    else return false;
+    if (jogada.first > 0 && jogada.first < 4 && jogada.second > 0 && jogada.second < 4) {
+        if (tabuleiro[jogada.first-1][jogada.second-1] == " ") return true;
+    }
+    std::cout << "ERRO: jogada inválida" << std::endl;
+    return false;
 }
 
 void JogoDaVelha::fazerJogada(std::pair<int, int> jogada){
     if (isJogadaValida(jogada)){
-        tabuleiro[jogada.first][jogada.second] == turno;
+        tabuleiro[jogada.first-1][jogada.second-1] == turno;
     }
 }

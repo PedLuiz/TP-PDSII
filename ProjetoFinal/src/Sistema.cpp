@@ -14,9 +14,21 @@ Sistema::~Sistema(){
 std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
 
 void Sistema::cadastrarJogador(std::string apelido, std::string nome){
+    if (apelido == "" || nome == ""){
+        std::cout << "ERRO: dados incorretos" << std::endl;
+        return;
+    }
+    std::vector<Jogador> iterator it;
+    for (it = vetor_jogadores.begin(); it != vetor_jogadores.end(); it++){
+        if (it->getApelido() == apelido) {
+            std::cout << "ERRO: jogador repetido" << std::endl;
+            return;
+        }
+    } 
     Jogador aux(apelido, nome);
     vetor_jogadores.push_back(aux);
     num_jogadores_cadastrados++;
+    std::cout << "Jogador " << apelido << " cadastrado com sucesso" << std:: endl;
 }
 
 void Sistema::loadSistema(){
@@ -132,11 +144,17 @@ void Sistema::printLeaderBoard(){
 
 void Sistema::removerJogador(std::string apelido){
     std::vector<Jogador> iterator it;
+    bool jogador_existente = false;
     for (it = vetor_jogadores.begin(); it!= vetor_jogadores.end(); it++){
         if (it->getApelido() == apelido){
             vetor_jogadores.erase(it);
+            jogador_existente = true;
             break;
         }
+    }
+    if (!jogador_existente){
+        std::cout << "ERRO: jogador inexistente" << std::endl;
+        return;
     }
     arq_jogadores.close();
     arq_jogadores.open("jogadores.txt", std::fstream::out);
