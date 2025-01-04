@@ -45,6 +45,7 @@ int main(){
             if(ordem == 'A' || ordem == 'N')
                 sistema.printSistema(ordem);
             else  cout << "Parametro de ordenação inválido." << endl;
+        }
 
         else if(comando == "EP"){
             /* Jogo* jogo;
