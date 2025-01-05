@@ -1,5 +1,8 @@
 #include "Reversi.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <thread>
+#include <chrono>
 
 Reversi::Reversi() : isTurnoX(true), Jogo(8, 8) {
     // Construtor e inicialização da posição inicial do jogo
@@ -69,7 +72,7 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
         }
         
         if (!estaNoTabuleiro({x, y})) 
-                break;
+                continue;
 
         if (tabuleiro[x][y] == jogador) {
             // Encontramos a outra peca do mesmo tipo, agora fazemos o caminho inverso e adicionando as
@@ -94,13 +97,13 @@ bool Reversi::isEstadoFinal() {
     // Retorna verdadeiro se o jogo acabou (nenhum jogador possui movimentos disponíveis) 
     // checando se o jogador atual possui jogadas disponíveis
 
-    bool jogador_atual_possui_jogadas = !getPossiveisJogadas().empty();
+    bool sem_jogadas_atual = getPossiveisJogadas().empty();
 
     trocaTurno(); // temporariamente troca o turno para checar a possibilidade do próximo jogador
-    bool outro_jogador_possui_jogadas = !getPossiveisJogadas().empty();
+    bool advesario_sem_jogadas = getPossiveisJogadas().empty();
     trocaTurno();
 
-    if ((!jogador_atual_possui_jogadas) && (!outro_jogador_possui_jogadas)) {
+    if ((sem_jogadas_atual) && (advesario_sem_jogadas)) {
         // Nenhum dos jogadores possui jogadas disponíveis, jogo acabou
         return true;
     }
@@ -155,37 +158,35 @@ bool Reversi::isJogadaValida(pair<int,int> jogada) {
     int curr_x = jogada.first;
     int curr_y = jogada.second;
 
-    if ((tabuleiro[curr_x][curr_y] != ' ') || (!estaNoTabuleiro(jogada))) {
+    if (!estaNoTabuleiro(jogada)) 
         return false;
-    }
+
+    if (tabuleiro[curr_x][curr_y] != ' ') 
+        return false;
 
     vector<pair<int, int>> pecas_convertidas = getPecasConvertidas(jogada);
 
-    if (pecas_convertidas.size() == 0) 
+    if (pecas_convertidas.empty()) 
         return false; 
 
     return true;
 }
 
-vector<int> Reversi::countPieces() const {
+map<char, int> Reversi::countPieces() const {
     // Conta a quantidade de peças de cada jogador
     // resultado = {countX, countO}
 
-    int countX = 0;
-    int countO = 0;
-    vector<int> resultado;
+    map<char, int> resultado {{'X', 0}, {'O', 0}};
 
     for (const auto &linha : tabuleiro) { 
         for (const char &pos : linha) { 
             if (pos == 'X') {
-                countX++;
+                resultado['X']++;
             } else if (pos == 'O') {
-                countO++;
+                resultado['O']++;
             }
         }
     }
-    resultado.push_back(countX);
-    resultado.push_back(countO);
 
     return resultado;
 }
@@ -206,13 +207,13 @@ bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
 char Reversi::getVencedor() {
     // Compara o vetor resultado = {countX, countO}  
 
-    vector<int> resultado = countPieces();
+    map <char, int> resultado = countPieces();
 
-    if (resultado[0] > resultado[1]){
+    if (resultado['X'] > resultado['O']){
         return 'X';
     }
 
-    else if (resultado[0] < resultado[1]){
+    else if (resultado['X'] < resultado['O']){
         return 'O';
     }
 
@@ -256,32 +257,75 @@ void Reversi::printTabuleiroPossivel() {
     }
 };
 
+void Reversi::printTabuleiro() {
+    cout << "    ";
+
+    for (int i=0; i<8; i++){
+        cout << i+1 << "   ";
+    }
+    cout << endl;
+
+    for (int i = 0; i < M; i++) {
+        cout<< i+1 << " ";
+        for (int j = 0; j < N; j++) {
+            cout<<  "| " << tabuleiro[i][j]  << " ";
+        }
+        cout << "|" << endl << endl;
+    }
+}
+
 int main () {
     Reversi* test = new Reversi(); 
 
     int x, y; 
 
     int rodada = 1;
-    while (true) {
+    map<char, int> resultado;
+
+    while (!test->isEstadoFinal()) {
+        system("cls");
         cout << endl << "Rodada " << rodada << ", vez do jogador " << test->getTurno() << ":" <<  endl << endl;
 
         test->printTabuleiroPossivel(); 
+        resultado = test->countPieces();
+        cout << "X: " << resultado['X'] << " pontos || O: " << resultado['O'] << " pontos" << endl;
 
-        cin >> x >> y;
-        x--; y--;
-        if ((x < 0) || (y < 0))  {
-            break;
+        if (test->getPossiveisJogadas().empty()) {
+            cout << "Jogador " << test->getTurno() << " nao possui jogadas disponiveis. Passando turno..." << endl;
+            this_thread::sleep_for(chrono::seconds(4));
+            test->trocaTurno(); rodada++;
+            continue;
         }
 
-        while (!(test->isJogadaValida({x, y}))) {
+        while (true) {
+            cout << "Insira um comando no formato <linha> <coluna>" << endl;
             cin >> x >> y;
-            x--, y--; 
+            x--; y--;
+
+            if (test->isJogadaValida({x, y}))
+                break;
+            cout << "ERRO: Jogada Invalida" << endl;
         }
 
         test->fazerJogada({x, y});
-
+        
         rodada++;
     }
+    
+    system("cls");
+    test->printTabuleiro();
+    cout << "+=++=++=++=+GAME OVER+=++=++=++=+" << endl;
 
-        return 0;
+    char vencedor = test->getVencedor();
+    resultado = test->countPieces(); 
+    if (vencedor != ' ') {
+        cout << "Jogador " << vencedor << " venceu com " << resultado[vencedor] << " pontos!" << endl;
+    }
+    else {
+        cout << "Jogo terminou em EMPATE com " << resultado['X'] << "pontos." << endl; 
+    }
+
+    delete test;
+    return 0;
 }
+

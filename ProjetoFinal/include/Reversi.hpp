@@ -3,6 +3,7 @@
 
 #include "Jogo.hpp"
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ public:
 
     bool estaNoTabuleiro(pair<int,int> jogada);
 
-    vector<int> countPieces() const; 
+    map <char, int> countPieces() const; 
 
     char getVencedor() override;
 
@@ -31,11 +32,13 @@ public:
 
     void fazerJogada(pair<int, int> jogada) override;
 
-    bool isJogadaValida(pair<int,int> jogada);
+    bool isJogadaValida(pair<int,int> jogada) override;
 
     vector <vector<char>> getTabuleiroPossivel();
 
     void printTabuleiroPossivel();
+
+    void printTabuleiro() override;
 };
 
 #endif
