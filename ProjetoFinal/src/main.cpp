@@ -9,50 +9,70 @@
 
 using namespace std;
 
-void processarEntrada(string& entrada, string& comando, string& nome, string apelido[], char& ordem, char& jogo);
+void executarReversi();
+void executarLiga4();
+void executarJogoDaVelha();
 
 int main(){
-    
+
+    Sistema sistema;
+    sistema.loadSistema();
+
     while(true) {
         
-        string entrada, comando, nome, apelido[2];
+        string entrada, comando, nome, apelido1, apelido2;
         char ordem, jogo;
-        Sistema sistema;
 
         getline(cin, entrada);
-
-        processarEntrada(entrada, comando, nome, apelido, ordem, jogo);
+        if(entrada.empty()){
+            cout << "Entrada inválida! Por favor tente novamente." << endl;
+            continue;
+        }
+        istringstream iss(entrada);
+        iss >> comando;
 
         if(comando == "CJ"){
-            if(apelido[0].empty() || nome.empty()){
-                cout << "Nome ou apelido inválidos." << endl;
-                continue;
-            }
-            else
-                sistema.cadastrarJogador(apelido[0], nome);
+            iss >> apelido1;
+            getline(iss, nome);
+            nome = nome.substr(1);
+            sistema.cadastrarJogador(apelido1, nome);
         }
 
         else if(comando == "RJ"){
-            if(apelido[0].empty())
-                cout << "Apelido inválido." << endl;
-            else{
-                sistema.removerJogador(apelido[0]);
-                cout << "Jogador " << apelido[0] << " removido com sucesso" << endl;
-            }
+            iss >> apelido1;
+            sistema.removerJogador(apelido1);
         }
 
         else if(comando == "LJ"){
-            if(ordem == 'A' || ordem == 'N')
-                sistema.printSistema(ordem);
-            else  cout << "Parametro de ordenação inválido." << endl;
+            iss >> ordem;
+            sistema.printSistema(ordem);
         }
 
         else if(comando == "EP"){
-            /* Jogo* jogo;
-            Liga4 liga4;
-            Reversi reversi;
-            JogoDaVelha velha;
-            ???*/
+            iss >> jogo;
+            iss >> apelido1;
+            iss >> apelido2;
+            //verificar se os apelidos já estão cadastrados, se não, casdastra-los***
+            //if (!sistema.isJogadorCadastrado(apelido1))
+            //  cout << "Jogador " << apelido1 << " não cadastrado! Cadastre-o primeiro." << endl;
+            //  continue;
+            //if (!sistema.isJogadorCadastrado(apelido2))
+            //  cout << "Jogador " << apelido2 << " não cadastrado! Cadastre-o primeiro." << endl;
+            //  continue;
+            switch (jogo) {
+                case 'R':
+                    executarReversi(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
+                    break;
+                case 'V':
+                    executarJogoDaVelha(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
+                    break;
+                case 'L':
+                    executarLiga4(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
+                    break;
+                default:
+                    cout << "Jogo inválido! Escolha 'R', 'V, ou 'L'." << endl;
+                    break;
+            }
         }
 
         else if(comando == "FS") break;
@@ -60,29 +80,19 @@ int main(){
         else cout << "Comando Inválido!" << endl;
 
     }
+    sistema.saveSistema();
+    cout << "Sistema finalizado com sucesso!" << endl;
 }
 
-void processarEntrada(string& entrada, string& comando, string& nome, string apelido[], char& ordem, char& jogo){
-    istringstream iss(entrada);
-    iss >> comando;
+void executarReversi(){
     
-    if(comando == "CJ"){
-        iss >> apelido[0];
-        getline(iss, nome);
-        nome = nome.substr(1);
-    }
-
-    else if(comando == "RJ"){
-        iss >> apelido[0];
-    }
-
-    else if(comando == "LJ"){
-        iss >> ordem;
-    }
-
-    else if(comando == "EP"){
-        iss >> jogo;
-        iss >> apelido[0];
-        iss >> apelido[1];
-    }
 }
+
+void executarLiga4(){
+    //sistema.atualizaStats(apelido, stats) ??
+}
+
+void executarJogoDaVelha(){
+
+}
+
