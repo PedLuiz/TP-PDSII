@@ -15,8 +15,8 @@ public:
     bool isEstadoFinal() override;
     char getTurno() override;
     void setTurno();
-    void fazerJogada(pair<int, int> jogada);
-    bool isJogadaValida(pair<int, int> jogada);
+    void fazerJogada(pair<int, int> jogada) override;
+    bool isJogadaValida(pair<int, int> jogada) override;
     ~Liga4();
 };
 
