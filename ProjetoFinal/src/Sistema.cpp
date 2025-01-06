@@ -55,7 +55,7 @@ void Sistema::saveSistema(){
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
                 arq_jogadores << vetor_jogadores[i].getStat(i, j);
-                if(j=0){
+                if(j == 0){
                     arq_jogadores << " ";
                 }
             }

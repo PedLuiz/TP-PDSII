@@ -1,8 +1,7 @@
-#include "ProjetoFinal/include/JogoDaVelha.hpp"
+#include "JogoDaVelha.hpp"
 #include <iostream>
 
-JogoDaVelha::JogoDaVelha(){
-    Jogo(3, 3);
+JogoDaVelha::JogoDaVelha() : Jogo(3, 3) {
     turno = 'X';
 }
 
@@ -32,8 +31,8 @@ char JogoDaVelha::getVencedor(){
     //checa diagonais:
         //diagonal principal:
     if (tabuleiro[0][0] != ' '){
+        bool vencedorFound = true;
         for (int i=1; i<3; i++){
-            bool vencedorFound = true;
             char anterior = tabuleiro[i-1][i-1];
                 if (tabuleiro[i][i] != anterior) vencedorFound = false;
         }
@@ -43,7 +42,7 @@ char JogoDaVelha::getVencedor(){
     if (tabuleiro[2][0] != ' '){
         bool vencedorFound = true;
         for (int i=1; i>=0; i--){
-            int j=1
+            int j=1;
             char anterior = tabuleiro[i+1][j-1];
             if (tabuleiro[i][j] != anterior) vencedorFound = false;
             j++;
@@ -76,7 +75,7 @@ char JogoDaVelha::getTurno(){
 
 bool JogoDaVelha::isJogadaValida(std::pair<int,int> jogada){
     if (jogada.first > 0 && jogada.first < 4 && jogada.second > 0 && jogada.second < 4) {
-        if (tabuleiro[jogada.first-1][jogada.second-1] == " ") return true;
+        if (tabuleiro[jogada.first-1][jogada.second-1] == ' ') return true;
     }
     std::cout << "ERRO: jogada inválida" << std::endl;
     return false;
