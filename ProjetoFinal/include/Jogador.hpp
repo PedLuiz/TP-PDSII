@@ -9,14 +9,20 @@ class Jogador {
         std::string apelido;
         int stats[3][2];
     public:
+        Jogador(std::string nome, std::string apelido);
         std::string getNome();
+        static bool comparaNome(Jogador & J1, Jogador & J2);
         void setNome(std::string nome);
         std::string getApelido();
         void setApelido(std::string apelido);
+        static bool comparaApelido(Jogador & J1, Jogador & J2);
         int getStat(int stat, int jogo);
         void setStat(int stat, int jogo, int value);
         //stat: 0 = vitórias | 1 = derrotas
         //jogo: 0 = Reversi | 1 = Lig4 | 2 = Velha
+        static bool comparaStatsReversi(Jogador &J1, Jogador & J2);
+        static bool comparaStatsLig4(Jogador &J1, Jogador & J2);
+        static bool comparaStatsVelha(Jogador &J1, Jogador & J2);
 };
 
 #endif
