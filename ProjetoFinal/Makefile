@@ -34,6 +34,6 @@ $(OBJ_DIR)/main.o: $(INCLUDE_DIR)/Sistema.hpp $(INCLUDE_DIR)/Jogador.hpp \
                    $(INCLUDE_DIR)/Reversi.hpp $(INCLUDE_DIR)/Liga4.hpp
 
 clean:
-	rm -f $(OBJ_DIR)*.o $(BIN_DIR)*.exe
+	del /f obj\*.o bin\*.exe
 
 .PHONY: all clean

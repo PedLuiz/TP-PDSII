@@ -12,12 +12,15 @@ using namespace std;
 void executarReversi();
 void executarLiga4();
 void executarJogoDaVelha();
+void Menu();
 
 int main(){
 
     Sistema sistema;
     sistema.loadSistema();
 
+    Menu();
+    
     while(true) {
         
         string entrada, comando, nome, apelido1, apelido2;
@@ -83,6 +86,29 @@ int main(){
     sistema.saveSistema();
     cout << "Sistema finalizado com sucesso!" << endl;
 }
+
+void Menu() {
+    system("cls");
+    cout << "============================================================SISTEMA DE JOGOS============================================================" << endl;
+    cout << "COMANDOS:" << endl;
+    cout << "\tCJ - CADASTRAR JOGADOR" << endl;
+    cout << "\t\tInsira um <apelido> e um <nome> para cadastrar o jogador ao sistema" << endl;
+
+    cout << "\tRJ - REMOVER JOGADOR"  << endl;
+    cout << "\t\tInsira o <apelido> do jogador a ser removido" << endl;
+
+    cout << "\tLJ - LISTAR JOGADORES" << endl;
+    cout << "\t\tExibe uma lista dos jogadores cadastrados no sistema e suas estatisticas" << endl;
+
+    cout << "\tEP - EXECUTAR PARTIDA" << endl;
+    cout << "\t\tInsira o jogo a ser jogado (R)eversi, (L)iga4, Jogo da (V)elha e os apelidos dos dois jogadores" << endl;
+
+    cout << "\tFS - FINALIZAR SISTEMA" << endl;
+    cout << "\t\tEncerra a execucao do programa" << endl;
+
+    cout << "=========================================================================================================================================" << endl;
+}
+
 
 void executarReversi(){
     

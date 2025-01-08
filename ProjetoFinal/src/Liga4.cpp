@@ -1,4 +1,4 @@
-#include "../include/Liga4.hpp"
+#include "Liga4.hpp"
 #include <iostream>
 
 using namespace std;
