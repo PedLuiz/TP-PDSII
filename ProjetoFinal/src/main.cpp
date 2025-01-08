@@ -1,7 +1,8 @@
-#include "../include/Liga4.hpp"
-#include "../include/JogoDaVelha.hpp"
-#include "../include/Reversi.hpp"
-#include "../include/Sistema.hpp"
+#include "Liga4.hpp"
+#include "JogoDaVelha.hpp"
+#include "Reversi.hpp"
+#include "Sistema.hpp"
+#include "Partida.hpp"
 
 #include <string>
 #include <iostream>
@@ -9,16 +10,13 @@
 
 using namespace std;
 
-void executarReversi();
-void executarLiga4();
-void executarJogoDaVelha();
 void Menu();
 
 int main(){
 
     Sistema sistema;
     sistema.loadSistema();
-
+    
     Menu();
     
     while(true) {
@@ -64,13 +62,10 @@ int main(){
             //  continue;
             switch (jogo) {
                 case 'R':
-                    executarReversi(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
                     break;
                 case 'V':
-                    executarJogoDaVelha(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
                     break;
                 case 'L':
-                    executarLiga4(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
                     break;
                 default:
                     cout << "Jogo inválido! Escolha 'R', 'V, ou 'L'." << endl;
@@ -108,17 +103,3 @@ void Menu() {
 
     cout << "=========================================================================================================================================" << endl;
 }
-
-
-void executarReversi(){
-    
-}
-
-void executarLiga4(){
-    //sistema.atualizaStats(apelido, stats) ??
-}
-
-void executarJogoDaVelha(){
-
-}
-

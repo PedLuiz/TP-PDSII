@@ -3,7 +3,9 @@
 
 #include "Jogo.hpp"
 #include "Jogador.hpp"
-#include "Sistema.hpp"
+#include "Reversi.hpp"
+#include "Liga4.hpp"
+#include "JogoDaVelha.hpp"
 
 #include <map>
 
@@ -15,18 +17,21 @@ private:
     Jogador* jogador2;
     Jogador* jogador_atual;
 
-    map<Jogador*, char> pecas_jogadores;
-    Jogo* Jogo;
+    map<char, Jogador*> pecas_jogadores;
+    Jogo* jogo;
+
+    void executarReversi() {};
+    void executarLiga4() {};
+    void executarVelha() {};
 
 public:
     Partida(Jogador* j1, Jogador* j2, Jogo* jogo);
     void sortearJogadorInicial();
-    void atriburPecas();
-    void iniciarPartida();
-    void finalizarPartida();
-    
+    void atribuirPecas();
 
-
+    // modelo => r = reversi, v = jogo da velha, l = liga4
+    void iniciarPartida(char modelo);
+    void finalizarPartida(char modelo);
 };
 
 #endif
