@@ -5,6 +5,10 @@ using namespace std;
 
     Liga4::Liga4 () : Jogo(7, 6){} 
 
+    const char (&Liga4::getTabuleiro() const)[7][6] {
+    return tabuleiro;
+}
+
     char Liga4::getVencedor() {
     // Verificar linhas, colunas e todas as diagonais para encontrar um vencedor
     for (int linha = 0; linha < 6; linha++) {
