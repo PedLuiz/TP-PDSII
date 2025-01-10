@@ -10,7 +10,55 @@
 using namespace std;
 
 void executarReversi();
-void executarLiga4();
+
+void executarLiga4() {
+    Liga4 jogo;
+    pair<int, int> jogada;
+    int coluna;
+    char vencedor;
+
+    cout << "Bem-vindo ao jogo Liga 4!" << endl;
+
+    while (!jogo.isEstadoFinal()) {
+        imprimirTabuleiroLiga4(jogo);
+        cout << "Jogador " << jogo.getTurnoAtual() << ", escolha uma coluna (1 a 7): ";
+        cin >> coluna;
+
+        if (coluna < 1 || coluna > 7) {
+            cout << "Entrada inválida. Escolha uma coluna entre 1 e 7." << endl;
+            continue;
+        }
+
+        jogada = make_pair(coluna, 0);
+
+        if (jogo.isJogadaValida(jogada)) {
+            jogo.fazerJogada(jogada);
+            vencedor = jogo.getVencedor();
+            if (vencedor != ' ') {
+                imprimirTabuleiroLiga4(jogo);
+                cout << "Parabéns, Jogador " << vencedor << "! Você venceu!" << endl;
+                return;
+            }
+        } else {
+            cout << "Coluna cheia. Tente outra." << endl;
+        }
+    }
+
+    imprimirTabuleiroLiga4(jogo);
+    cout << "Jogo encerrado. Foi um empate!" << endl;
+}
+
+void imprimirTabuleiroLiga4(Liga4& jogo) {
+    cout << "Tabuleiro atual:" << endl;
+    for (int linha = 0; linha < 6; linha++) {
+        for (int coluna = 0; coluna < 7; coluna++) {
+            cout << '|' << jogo.getTabuleiro()[linha][coluna];
+        }
+        cout << '|' << endl;
+    }
+    cout << "1  2  3  4  5  6  7" << endl; // Para indicar as colunas
+}
+
 void executarJogoDaVelha();
 void Menu();
 

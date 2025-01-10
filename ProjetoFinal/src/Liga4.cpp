@@ -5,9 +5,60 @@ using namespace std;
 
     Liga4::Liga4 () : Jogo(7, 6){} 
 
-    char Liga4::getVencedor() {}
+    const char (&Liga4::getTabuleiro() const)[7][6] {
+    return tabuleiro;
+}
 
-    bool Liga4::isEstadoFinal() {}
+    char Liga4::getVencedor() {
+    // Verificar linhas, colunas e todas as diagonais para encontrar um vencedor
+    for (int linha = 0; linha < 6; linha++) {
+        for (int coluna = 0; coluna < 7; coluna++) {
+            char jogador = tabuleiro[coluna][linha];
+            if (jogador != ' ') {
+                // Verificar horizontal
+                if (coluna + 3 < 7 &&
+                    jogador == tabuleiro[coluna + 1][linha] &&
+                    jogador == tabuleiro[coluna + 2][linha] &&
+                    jogador == tabuleiro[coluna + 3][linha]) {
+                    return jogador;
+                }
+                // Verificar vertical
+                if (linha + 3 < 6 &&
+                    jogador == tabuleiro[coluna][linha + 1] &&
+                    jogador == tabuleiro[coluna][linha + 2] &&
+                    jogador == tabuleiro[coluna][linha + 3]) {
+                    return jogador;
+                }
+                // Verificar diagonal descendente
+                if (coluna + 3 < 7 && linha + 3 < 6 &&
+                    jogador == tabuleiro[coluna + 1][linha + 1] &&
+                    jogador == tabuleiro[coluna + 2][linha + 2] &&
+                    jogador == tabuleiro[coluna + 3][linha + 3]) {
+                    return jogador;
+                }
+                // Verificar diagonal ascendente
+                if (coluna + 3 < 7 && linha - 3 >= 0 &&
+                    jogador == tabuleiro[coluna + 1][linha - 1] &&
+                    jogador == tabuleiro[coluna + 2][linha - 2] &&
+                    jogador == tabuleiro[coluna + 3][linha - 3]) {
+                    return jogador;
+                    }
+                }
+            }
+        }
+    return ' '; // Sem vencedor
+    }
+
+    bool Liga4::isEstadoFinal() {
+    if (getVencedor() != ' ') return true;
+
+    // Verificar se o tabuleiro está cheio
+    for (int coluna = 0; coluna < 7; coluna++) {
+        if (tabuleiro[coluna][0] == ' ') return false;
+    }
+
+    return true; // Tabuleiro cheio ou há um vencedor
+    }
 
     char Liga4::getTurno() {
         return turno_atual;
