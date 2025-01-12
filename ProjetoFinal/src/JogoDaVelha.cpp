@@ -49,6 +49,7 @@ char JogoDaVelha::getVencedor(){
         }
         if (vencedorFound == true) return tabuleiro[2][0];
     }
+    return ' ';
 }
 
 bool JogoDaVelha::isEstadoFinal(){
@@ -82,7 +83,15 @@ bool JogoDaVelha::isJogadaValida(std::pair<int,int> jogada){
 }
 
 void JogoDaVelha::fazerJogada(std::pair<int, int> jogada){
-    if (isJogadaValida(jogada)){
-        tabuleiro[jogada.first-1][jogada.second-1] == turno;
+    tabuleiro[jogada.first-1][jogada.second-1] = turno;
+}
+
+void JogoDaVelha::printTabuleiro(){
+    for (int i=0; i<3; i++){
+        for (int j=0; j<3; j++){
+            std::cout << tabuleiro[i][j];
+            if(j<2) std::cout << "|";
+            else std::cout << std::endl;
+        }
     }
 }

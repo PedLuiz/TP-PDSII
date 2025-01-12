@@ -48,11 +48,11 @@ bool Jogador::comparaApelido(Jogador & J1, Jogador & J2){
     else return false;
 }
 
-int Jogador::getStat(int stat, int jogo){
+int Jogador::getStat(int jogo, int stat){
     return stats[jogo][stat];
 }
 
-void Jogador::setStat(int stat, int jogo, int value){
+void Jogador::setStat(int jogo, int stat, int value){
     stats[jogo][stat] = value;
 }
 
