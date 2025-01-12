@@ -5,7 +5,14 @@
 
 using namespace std;
 
-CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) : Jogo(colunas, linhas){}
+CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) :
+    Jogo(colunas, linhas),
+    numBombas(numBombas),
+    perdedor(' '),
+    jogoAtivo(true),
+    jogadasRestantes(linhas*colunas-numBombas),
+    tabuleiro_visivel(colunas, vector<char>(linhas, ' ')){
+    }
 
 void CampoMinado::colocarBombas(){}
 
@@ -23,9 +30,10 @@ char CampoMinado::getVencedor(){
 bool CampoMinado::isEstadoFinal(){
     if(jogadasRestantes <= 0){
         jogoAtivo = false;
-        return false;
+        return true;
     }
-    return jogoAtivo;
+        else if(jogoAtivo == false) return true;
+        else return false;
 }
 
 void CampoMinado::setTurno(){
@@ -41,12 +49,13 @@ char CampoMinado::getTurno(){
 
 void CampoMinado::fazerJogada(pair<int, int> jogada){
     int coluna_jogada, linha_jogada;
-    jogada.first = coluna_jogada;
-    jogada.second = linha_jogada;
+    coluna_jogada = jogada.first;
+    linha_jogada = jogada.second;
     if(isJogadaValida(jogada)){
         tabuleiro[coluna_jogada][linha_jogada] = tabuleiro_visivel[coluna_jogada][linha_jogada];
+        jogadasRestantes -= 1;
         if(tabuleiro[coluna_jogada][linha_jogada] == 'B'){
-            perdedor == turno_atual;
+            perdedor = turno_atual;
             jogoAtivo = false;
             return;
         }
@@ -56,8 +65,8 @@ void CampoMinado::fazerJogada(pair<int, int> jogada){
 
 bool CampoMinado::isJogadaValida(pair<int, int> jogada){
     int coluna_jogada, linha_jogada;
-    jogada.first = coluna_jogada;
-    jogada.second = linha_jogada;
+    coluna_jogada = jogada.first;
+    linha_jogada = jogada.second;
     if(coluna_jogada <= colunas && coluna_jogada >0 && linha_jogada <= linhas && linha_jogada > 0){
         if(tabuleiro_visivel[coluna_jogada][linha_jogada] == ' ')
             return true;
