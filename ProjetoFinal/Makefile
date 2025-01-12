@@ -29,6 +29,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 $(OBJ_DIR)/Reversi.o: $(INCLUDE_DIR)/Reversi.hpp $(INCLUDE_DIR)/Jogo.hpp
 
 $(OBJ_DIR)/Liga4.o: $(INCLUDE_DIR)/Liga4.hpp $(INCLUDE_DIR)/Jogo.hpp
+
+$(OBJ_DIR)/JogoDaVelha.o: $(INCLUDE_DIR)/JogoDaVelha.hpp $(INCLUDE_DIR)/Jogo.hpp
  
 $(OBJ_DIR)/Sistema.o: $(INCLUDE_DIR)/Sistema.hpp $(INCLUDE_DIR)/Jogador.hpp
 

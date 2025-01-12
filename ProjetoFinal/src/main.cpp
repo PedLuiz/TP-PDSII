@@ -25,10 +25,12 @@ int main(){
         char ordem, jogo;
 
         getline(cin, entrada);
+        
         if(entrada.empty()){
             cout << "Entrada inválida! Por favor tente novamente." << endl;
             continue;
         }
+
         istringstream iss(entrada);
         iss >> comando;
 
