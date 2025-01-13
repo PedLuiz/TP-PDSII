@@ -2,11 +2,13 @@
 #include "JogoDaVelha.hpp"
 #include "Reversi.hpp"
 #include "Sistema.hpp"
+#include "CampoMinado.hpp"
 #include "Partida.hpp"
 
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -48,7 +50,12 @@ void executarLiga4() {
 
 void Menu();
 
+void toUpper(string& str);
+
+void flush();
+
 int main(){
+    system("cls");
 
     Sistema sistema;
     sistema.loadSistema();
@@ -58,12 +65,16 @@ int main(){
     
     while(true) {
         Menu();
-        cout<< "Digite um comando: "<< endl;
+        cout << "Digite um comando: "<< endl;
         cin >> comando;
+        toUpper(comando);
 
         if (comando=="CJ"){
-            cout<< "Insira o apelido e o nome (respectivamente)"<< endl;
-            cin>> apelido>> nome;
+            cout << "Insira o apelido e o nome (respectivamente)"<< endl;
+            cin >> apelido; cin.get();
+            
+            getline(cin, nome);
+
             sistema.cadastrarJogador(nome, apelido);
         }
 
@@ -100,7 +111,7 @@ int main(){
 }
 
 void Menu() {
-    system("cls");
+    // system("cls");
     cout << "============================================================SISTEMA DE JOGOS============================================================" << endl;
     cout << "COMANDOS:" << endl;
     cout << "\tCJ - CADASTRAR JOGADOR" << endl;
@@ -121,4 +132,10 @@ void Menu() {
     cout << "=========================================================================================================================================" << endl;
 }
 
-void executarJogoDaVelha();
+void toUpper(string& str) {
+    transform(str.begin(), str.end(), str.begin(), ::toupper);
+}
+
+void flush() {
+    cin.ignore(10000, '\n');
+}

@@ -11,7 +11,6 @@ Sistema::~Sistema(){
     arq_jogadores.close();
 }
 
-
 std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
 
 void Sistema::cadastrarJogador(std::string nome, std::string apelido){
@@ -28,40 +27,49 @@ void Sistema::cadastrarJogador(std::string nome, std::string apelido){
     Jogador aux(nome, apelido);
     vetor_jogadores.push_back(aux);
     num_jogadores_cadastrados++;
+    // saveSistema();
     std::cout << "Jogador " << apelido << " cadastrado com sucesso" << std:: endl;
 }
 
 void Sistema::loadSistema(){
-    while (!arq_jogadores.eof()){
-        std::string nome;
-        std::string apelido;
-        arq_jogadores >> nome;
-        arq_jogadores >> apelido;
+    std::string nome, apelido;
+    int stat;
+
+    while (true) {
+        if (!std::getline(arq_jogadores, nome) || nome.empty()) break;
+
+        if (!std::getline(arq_jogadores, apelido) || apelido.empty()) break;
+
         cadastrarJogador(nome, apelido);
-        int stat;
-        Jogador * adicionado = &vetor_jogadores[vetor_jogadores.size()-1];
-        for (int i=0; i<3; i++){
-            for (int j=0; j<2; j++){
-                arq_jogadores >> stat;
+        Jogador* adicionado = &vetor_jogadores.back();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (!(arq_jogadores >> stat)) break;
                 adicionado->setStat(i, j, stat);
             }
         }
+
+        arq_jogadores.ignore(10000, '\n'); // ignora \n no final da leitura da ultima estatistica
     }
 }
 
 void Sistema::saveSistema(){
+    std::ofstream output("jogadores.txt", std::ios::trunc);
+
     for (int i=0; i < vetor_jogadores.size(); i++){
-        arq_jogadores << vetor_jogadores[i].getNome() << std::endl << vetor_jogadores[i].getApelido() << std::endl;
+        output << vetor_jogadores[i].getNome() << std::endl << vetor_jogadores[i].getApelido() << std::endl;
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
-                arq_jogadores << vetor_jogadores[i].getStat(i, j);
+                output << vetor_jogadores[i].getStat(i, j);
                 if(j == 0){
-                    arq_jogadores << " ";
+                    output << " ";
                 }
             }
-            arq_jogadores << std::endl;
+            output << std::endl;
         }
     }
+    output.close();
 }
 
 void Sistema::printSistema(char parametro){
@@ -76,6 +84,7 @@ void Sistema::printSistema(char parametro){
         for (int j=0; j<3; j++){
             std::cout << nomes_jogos[j] << " - V: " << vetor_jogadores[i].getStat(j, 0) << " D: " << vetor_jogadores[i].getStat(j, 1) << std::endl;
         }
+        std::cout << std::endl;
     }
 }
 
@@ -107,6 +116,7 @@ void Sistema::removerJogador(std::string apelido){
         std::cout << "ERRO: jogador inexistente" << std::endl;
         return;
     }
+    std::cout << "Jogador " << apelido << " removido com sucesso" << std::endl;
     arq_jogadores.close();
     arq_jogadores.open("jogadores.txt", std::fstream::out);
     saveSistema();
