@@ -62,9 +62,37 @@ int main(){
         cin >> comando;
 
         if (comando=="CJ"){
+            cout<< "Insira o apelido e o nome (respectivamente)"<< endl;
             cin>> apelido>> nome;
             sistema.cadastrarJogador(nome, apelido);
         }
+
+        else if (comando=="RJ"){
+            cout<< "Insira o apelido do jogador a ser removido"<<endl;
+            cin>> apelido;
+            sistema.removerJogador(apelido);
+        }
+
+        else if (comando=="LJ"){
+            char opcao;
+            cout<<"Deseja ordenar por nome(n) ou apelido(a)?"<< endl;
+            cin>> opcao;
+            sistema.printSistema(opcao);
+        }
+
+        else if (comando=="EP"){
+        }
+
+        else if (comando=="FS"){
+            cout<< "Finalizando sistema..."<< endl;
+            break;
+        }
+
+        else {
+            cout<< "Comando inexistente"<< endl;
+            continue;
+        }
+
 
     }
     sistema.saveSistema();
