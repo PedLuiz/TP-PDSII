@@ -52,68 +52,19 @@ int main(){
 
     Sistema sistema;
     sistema.loadSistema();
-    
-    Menu();
+
+    string comando, apelido, nome;
+
     
     while(true) {
-        
-        string entrada, comando, nome, apelido1, apelido2;
-        char ordem, jogo;
+        Menu();
+        cout<< "Digite um comando: "<< endl;
+        cin >> comando;
 
-        getline(cin, entrada);
-        
-        if(entrada.empty()){
-            cout << "Entrada inválida! Por favor tente novamente." << endl;
-            continue;
+        if (comando=="CJ"){
+            cin>> apelido>> nome;
+            sistema.cadastrarJogador(nome, apelido);
         }
-
-        istringstream iss(entrada);
-        iss >> comando;
-
-        if(comando == "CJ"){
-            iss >> apelido1;
-            getline(iss, nome);
-            nome = nome.substr(1);
-            sistema.cadastrarJogador(apelido1, nome);
-        }
-
-        else if(comando == "RJ"){
-            iss >> apelido1;
-            sistema.removerJogador(apelido1);
-        }
-
-        else if(comando == "LJ"){
-            iss >> ordem;
-            sistema.printSistema(ordem);
-        }
-
-        else if(comando == "EP"){
-            iss >> jogo;
-            iss >> apelido1;
-            iss >> apelido2;
-            //verificar se os apelidos já estão cadastrados, se não, casdastra-los***
-            //if (!sistema.isJogadorCadastrado(apelido1))
-            //  cout << "Jogador " << apelido1 << " não cadastrado! Cadastre-o primeiro." << endl;
-            //  continue;
-            //if (!sistema.isJogadorCadastrado(apelido2))
-            //  cout << "Jogador " << apelido2 << " não cadastrado! Cadastre-o primeiro." << endl;
-            //  continue;
-            switch (jogo) {
-                case 'R':
-                    break;
-                case 'V':
-                    break;
-                case 'L':
-                    break;
-                default:
-                    cout << "Jogo inválido! Escolha 'R', 'V, ou 'L'." << endl;
-                    break;
-            }
-        }
-
-        else if(comando == "FS") break;
-
-        else cout << "Comando Inválido!" << endl;
 
     }
     sistema.saveSistema();
