@@ -11,6 +11,7 @@ CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) :
     perdedor(' '),
     jogoAtivo(true),
     jogadasRestantes(linhas*colunas-numBombas),
+    count_jogadas(0),
     tabuleiro_visivel(colunas, vector<char>(linhas, ' ')){
     }
 
@@ -21,7 +22,7 @@ int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const{}
 void CampoMinado::colocarSinalizador(pair<int, int>){}
 
 char CampoMinado::getVencedor(){
-    if(perdedor == ' ')  return ' ';
+    if(perdedor == ' ')  return ' ';//empate
     else if(perdedor == 'O') return 'X';
     else if(perdedor == 'X') return 'O';
     else cerr << "Perdedor está com um valor inválido: (" << perdedor << "). Corrigir erro!!!" << endl;
@@ -36,7 +37,7 @@ bool CampoMinado::isEstadoFinal(){
         else return false;
 }
 
-void CampoMinado::setTurno(){
+void CampoMinado::setTurno(){//troca de turno a cada jogada válida
     if(turno_atual == 'X') turno_atual = 'O';
         else if(turno_atual == 'O') turno_atual = 'X';
         else cerr << "Erro Inesperado: turno_atual possui um valor inválido (" << turno_atual << " )." << endl;
@@ -54,10 +55,16 @@ void CampoMinado::fazerJogada(pair<int, int> jogada){
     if(isJogadaValida(jogada)){
         tabuleiro[coluna_jogada][linha_jogada] = tabuleiro_visivel[coluna_jogada][linha_jogada];
         jogadasRestantes -= 1;
+        count_jogadas += 1;
         if(tabuleiro[coluna_jogada][linha_jogada] == 'B'){
+            //Inicialmente perdedor = ' ', se um jogador perder na rodada anterior, o atributo perdedor vai ser setado como 'X' ou 'O'
+            //Caso na próxima jogada o outro jogador perca, será considerado empate
+            if(perdedor == 'O' || perdedor == 'X'){
+                perdedor = ' ';
+            }
             perdedor = turno_atual;
-            jogoAtivo = false;
-            return;
+            //o jogo só irá ser encerrado se um jogador encontrar uma primeira bomba e os dois jogadores tiverem a mesma quantidade de jogadas;
+            if(count_jogadas%2==0) jogoAtivo = false;
         }
         setTurno();
     }
@@ -81,7 +88,7 @@ bool CampoMinado::isJogadaValida(pair<int, int> jogada){
     }
 }
 
-void CampoMinado::printTabuleiro(){
+void CampoMinado::printTabuleiro(){//imprime o tabuleiro apenas com as já escolhidas pelos jogadores
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
             cout << "| " << tabuleiro_visivel[i][j]  << " ";
@@ -90,7 +97,7 @@ void CampoMinado::printTabuleiro(){
     }
 }
 
-void CampoMinado::revelarTabuleiro(){
+void CampoMinado::revelarTabuleiro(){//Revela o tabuleiro com todas as bombas
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
             cout << "| " << tabuleiro[i][j]  << " ";

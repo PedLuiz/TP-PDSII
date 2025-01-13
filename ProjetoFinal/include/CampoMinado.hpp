@@ -14,6 +14,7 @@ private:
     char perdedor;
     int numBombas;
     bool jogoAtivo;
+    int count_jogadas;
     int jogadasRestantes;
 
     vector<vector<char>> tabuleiro_visivel;

@@ -18,6 +18,7 @@ public:
     void fazerJogada(pair<int, int> jogada) override;
     bool isJogadaValida(pair<int, int> jogada) override;
     const char (&getTabuleiro() const)[7][6];
+    void printTabuleiro() override;
     ~Liga4();
 };
 

@@ -64,7 +64,7 @@ using namespace std;
         return turno_atual;
     }
 
-    void Liga4::setTurno(){
+    void Liga4::setTurno(){//troca o turno a cada jogada válida
         if(turno_atual == 'X') turno_atual = 'O';
         else if(turno_atual == 'O') turno_atual = 'X';
         else cerr << "Erro Inesperado: turno_atual possui um valor inválido (" << turno_atual << " )." << endl;
@@ -74,7 +74,7 @@ using namespace std;
         int coluna = jogada.first;
 
         if(isJogadaValida(jogada)){
-            for(int i=5; i>=0; i--){
+            for(int i=5; i>=0; i--){//percorre a coluna de baixo pra cima até encontrar a primeira casa vazia
                 if(tabuleiro[coluna-1][i]=='X' || tabuleiro[coluna-1][i]=='O')
                     continue;
                 else{
@@ -102,6 +102,17 @@ using namespace std;
                 cout << "Coluna Inválida! Escolha entre 1 e 7" << endl;
                 return false;
             }
+    }
+
+    void Liga4::printTabuleiro(){
+            cout << "Tabuleiro atual:" << endl;
+        for (int linha = 0; linha < 6; linha++) {
+            for (int coluna = 0; coluna < 7; coluna++) {
+                cout << '|' << tabuleiro[linha][coluna];
+            }
+            cout << '|' << endl;
+        }
+        cout << "1  2  3  4  5  6  7" << endl; // Para indicar as colunas
     }
 
     Liga4::~Liga4(){}
