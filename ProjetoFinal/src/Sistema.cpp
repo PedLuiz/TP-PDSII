@@ -15,7 +15,7 @@ Sistema::~Sistema(){
 std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
 
 void Sistema::cadastrarJogador(std::string nome, std::string apelido){
-    if (apelido == "" || nome == ""){
+    if (apelido.empty() || nome.empty()){
         std::cout << "ERRO: dados incorretos" << std::endl;
         return;
     }
@@ -37,15 +37,15 @@ void Sistema::loadSistema(){
         std::string apelido;
         arq_jogadores >> nome;
         arq_jogadores >> apelido;
-        Jogador aux(nome, apelido);
+        cadastrarJogador(nome, apelido);
         int stat;
+        Jogador * adicionado = &vetor_jogadores[vetor_jogadores.size()-1];
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
                 arq_jogadores >> stat;
-                aux.setStat(i, j, stat);
+                adicionado->setStat(i, j, stat);
             }
         }
-        vetor_jogadores.push_back(aux);
     }
 }
 
@@ -68,13 +68,13 @@ void Sistema::printSistema(char parametro){
     if (parametro == 'A') {
         std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaApelido);
     }
-    if (parametro == 'N') {
+    else if (parametro == 'N') {
         std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaNome);
     }
     for (int i=0; i < vetor_jogadores.size(); i++){
         std::cout << vetor_jogadores[i].getNome() << std::endl << vetor_jogadores[i].getApelido() << std::endl;
-        for (int i=0; i<3; i++){
-            std::cout << nomes_jogos[i] << " - V: " << vetor_jogadores[i].getStat(i, 0) << " D: " << vetor_jogadores[i].getStat(i, 1) << std::endl;
+        for (int j=0; j<3; j++){
+            std::cout << nomes_jogos[j] << " - V: " << vetor_jogadores[i].getStat(j, 0) << " D: " << vetor_jogadores[i].getStat(j, 1) << std::endl;
         }
     }
 }
@@ -98,6 +98,7 @@ void Sistema::removerJogador(std::string apelido){
     for (int i = 0; i != vetor_jogadores.size(); i++){
         if (vetor_jogadores[i].getApelido() == apelido){
             vetor_jogadores.erase(vetor_jogadores.begin()+i);
+            num_jogadores_cadastrados--;
             jogador_existente = true;
             break;
         }

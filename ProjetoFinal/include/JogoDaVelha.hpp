@@ -14,6 +14,7 @@ class JogoDaVelha : public Jogo {
         char getTurno() override;
         bool isJogadaValida(std::pair<int,int> jogada) override;
         void fazerJogada(std::pair<int, int> jogada) override;
+        void printTabuleiro();
 };
 
 #endif

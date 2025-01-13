@@ -1,15 +1,14 @@
-#include "../include/Liga4.hpp"
-#include "../include/JogoDaVelha.hpp"
-#include "../include/Reversi.hpp"
-#include "../include/Sistema.hpp"
+#include "Liga4.hpp"
+#include "JogoDaVelha.hpp"
+#include "Reversi.hpp"
+#include "Sistema.hpp"
+#include "Partida.hpp"
 
 #include <string>
 #include <iostream>
 #include <sstream>
 
 using namespace std;
-
-void executarReversi();
 
 void executarLiga4() {
     Liga4 jogo;
@@ -20,8 +19,8 @@ void executarLiga4() {
     cout << "Bem-vindo ao jogo Liga 4!" << endl;
 
     while (!jogo.isEstadoFinal()) {
-        imprimirTabuleiroLiga4(jogo);
-        cout << "Jogador " << jogo.getTurnoAtual() << ", escolha uma coluna (1 a 7): ";
+        jogo.printTabuleiro();
+        cout << "Jogador " << jogo.getTurno() << ", escolha uma coluna (1 a 7): ";
         cin >> coluna;
 
         if (coluna < 1 || coluna > 7) {
@@ -35,7 +34,7 @@ void executarLiga4() {
             jogo.fazerJogada(jogada);
             vencedor = jogo.getVencedor();
             if (vencedor != ' ') {
-                imprimirTabuleiroLiga4(jogo);
+                jogo.printTabuleiro();
                 cout << "Parabéns, Jogador " << vencedor << "! Você venceu!" << endl;
                 return;
             }
@@ -43,23 +42,10 @@ void executarLiga4() {
             cout << "Coluna cheia. Tente outra." << endl;
         }
     }
-
-    imprimirTabuleiroLiga4(jogo);
+    jogo.printTabuleiro();
     cout << "Jogo encerrado. Foi um empate!" << endl;
 }
 
-void imprimirTabuleiroLiga4(Liga4& jogo) {
-    cout << "Tabuleiro atual:" << endl;
-    for (int linha = 0; linha < 6; linha++) {
-        for (int coluna = 0; coluna < 7; coluna++) {
-            cout << '|' << jogo.getTabuleiro()[linha][coluna];
-        }
-        cout << '|' << endl;
-    }
-    cout << "1  2  3  4  5  6  7" << endl; // Para indicar as colunas
-}
-
-void executarJogoDaVelha();
 void Menu();
 
 int main(){
@@ -67,68 +53,18 @@ int main(){
     Sistema sistema;
     sistema.loadSistema();
 
-    Menu();
+    string comando, apelido, nome;
+
     
     while(true) {
-        
-        string entrada, comando, nome, apelido1, apelido2;
-        char ordem, jogo;
+        Menu();
+        cout<< "Digite um comando: "<< endl;
+        cin >> comando;
 
-        getline(cin, entrada);
-        if(entrada.empty()){
-            cout << "Entrada inválida! Por favor tente novamente." << endl;
-            continue;
+        if (comando=="CJ"){
+            cin>> apelido>> nome;
+            sistema.cadastrarJogador(nome, apelido);
         }
-        istringstream iss(entrada);
-        iss >> comando;
-
-        if(comando == "CJ"){
-            iss >> apelido1;
-            getline(iss, nome);
-            nome = nome.substr(1);
-            sistema.cadastrarJogador(apelido1, nome);
-        }
-
-        else if(comando == "RJ"){
-            iss >> apelido1;
-            sistema.removerJogador(apelido1);
-        }
-
-        else if(comando == "LJ"){
-            iss >> ordem;
-            sistema.printSistema(ordem);
-        }
-
-        else if(comando == "EP"){
-            iss >> jogo;
-            iss >> apelido1;
-            iss >> apelido2;
-            //verificar se os apelidos já estão cadastrados, se não, casdastra-los***
-            //if (!sistema.isJogadorCadastrado(apelido1))
-            //  cout << "Jogador " << apelido1 << " não cadastrado! Cadastre-o primeiro." << endl;
-            //  continue;
-            //if (!sistema.isJogadorCadastrado(apelido2))
-            //  cout << "Jogador " << apelido2 << " não cadastrado! Cadastre-o primeiro." << endl;
-            //  continue;
-            switch (jogo) {
-                case 'R':
-                    executarReversi(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
-                    break;
-                case 'V':
-                    executarJogoDaVelha(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
-                    break;
-                case 'L':
-                    executarLiga4(/*adicionar Parametros, sistema, apelido1, apelido2??*/);
-                    break;
-                default:
-                    cout << "Jogo inválido! Escolha 'R', 'V, ou 'L'." << endl;
-                    break;
-            }
-        }
-
-        else if(comando == "FS") break;
-
-        else cout << "Comando Inválido!" << endl;
 
     }
     sistema.saveSistema();
@@ -157,16 +93,4 @@ void Menu() {
     cout << "=========================================================================================================================================" << endl;
 }
 
-
-void executarReversi(){
-    
-}
-
-void executarLiga4(){
-    //sistema.atualizaStats(apelido, stats) ??
-}
-
-void executarJogoDaVelha(){
-
-}
-
+void executarJogoDaVelha();
