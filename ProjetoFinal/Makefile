@@ -27,11 +27,21 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 # Parâmetros de dependências entre arquivos
 $(OBJ_DIR)/Reversi.o: $(INCLUDE_DIR)/Reversi.hpp $(INCLUDE_DIR)/Jogo.hpp
+
 $(OBJ_DIR)/Liga4.o: $(INCLUDE_DIR)/Liga4.hpp $(INCLUDE_DIR)/Jogo.hpp
+
+$(OBJ_DIR)/JogoDaVelha.o: $(INCLUDE_DIR)/JogoDaVelha.hpp $(INCLUDE_DIR)/Jogo.hpp
+
+$(OBJ_DIR)/CampoMinado.o: $(INCLUDE_DIR)/CampoMinado.hpp $(INCLUDE_DIR)/Jogo.hpp
+ 
 $(OBJ_DIR)/Sistema.o: $(INCLUDE_DIR)/Sistema.hpp $(INCLUDE_DIR)/Jogador.hpp
+
+$(OBJ_DIR)/Partida.o: $(INCLUDE_DIR)/Jogo.hpp $(INCLUDE_DIR)/Jogador.hpp \
+					  $(INCLUDE_DIR)/Reversi.hpp $(INCLUDE_DIR)/Liga4.hpp $(INCLUDE_DIR)/JogoDaVelha.hpp
+
 $(OBJ_DIR)/main.o: $(INCLUDE_DIR)/Sistema.hpp $(INCLUDE_DIR)/Jogador.hpp \
                    $(INCLUDE_DIR)/Jogo.hpp $(INCLUDE_DIR)/JogoDaVelha.hpp \
-                   $(INCLUDE_DIR)/Reversi.hpp $(INCLUDE_DIR)/Liga4.hpp
+                   $(INCLUDE_DIR)/Reversi.hpp $(INCLUDE_DIR)/Liga4.hpp $(INCLUDE_DIR)/Partida.hpp	
 
 clean:
 	del /f obj\*.o bin\*.exe
