@@ -3,7 +3,7 @@
 #include <algorithm>
 
 Sistema::Sistema(){
-    arq_jogadores.open("jogadores.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+    arq_jogadores.open("jogadores.txt", std::fstream::in);
     num_jogadores_cadastrados = 0;
 }
 
@@ -16,12 +16,12 @@ std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
 
 void Sistema::cadastrarJogador(std::string nome, std::string apelido){
     if (apelido.empty() || nome.empty()){
-        std::cout << "ERRO: dados incorretos" << std::endl;
+        std::cout << "ERRO: dados incorretos " << nome << " | " << apelido <<std::endl;
         return;
     }
     for (int i=0; i < vetor_jogadores.size(); i++){
-        if (vetor_jogadores[i].Jogador::getApelido() == apelido) {
-            std::cout << "ERRO: jogador repetido" << std::endl;
+        if (vetor_jogadores[i].getApelido() == apelido) {
+            std::cout << "ERRO: jogador repetido " << nome << " | " << apelido << std::endl;
             return;
         }
     } 
@@ -37,31 +37,38 @@ void Sistema::loadSistema(){
         std::string apelido;
         arq_jogadores >> nome;
         arq_jogadores >> apelido;
-        cadastrarJogador(nome, apelido);
+        Jogador aux(nome, apelido);
         int stat;
-        Jogador * adicionado = &vetor_jogadores[vetor_jogadores.size()-1];
+        //Jogador * adicionado = &vetor_jogadores[vetor_jogadores.size()-1];
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
                 arq_jogadores >> stat;
-                adicionado->setStat(i, j, stat);
+                aux.setStat(i, j, stat);
             }
         }
+        vetor_jogadores.push_back(aux);
     }
 }
 
 void Sistema::saveSistema(){
-    for (int i=0; i < vetor_jogadores.size(); i++){
+    arq_jogadores.close();
+    arq_jogadores.open("jogadores.txt", std::fstream::out);
+    int end = vetor_jogadores.size();
+    for (int i=0; i < end; i++){
+        if (i>0) arq_jogadores << std::endl;
         arq_jogadores << vetor_jogadores[i].getNome() << std::endl << vetor_jogadores[i].getApelido() << std::endl;
-        for (int i=0; i<3; i++){
-            for (int j=0; j<2; j++){
-                arq_jogadores << vetor_jogadores[i].getStat(i, j);
-                if(j == 0){
+        for (int j=0; j<3; j++){
+            for (int k=0; k<2; k++){
+                arq_jogadores << vetor_jogadores[i].getStat(j, k);
+                if(k == 0){
                     arq_jogadores << " ";
                 }
             }
-            arq_jogadores << std::endl;
+            if (j<2) arq_jogadores << std::endl;
         }
     }
+    arq_jogadores.close();
+    arq_jogadores.open("jogadores.txt", std::fstream::in);
 }
 
 void Sistema::printSistema(char parametro){
@@ -72,7 +79,7 @@ void Sistema::printSistema(char parametro){
         std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaNome);
     }
     for (int i=0; i < vetor_jogadores.size(); i++){
-        std::cout << vetor_jogadores[i].getNome() << std::endl << vetor_jogadores[i].getApelido() << std::endl;
+        std::cout << vetor_jogadores[i].getApelido() << " " << vetor_jogadores[i].getNome() << std::endl;
         for (int j=0; j<3; j++){
             std::cout << nomes_jogos[j] << " - V: " << vetor_jogadores[i].getStat(j, 0) << " D: " << vetor_jogadores[i].getStat(j, 1) << std::endl;
         }
