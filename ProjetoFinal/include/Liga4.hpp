@@ -16,8 +16,9 @@ public:
     char getTurno() override;
     void setTurno();
     void fazerJogada(pair<int, int> jogada) override;
+    void printTabuleiro() override;
     bool isJogadaValida(pair<int, int> jogada) override;
-    const char (&getTabuleiro() const)[7][6];
+    const vector<vector<char>> &getTabuleiro() const;
     ~Liga4();
 };
 

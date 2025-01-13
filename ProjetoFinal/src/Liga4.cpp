@@ -5,9 +5,9 @@ using namespace std;
 
     Liga4::Liga4 () : Jogo(7, 6){} 
 
-    const char (&Liga4::getTabuleiro() const)[7][6] {
+    const vector<vector<char>> &Liga4::getTabuleiro() const {
     return tabuleiro;
-}
+    }
 
     char Liga4::getVencedor() {
     // Verificar linhas, colunas e todas as diagonais para encontrar um vencedor
@@ -103,6 +103,19 @@ using namespace std;
                 return false;
             }
     }
+
+    void Liga4::printTabuleiro() {
+        cout << "Tabuleiro atual:" << endl;
+        
+        for (int linha = 0; linha < 6; linha++) {
+            for (int coluna = 0; coluna < 7; coluna++) {
+                cout << '|' << tabuleiro[linha][coluna];
+            }
+            cout << '|' << endl;
+        }
+        cout << "1  2  3  4  5  6  7" << endl; // Para indicar as colunas
+    }
+    
 
     Liga4::~Liga4(){}
 
