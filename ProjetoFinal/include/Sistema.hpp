@@ -20,6 +20,8 @@ class Sistema {
         void printSistema(char parametro);
         void printLeaderBoard();
         void removerJogador(std::string apelido);
+        bool jogadorRegistrado(std::string apelido);
+        Jogador* getJogador(std::string apelido);
 };
 
 #endif

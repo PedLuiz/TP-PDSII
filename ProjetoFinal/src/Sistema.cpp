@@ -20,7 +20,7 @@ void Sistema::cadastrarJogador(std::string nome, std::string apelido){
     }
     for (int i=0; i < vetor_jogadores.size(); i++){
         if (vetor_jogadores[i].getApelido() == apelido) {
-            std::cout << "ERRO: jogador repetido " << nome << " | " << apelido << std::endl;
+            std::cout << "ERRO: o apelido <" << apelido  << "> ja esta em uso" << std::endl;
             return;
         }
     } 
@@ -32,20 +32,27 @@ void Sistema::cadastrarJogador(std::string nome, std::string apelido){
 }
 
 void Sistema::loadSistema(){
+
     std::string nome, apelido;
     int stat;
 
     while (true) {
         if (!std::getline(arq_jogadores, nome) || nome.empty()) break;
 
-        if (!std::getline(arq_jogadores, apelido) || apelido.empty()) break;
+        if (!std::getline(arq_jogadores, apelido) || apelido.empty()) {
+            std::cout << "ERRO: informacoes ausentes em jogadores.txt" << std::endl;
+            break;
+        } 
 
         cadastrarJogador(nome, apelido);
         Jogador* adicionado = &vetor_jogadores.back();
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
-                if (!(arq_jogadores >> stat)) break;
+                if (!(arq_jogadores >> stat)) {
+                    std::cout << "ERRO: informacoes ausentes em jogadores.txt" << std::endl;
+                    break;
+                } 
                 adicionado->setStat(i, j, stat);
             }
         }
@@ -102,18 +109,26 @@ void Sistema::printLeaderBoard(){
     }
 }
 
-void Sistema::removerJogador(std::string apelido){
-    bool jogador_existente = false;
-    for (int i = 0; i != vetor_jogadores.size(); i++){
-        if (vetor_jogadores[i].getApelido() == apelido){
-            vetor_jogadores.erase(vetor_jogadores.begin()+i);
-            num_jogadores_cadastrados--;
-            jogador_existente = true;
-            break;
+bool Sistema::jogadorRegistrado(std::string apelido) {
+    for (auto& jogador : vetor_jogadores) {
+        if (jogador.getApelido() == apelido) {
+            return true;
         }
     }
-    if (!jogador_existente){
-        std::cout << "ERRO: jogador inexistente" << std::endl;
+    return false;
+}
+
+void Sistema::removerJogador(std::string apelido){
+    if (jogadorRegistrado(apelido)) {
+        for (int i = 0; i != vetor_jogadores.size(); i++){
+            if (vetor_jogadores[i].getApelido() == apelido){
+                vetor_jogadores.erase(vetor_jogadores.begin()+i);
+                num_jogadores_cadastrados--;
+            }
+        }
+    }
+    else {
+        std::cout << "ERRO: jogador <" << apelido  << "> inexistente" << std::endl;
         return;
     }
     std::cout << "Jogador " << apelido << " removido com sucesso" << std::endl;
@@ -122,4 +137,17 @@ void Sistema::removerJogador(std::string apelido){
     saveSistema();
     arq_jogadores.close();
     arq_jogadores.open("jogadores.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+}
+
+Jogador* Sistema::getJogador(std::string apelido) {
+    if (jogadorRegistrado(apelido)) {
+        for (auto& jogador : vetor_jogadores) {
+            if (jogador.getApelido() == apelido) 
+                return &jogador;
+        }
+    }
+    else {
+        std::cout << "ERRO: jogador <" << apelido  << "> inexistente" << std::endl;
+        return NULL;
+    }
 }

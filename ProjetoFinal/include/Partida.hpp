@@ -20,9 +20,10 @@ private:
     map<char, Jogador*> pecas_jogadores;
     Jogo* jogo;
 
-    void executarReversi() {};
+    void executarReversi();
     void executarLiga4() {};
     void executarVelha() {};
+    void executarMinado() {};
 
 public:
     Partida(Jogador* j1, Jogador* j2, Jogo* jogo);
@@ -32,6 +33,8 @@ public:
     // modelo => r = reversi, v = jogo da velha, l = liga4
     void iniciarPartida(char modelo);
     void finalizarPartida(char modelo);
+
+    static bool isJogoValido(string modelo);
 };
 
 #endif
