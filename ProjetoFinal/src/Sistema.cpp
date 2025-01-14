@@ -27,7 +27,7 @@ void Sistema::cadastrarJogador(std::string nome, std::string apelido){
     Jogador aux(nome, apelido);
     vetor_jogadores.push_back(aux);
     num_jogadores_cadastrados++;
-    // saveSistema();
+    saveSistema();
     std::cout << "Jogador " << apelido << " cadastrado com sucesso" << std:: endl;
 }
 
@@ -57,11 +57,11 @@ void Sistema::loadSistema(){
 void Sistema::saveSistema(){
     std::ofstream output("jogadores.txt", std::ios::trunc);
 
-    for (int i=0; i < vetor_jogadores.size(); i++){
-        output << vetor_jogadores[i].getNome() << std::endl << vetor_jogadores[i].getApelido() << std::endl;
+    for (int k=0; k < vetor_jogadores.size(); k++){
+        output << vetor_jogadores[k].getNome() << std::endl << vetor_jogadores[k].getApelido() << std::endl;
         for (int i=0; i<3; i++){
             for (int j=0; j<2; j++){
-                output << vetor_jogadores[i].getStat(i, j);
+                output << vetor_jogadores[k].getStat(i, j);
                 if(j == 0){
                     output << " ";
                 }
