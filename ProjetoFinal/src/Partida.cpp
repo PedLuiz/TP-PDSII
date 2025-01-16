@@ -9,6 +9,8 @@
 
 using namespace std;
 
+void cls();
+
 Partida::Partida(Jogador* j1, Jogador* j2, Jogo* jogo) : jogador1(j1), jogador2(j2), jogo(jogo) {
     sortearJogadorInicial();
 }
@@ -51,10 +53,13 @@ void Partida::iniciarPartida(char modelo) {
 }
 
 void Partida::finalizarPartida(char modelo) {
-    jogo->printTabuleiro();
-    char peca_vencedor = jogo->getVencedor();
+    cls();
 
     cout << endl << "+=++=++=++=+ FIM DE JOGO +=++=++=++=+" << endl;
+    jogo->printTabuleiro();
+
+    char peca_vencedor = jogo->getVencedor();
+
     
     if (peca_vencedor == ' ') {
         cout << "Jogo terminou em EMPATE ";
@@ -73,7 +78,7 @@ void Partida::finalizarPartida(char modelo) {
         Jogador* perdedor = (vencedor == jogador1) ? jogador2 : jogador1;
 
 
-        cout << "Jogador " << vencedor->getApelido() << " e o vencedor da partida ";
+        cout << "Jogador " << vencedor->getApelido() << " e' o vencedor da partida!!!";
 
         if (modelo == 'R') {
             Reversi* reversi = dynamic_cast<Reversi*> (jogo);
@@ -116,8 +121,9 @@ bool Partida::isJogoValido(string modelo) {
 }
 
 void Partida::executarReversi() {
-    cout << "========================== REVERSI =============================" << endl << endl;
     Reversi* reversi = dynamic_cast<Reversi*> (jogo);
+
+    cout << "========================== BEM VINDO AO REVERSI =============================" << endl << endl;
 
     atribuirPecas();
 
@@ -127,11 +133,11 @@ void Partida::executarReversi() {
     map<char, int> resultado;
 
     while (!reversi->isEstadoFinal()) {
+        cout << "========================== REVERSI =============================" << endl << endl;
         if (rodada > 1) 
-            system("cls");
-
-        Jogador* atual = pecas_jogadores[reversi->getTurno()];
-        cout << endl << "Rodada " << rodada << ", vez do jogador " << atual->getApelido() << "[" << reversi->getTurno() << "]:" <<  endl << endl;
+            cls();
+        jogador_atual = pecas_jogadores[reversi->getTurno()];
+        cout << endl << "Rodada " << rodada << ", vez do jogador " << jogador_atual->getApelido() << "[" << reversi->getTurno() << "]:" <<  endl << endl;
 
         reversi->printTabuleiroPossivel(); 
         resultado = reversi->countPieces();
@@ -157,49 +163,57 @@ void Partida::executarReversi() {
         
         rodada++;
     }
+
     finalizarPartida('R');
 }
 
 void Partida::executarLiga4(){
     cout << endl << "========================== BEM VINDO AO LIGA4 =============================" << endl << endl;
 
-    cout << "O PRIMEIRO JOGADOR QUE FIZER UMA SEQUÊNCIA DE 4 'O' OU 'X' NA COLUNA, LINHA OU DIAGONAL GANHA A PARTIDA! BOA SORTE." << endl << endl;
+    cout << "O PRIMEIRO JOGADOR QUE FIZER UMA SEQUENCIA DE 4 'O' OU 'X' NA COLUNA, \nLINHA OU DIAGONAL GANHA A PARTIDA! BOA SORTE." << endl << endl;
 
     Liga4* liga4 = dynamic_cast<Liga4*> (jogo);
 
     atribuirPecas();
 
+    int rodada = 1;
+
     pair<int, int> jogada;
     int coluna;
-    char vencedor;
 
     while (!liga4->isEstadoFinal()) {
+        if (rodada > 1) {
+            cls();
+            cout << "========================== LIGA4 =============================" << endl << endl;
+        }
+        
+        jogador_atual = pecas_jogadores[liga4->getTurno()];
+
+        cout << endl << "Rodada " << rodada << ", vez do jogador(a) " << jogador_atual->getApelido() << "[" << liga4->getTurno() << "]:" << endl << endl;
+
         liga4->printTabuleiro();
-        cout << "Jogador " << liga4->getTurno() <<", escolha uma coluna (1 a 7): ";
-        while(!(cin >> coluna)){
-            cin.clear(); // Limpa o estado de erro
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Por favor digite uma coluna valida: ";
+
+        while (true) {
+            cout << "Jogador(a) " << jogador_atual->getApelido() << "[" << liga4->getTurno() << "]" << ", escolha uma coluna (1 a 7): ";
+            cin >> coluna; cin.get();
+
+            jogada = {coluna, 0};
+            
+            if (liga4->isJogadaValida(jogada)) 
+                break;
         }
+        liga4->fazerJogada(jogada);
 
-        jogada = make_pair(coluna, 0);
-
-        if (liga4->isJogadaValida(jogada)) {
-            system("clear");
-            cout << endl << "========================== BEM VINDO AO LIGA4 =============================" << endl << endl;
-            cout << "O PRIMEIRO JOGADOR QUE FIZER UMA SEQUÊNCIA DE 4 'O' OU 'X' NA COLUNA, LINHA OU DIAGONAL GANHA A PARTIDA! BOA SORTE." << endl << endl;
-
-            liga4->fazerJogada(jogada);
-            vencedor = liga4->getVencedor();
-            if (vencedor != ' ') {
-                liga4->printTabuleiro();
-                cout << "Parabéns, Jogador " << vencedor << "! Você venceu!" << endl;
-                return;
-            }
-        }
-
+        rodada++;
     }
-    liga4->printTabuleiro();
-    cout << "Jogo encerrado. Foi um empate!" << endl;
 
+    finalizarPartida('L');
+}
+
+void cls() {
+    #ifdef _WIN32
+        system("cls");
+    #else   
+        system("clear");
+    #endif
 }

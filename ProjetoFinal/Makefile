@@ -36,7 +36,7 @@ $(OBJ_DIR)/CampoMinado.o: $(INCLUDE_DIR)/CampoMinado.hpp $(INCLUDE_DIR)/Jogo.hpp
  
 $(OBJ_DIR)/Sistema.o: $(INCLUDE_DIR)/Sistema.hpp $(INCLUDE_DIR)/Jogador.hpp
 
-$(OBJ_DIR)/Partida.o: $(INCLUDE_DIR)/Jogo.hpp $(INCLUDE_DIR)/Jogador.hpp \
+$(OBJ_DIR)/Partida.o: $(INCLUDE_DIR)/Jogo.hpp $(INCLUDE_DIR)/Jogador.hpp $(INCLUDE_DIR)/Sistema.hpp \
 					  $(INCLUDE_DIR)/Reversi.hpp $(INCLUDE_DIR)/Liga4.hpp $(INCLUDE_DIR)/JogoDaVelha.hpp
 
 $(OBJ_DIR)/main.o: $(INCLUDE_DIR)/Sistema.hpp $(INCLUDE_DIR)/Jogador.hpp \

@@ -18,9 +18,10 @@ void toUpper(string& str);
 
 void pause();
 
-int main(){
-    system("cls");
+void clear();
 
+int main(){
+    clear();
     Sistema sistema;
     sistema.loadSistema();
 
@@ -75,7 +76,7 @@ int main(){
                     getline(cin, jogo);
                     toUpper(jogo);
                     if ((jogo == "SAIR") || (Partida::isJogoValido(jogo)))
-                        break;
+                       break;
                 }
             }
 
@@ -138,6 +139,8 @@ int main(){
                 Partida* partida = new Partida (jogador1, jogador2, jogo);
 
                 partida->iniciarPartida(modelo);
+                sistema.saveSistema();
+                pause();
 
                 delete partida, jogo, jogador1, jogador2;
             }
@@ -161,7 +164,7 @@ int main(){
 }
 
 void Menu() {
-    system("cls");
+    clear();
     cout << "============================================================SISTEMA DE JOGOS============================================================" << endl;
     cout << "COMANDOS:" << endl;
     cout << "\tCJ - CADASTRAR JOGADOR" << endl;
@@ -189,4 +192,12 @@ void toUpper(string& str) {
 void pause() {
     cout << "Pressione [ENTER] para continuar..."<< std::flush;
     cin.get();
+}
+
+void clear() {
+    #ifdef _WIN32
+        system("cls");
+    #else   
+        system("clear");
+    #endif
 }

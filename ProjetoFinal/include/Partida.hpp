@@ -6,6 +6,7 @@
 #include "Reversi.hpp"
 #include "Liga4.hpp"
 #include "JogoDaVelha.hpp"
+#include "Sistema.hpp"
 
 #include <map>
 
