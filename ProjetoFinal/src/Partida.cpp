@@ -98,8 +98,8 @@ void Partida::finalizarPartida(char modelo) {
             stat_jogo = 2;
         }
 
-        vencedor->setStat(0, stat_jogo, vencedor->getStat(0, stat_jogo) + 1); // incrementa vitorias
-        perdedor->setStat(1, stat_jogo, vencedor->getStat(0, stat_jogo) + 1); // incrementa derrota 
+        vencedor->setStat(stat_jogo, 0, (vencedor->getStat(stat_jogo, 0) + 1)); // incrementa vitorias
+        perdedor->setStat(stat_jogo, 1, (perdedor->getStat(stat_jogo, 1) + 1)); // incrementa derrota 
     }
 
 }
@@ -133,15 +133,16 @@ void Partida::executarReversi() {
     map<char, int> resultado;
 
     while (!reversi->isEstadoFinal()) {
-        cout << "========================== REVERSI =============================" << endl << endl;
-        if (rodada > 1) 
+        if (rodada > 1) {
             cls();
+            cout << "========================== REVERSI =============================" << endl << endl;
+        } 
         jogador_atual = pecas_jogadores[reversi->getTurno()];
         cout << endl << "Rodada " << rodada << ", vez do jogador " << jogador_atual->getApelido() << "[" << reversi->getTurno() << "]:" <<  endl << endl;
 
         reversi->printTabuleiroPossivel(); 
         resultado = reversi->countPieces();
-        cout << pecas_jogadores['X']->getApelido() << "[X]: " << resultado['X'] << " pontos || " << pecas_jogadores['O']->getApelido() << "[O]: " << resultado['O'] << " pontos" << endl;
+        cout << pecas_jogadores['X']->getApelido() << "[X]: " << resultado['X'] << " pontos | " << pecas_jogadores['O']->getApelido() << "[O]: " << resultado['O'] << " pontos" << endl <<  endl;
 
         if (reversi->getPossiveisJogadas().empty()) {
             cout << "Jogador " << reversi->getTurno() << " nao possui jogadas disponiveis. Passando turno..." << endl;
@@ -152,7 +153,7 @@ void Partida::executarReversi() {
 
         while (true) {
             cout << "Insira um comando no formato <linha> <coluna>" << endl;
-            cin >> x >> y;
+            cin >> x >> y; cin.get();
 
             if (reversi->isJogadaValida({x-1, y-1}))
                 break;
@@ -208,6 +209,10 @@ void Partida::executarLiga4(){
     }
 
     finalizarPartida('L');
+}
+
+void Partida::executarVelha() {
+    
 }
 
 void cls() {

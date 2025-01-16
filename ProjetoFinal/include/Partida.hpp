@@ -23,7 +23,7 @@ private:
 
     void executarReversi();
     void executarLiga4();
-    void executarVelha() {};
+    void executarVelha();
     void executarMinado() {};
 
 public:

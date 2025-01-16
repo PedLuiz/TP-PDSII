@@ -16,6 +16,7 @@ class Sistema {
         ~Sistema();
         void loadSistema();
         void saveSistema();
+        int getNumJogadores();
         void cadastrarJogador(std::string nome, std::string apelido);
         void printSistema(char parametro);
         void printLeaderBoard();

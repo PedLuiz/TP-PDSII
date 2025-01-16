@@ -13,6 +13,10 @@ Sistema::~Sistema(){
 
 std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
 
+int Sistema::getNumJogadores() {
+    return num_jogadores_cadastrados;
+}
+
 void Sistema::cadastrarJogador(std::string nome, std::string apelido){
     if (apelido.empty() || nome.empty()){
         std::cout << "ERRO: dados incorretos " << nome << " | " << apelido <<std::endl;
@@ -20,7 +24,7 @@ void Sistema::cadastrarJogador(std::string nome, std::string apelido){
     }
     for (int i=0; i < vetor_jogadores.size(); i++){
         if (vetor_jogadores[i].getApelido() == apelido) {
-            std::cout << "ERRO: o apelido <" << apelido  << "> ja esta em uso" << std::endl;
+            std::cout << "ERRO: o apelido \"" << apelido  << "\" ja esta em uso" << std::endl;
             return;
         }
     } 
@@ -80,14 +84,14 @@ void Sistema::saveSistema(){
 }
 
 void Sistema::printSistema(char parametro){
-    if (parametro == 'A') {
+    if ((parametro == 'A') || (parametro == 'a')) {
         std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaApelido);
     }
-    else if (parametro == 'N') {
+    else if ((parametro == 'N') || (parametro == 'n')) {
         std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaNome);
     }
     for (int i=0; i < vetor_jogadores.size(); i++){
-        std::cout << vetor_jogadores[i].getApelido() << " " << vetor_jogadores[i].getNome() << std::endl;
+        std::cout << vetor_jogadores[i].getApelido() << " | " << vetor_jogadores[i].getNome() << std::endl;
         for (int j=0; j<3; j++){
             std::cout << nomes_jogos[j] << " - V: " << vetor_jogadores[i].getStat(j, 0) << " D: " << vetor_jogadores[i].getStat(j, 1) << std::endl;
         }
@@ -124,11 +128,12 @@ void Sistema::removerJogador(std::string apelido){
             if (vetor_jogadores[i].getApelido() == apelido){
                 vetor_jogadores.erase(vetor_jogadores.begin()+i);
                 num_jogadores_cadastrados--;
+                break;
             }
         }
     }
     else {
-        std::cout << "ERRO: jogador <" << apelido  << "> inexistente" << std::endl;
+        std::cout << "ERRO: jogador \"" << apelido  << "\" inexistente" << std::endl;
         return;
     }
     std::cout << "Jogador " << apelido << " removido com sucesso" << std::endl;
@@ -151,3 +156,4 @@ Jogador* Sistema::getJogador(std::string apelido) {
         return NULL;
     }
 }
+

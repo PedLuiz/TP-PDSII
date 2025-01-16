@@ -58,9 +58,17 @@ int main(){
             toUpper(opcao);
 
             char op = opcao[0]; 
-
-            cout << endl << "JOGADORES CADASTRADOS" << endl << endl;
-            sistema.printSistema(op);
+            int num_jogadores = sistema.getNumJogadores();
+            clear();
+            if (num_jogadores > 0) {
+                cout << "------------------------------------------------------------------------------" << endl;
+                cout <<  "\t\t\tJOGADORES CADASTRADOS  [" << num_jogadores << "]" << endl << endl;
+                cout << "APELIDO  |  NOME" << endl << endl;
+                sistema.printSistema(op);
+                cout << "------------------------------------------------------------------------------" << endl;
+            } else {
+                cout << "NENHUM JOGADOR CADASTRADO NO SISTEMA" << endl << endl;
+            }
             pause();
         }
 
@@ -72,7 +80,7 @@ int main(){
 
             if (!Partida::isJogoValido(jogo)) {
                 while (true) {
-                    cout << "Insira um tipo valido de jogo ou digite <sair> para cancelar a partida" << endl;
+                    cout << "Insira um tipo valido de jogo ou digite [sair] para cancelar a partida" << endl;
                     getline(cin, jogo);
                     toUpper(jogo);
                     if ((jogo == "SAIR") || (Partida::isJogoValido(jogo)))
@@ -190,7 +198,7 @@ void toUpper(string& str) {
 }
 
 void pause() {
-    cout << "Pressione [ENTER] para continuar..."<< std::flush;
+    cout << endl << "Pressione [ENTER] para continuar..."<< std::flush;
     cin.get();
 }
 
