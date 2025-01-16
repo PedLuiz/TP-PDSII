@@ -12,42 +12,6 @@
 
 using namespace std;
 
-void executarLiga4() {
-    Liga4 jogo;
-    pair<int, int> jogada;
-    int coluna;
-    char vencedor;
-
-    cout << "Bem-vindo ao jogo Liga 4!" << endl;
-
-    while (!jogo.isEstadoFinal()) {
-        jogo.printTabuleiro();
-        cout << "Jogador " << jogo.getTurno() << ", escolha uma coluna (1 a 7): ";
-        cin >> coluna;
-
-        if (coluna < 1 || coluna > 7) {
-            cout << "Entrada inválida. Escolha uma coluna entre 1 e 7." << endl;
-            continue;
-        }
-
-        jogada = make_pair(coluna, 0);
-
-        if (jogo.isJogadaValida(jogada)) {
-            jogo.fazerJogada(jogada);
-            vencedor = jogo.getVencedor();
-            if (vencedor != ' ') {
-                jogo.printTabuleiro();
-                cout << "Parabéns, Jogador " << vencedor << "! Você venceu!" << endl;
-                return;
-            }
-        } else {
-            cout << "Coluna cheia. Tente outra." << endl;
-        }
-    }
-    jogo.printTabuleiro();
-    cout << "Jogo encerrado. Foi um empate!" << endl;
-}
-
 void Menu();
 
 void toUpper(string& str);

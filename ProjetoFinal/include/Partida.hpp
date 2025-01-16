@@ -21,7 +21,7 @@ private:
     Jogo* jogo;
 
     void executarReversi();
-    void executarLiga4() {};
+    void executarLiga4();
     void executarVelha() {};
     void executarMinado() {};
 

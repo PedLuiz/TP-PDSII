@@ -159,3 +159,47 @@ void Partida::executarReversi() {
     }
     finalizarPartida('R');
 }
+
+void Partida::executarLiga4(){
+    cout << endl << "========================== BEM VINDO AO LIGA4 =============================" << endl << endl;
+
+    cout << "O PRIMEIRO JOGADOR QUE FIZER UMA SEQUÊNCIA DE 4 'O' OU 'X' NA COLUNA, LINHA OU DIAGONAL GANHA A PARTIDA! BOA SORTE." << endl << endl;
+
+    Liga4* liga4 = dynamic_cast<Liga4*> (jogo);
+
+    atribuirPecas();
+
+    pair<int, int> jogada;
+    int coluna;
+    char vencedor;
+
+    while (!liga4->isEstadoFinal()) {
+        liga4->printTabuleiro();
+        cout << "Jogador " << liga4->getTurno() <<", escolha uma coluna (1 a 7): ";
+        while(!(cin >> coluna)){
+            cin.clear(); // Limpa o estado de erro
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Por favor digite uma coluna valida: ";
+        }
+
+        jogada = make_pair(coluna, 0);
+
+        if (liga4->isJogadaValida(jogada)) {
+            system("clear");
+            cout << endl << "========================== BEM VINDO AO LIGA4 =============================" << endl << endl;
+            cout << "O PRIMEIRO JOGADOR QUE FIZER UMA SEQUÊNCIA DE 4 'O' OU 'X' NA COLUNA, LINHA OU DIAGONAL GANHA A PARTIDA! BOA SORTE." << endl << endl;
+
+            liga4->fazerJogada(jogada);
+            vencedor = liga4->getVencedor();
+            if (vencedor != ' ') {
+                liga4->printTabuleiro();
+                cout << "Parabéns, Jogador " << vencedor << "! Você venceu!" << endl;
+                return;
+            }
+        }
+
+    }
+    liga4->printTabuleiro();
+    cout << "Jogo encerrado. Foi um empate!" << endl;
+
+}

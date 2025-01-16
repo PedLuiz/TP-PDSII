@@ -69,7 +69,6 @@ using namespace std;
     void Liga4::fazerJogada(pair<int, int> jogada) {
         int coluna = jogada.first;
 
-        if(isJogadaValida(jogada)){
             for(int i=5; i>=0; i--){//percorre a coluna de baixo pra cima até encontrar a primeira casa vazia
                 if(tabuleiro[coluna-1][i]=='X' || tabuleiro[coluna-1][i]=='O')
                     continue;
@@ -80,36 +79,34 @@ using namespace std;
                 }
             }
         }
-        else
-            cout << "Digite uma coluna válida: ";
-    }
 
     bool Liga4::isJogadaValida(pair<int, int> jogada) {
         int coluna = jogada.first;
 
         if(coluna>=1 && coluna<=7){
             if(tabuleiro[coluna-1][0]=='X' || tabuleiro[coluna-1][0]=='O'){
-                cout << "Coluna escolhida já foi totalmente preenchida!" << endl;
+                cout << "Coluna escolhida ja foi totalmente preenchida! Escolha outra." << endl;
                 return false;
                 }
                 else return true;
         }
             else {
-                cout << "Coluna Inválida! Escolha entre 1 e 7" << endl;
+                cout << "Coluna Inválida! Por favor Escolha entre 1 e 7" << endl;
                 return false;
             }
     }
 
-    void Liga4::printTabuleiro(){
-            cout << "Tabuleiro atual:" << endl;
-        for (int linha = 0; linha < 6; linha++) {
-            for (int coluna = 0; coluna < 7; coluna++) {
-                cout << '|' << tabuleiro[linha][coluna];
+    void Liga4::printTabuleiro(){                   
+            cout << endl << "=======TABULEIRO ATUAL=======" << endl;
+        for (int coluna = 0; coluna < 6; coluna++) {
+            for (int linha = 0; linha < 7; linha++) {
+                cout << "| " << tabuleiro[linha][coluna] << " ";
             }
-            cout << '|' << endl;
+            cout << "|" << endl << endl;
         }
-        cout << "1  2  3  4  5  6  7" << endl; // Para indicar as colunas
-    }
+        cout << "  1   2   3   4   5   6   7" << endl;
+        cout << "===========COLUNAS===========" << endl << endl; // Para indicar as colunas
+    }        
 
     Liga4::~Liga4(){}
 

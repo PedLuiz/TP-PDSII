@@ -1,4 +1,4 @@
-#include "CampoMinado.hpp"
+#include "../include/CampoMinado.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
