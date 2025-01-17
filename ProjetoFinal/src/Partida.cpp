@@ -212,7 +212,25 @@ void Partida::executarLiga4(){
 }
 
 void Partida::executarVelha() {
-    
+    cout << endl << "========================== BEM VINDO AO JOGO DA VELHA =============================" << endl << endl;
+
+    JogoDaVelha * jogo_da_velha = dynamic_cast<JogoDaVelha*> (jogo);
+
+    atribuirPecas();
+
+    while(!jogo_da_velha->isEstadoFinal()){
+        cout << "Vez de " << pecas_jogadores[jogo_da_velha->getTurno()] << ":" << endl;
+        pair <int, int> jogada;
+        cin >> jogada.first >> jogada.second;
+        if (jogo_da_velha->isJogadaValida(jogada)) {
+            jogo_da_velha->fazerJogada(jogada);
+        }
+        else continue;
+        if (jogo_da_velha->getVencedor() != ' ') break;
+        jogo_da_velha->alternaTurno();
+        jogo_da_velha->printTabuleiro();
+    }
+    finalizarPartida('V');
 }
 
 void cls() {
