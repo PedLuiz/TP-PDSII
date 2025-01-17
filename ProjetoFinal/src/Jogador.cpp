@@ -19,7 +19,7 @@ void Jogador::setNome(std::string nome){
 bool Jogador::comparaNome(Jogador & J1, Jogador & J2){
     std::string nome1 = J1.getNome();
     std::string nome2 = J2.getNome();
-    int ultimo_index = std::min(nome1.size(), nome2.size());
+    unsigned int ultimo_index = std::min(nome1.size(), nome2.size());
     for (int i=0; i<ultimo_index; i++){
         if (nome1[i] < nome2[i]) return true;
         if (nome1[i] > nome2[i]) return false;
@@ -39,7 +39,7 @@ void Jogador::setApelido(std::string apelido){
 bool Jogador::comparaApelido(Jogador & J1, Jogador & J2){
     std::string apelido1 = J1.getApelido();
     std::string apelido2 = J2.getApelido();
-    int ultimo_index = std::min(apelido1.size(), apelido2.size());
+    unsigned int ultimo_index = std::min(apelido1.size(), apelido2.size());
     for (int i=0; i<ultimo_index; i++){
         if (apelido1[i] < apelido2[i]) return true;
         if (apelido1[i] > apelido2[i]) return false;
