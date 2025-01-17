@@ -124,7 +124,7 @@ int main(){
                     if (apelido_j2 == "sair") {
                         break;
                     }
-                    jogador1 = sistema.getJogador(apelido_j2);
+                    jogador2 = sistema.getJogador(apelido_j2);
                     if (jogador2) {
                         break;
                     }
@@ -198,7 +198,7 @@ void toUpper(string& str) {
 }
 
 void pause() {
-    cout << endl << "Pressione [ENTER] para continuar..."<< std::flush;
+    cout << endl << "Pressione qualquer tecla para continuar..."<< std::flush;
     cin.get();
 }
 

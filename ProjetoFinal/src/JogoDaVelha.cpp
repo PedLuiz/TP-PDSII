@@ -54,6 +54,11 @@ char JogoDaVelha::getVencedor(){
 
 bool JogoDaVelha::isEstadoFinal(){
     bool estado_final = true;
+    if (this->getVencedor() != ' ') {
+        std::cout << "a";
+        return true;
+    } 
+    
     for (int i=0; i<3; i++){
         for (int j=0; j<3; j++){
             if (tabuleiro[i][j] == ' ') {
@@ -76,22 +81,42 @@ char JogoDaVelha::getTurno(){
 
 bool JogoDaVelha::isJogadaValida(std::pair<int,int> jogada){
     if (jogada.first > 0 && jogada.first < 4 && jogada.second > 0 && jogada.second < 4) {
-        if (tabuleiro[jogada.first-1][jogada.second-1] == ' ') return true;
+        if (tabuleiro[jogada.first-1][jogada.second-1] == ' ')
+            return true;
     }
     std::cout << "ERRO: jogada inválida" << std::endl;
     return false;
 }
 
 void JogoDaVelha::fazerJogada(std::pair<int, int> jogada){
-    tabuleiro[jogada.first-1][jogada.second-1] = turno;
+    if (isJogadaValida(jogada)) {
+        tabuleiro[jogada.first-1][jogada.second-1] = turno;
+        alternaTurno();
+    } else {
+        std::cout << "ERRO: jogada inválida" << std::endl;
+    }
 }
 
 void JogoDaVelha::printTabuleiro(){
+
+    cout << "      ";
+
     for (int i=0; i<3; i++){
+        cout << i+1 << "    ";
+    }
+
+    cout << endl << endl;
+
+    for (int i=0; i<3; i++){
+        cout<< i+1 << "  ";
         for (int j=0; j<3; j++){
-            std::cout << tabuleiro[i][j];
-            if(j<2) std::cout << "|";
-            else std::cout << std::endl;
+            std::cout << "  " << tabuleiro[i][j] << "  ";
+            if(j<2) 
+                std::cout << "|";
+            else 
+                std::cout << std::endl;
         }
+        if (i < 2)
+            std::cout << "   -----------------" << endl;
     }
 }

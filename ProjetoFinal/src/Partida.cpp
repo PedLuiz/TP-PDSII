@@ -9,6 +9,7 @@
 
 using namespace std;
 
+void flush();
 void cls();
 
 Partida::Partida(Jogador* j1, Jogador* j2, Jogo* jogo) : jogador1(j1), jogador2(j2), jogo(jogo) {
@@ -55,7 +56,7 @@ void Partida::iniciarPartida(char modelo) {
 void Partida::finalizarPartida(char modelo) {
     cls();
 
-    cout << endl << "+=++=++=++=+ FIM DE JOGO +=++=++=++=+" << endl;
+    cout << endl << "+=++=++=++=++=++=+ FIM DE JOGO +=++=++=++=++=++=+" << endl << endl;
     jogo->printTabuleiro();
 
     char peca_vencedor = jogo->getVencedor();
@@ -78,7 +79,7 @@ void Partida::finalizarPartida(char modelo) {
         Jogador* perdedor = (vencedor == jogador1) ? jogador2 : jogador1;
 
 
-        cout << "Jogador " << vencedor->getApelido() << " e' o vencedor da partida!!!";
+        cout<< endl << "Jogador(a) " << vencedor->getApelido() << "[" << peca_vencedor << "]" << " e' o vencedor da partida!!!";
 
         if (modelo == 'R') {
             Reversi* reversi = dynamic_cast<Reversi*> (jogo);
@@ -142,18 +143,22 @@ void Partida::executarReversi() {
 
         reversi->printTabuleiroPossivel(); 
         resultado = reversi->countPieces();
-        cout << pecas_jogadores['X']->getApelido() << "[X]: " << resultado['X'] << " pontos | " << pecas_jogadores['O']->getApelido() << "[O]: " << resultado['O'] << " pontos" << endl <<  endl;
+        cout << endl << pecas_jogadores['X']->getApelido() << "[X]: " << resultado['X'] << " pontos | " << pecas_jogadores['O']->getApelido() << "[O]: " << resultado['O'] << " pontos" << endl;
 
         if (reversi->getPossiveisJogadas().empty()) {
-            cout << "Jogador " << reversi->getTurno() << " nao possui jogadas disponiveis. Passando turno..." << endl;
-            this_thread::sleep_for(chrono::seconds(4));
+            cout << "Jogador " << reversi->getTurno() << " nao possui jogadas disponiveis. Pressione [ENTER] para passar o turno..." << endl; cin.get();
             reversi->trocaTurno(); rodada++;
             continue;
         }
 
         while (true) {
-            cout << "Insira um comando no formato <linha> <coluna>" << endl;
-            cin >> x >> y; cin.get();
+            cout << endl << "Jogador(a) " << jogador_atual->getApelido() << "[" << reversi->getTurno() << "]" << " insira um comando no formato <linha> <coluna>" << endl;
+
+            while (!(cin >> x >> y)) {
+                flush();
+                cout << "ERRO: Formato de entrada invalido, digite um inteiro" << endl;
+            }   
+            cin.get();
 
             if (reversi->isJogadaValida({x-1, y-1}))
                 break;
@@ -195,8 +200,13 @@ void Partida::executarLiga4(){
         liga4->printTabuleiro();
 
         while (true) {
-            cout << "Jogador(a) " << jogador_atual->getApelido() << "[" << liga4->getTurno() << "]" << ", escolha uma coluna (1 a 7): ";
-            cin >> coluna; cin.get();
+            cout << endl << "Jogador(a) " << jogador_atual->getApelido() << "[" << liga4->getTurno() << "]" << ", escolha uma coluna (1 a 7): ";
+
+            while (!(cin >> coluna)) {
+                flush();
+                cout << "ERRO: Formato de entrada invalido, digite um inteiro" << endl;
+            }
+            cin.get();
 
             jogada = {coluna, 0};
             
@@ -217,20 +227,46 @@ void Partida::executarVelha() {
     JogoDaVelha * jogo_da_velha = dynamic_cast<JogoDaVelha*> (jogo);
 
     atribuirPecas();
-
+    
+    int rodada = 1;
     while(!jogo_da_velha->isEstadoFinal()){
-        cout << "Vez de " << pecas_jogadores[jogo_da_velha->getTurno()] << ":" << endl;
-        pair <int, int> jogada;
-        cin >> jogada.first >> jogada.second;
-        if (jogo_da_velha->isJogadaValida(jogada)) {
-            jogo_da_velha->fazerJogada(jogada);
+        if (rodada > 1) {
+            cls();
+            cout << "========================== JOGO DA VELHA =============================" << endl << endl;
         }
-        else continue;
-        if (jogo_da_velha->getVencedor() != ' ') break;
-        jogo_da_velha->alternaTurno();
+
+        jogador_atual = pecas_jogadores[jogo_da_velha->getTurno()];
+        cout << endl << "Rodada " << rodada << ", vez do jogador(a) " << jogador_atual->getApelido() << "[" << jogo_da_velha->getTurno() << "]:" << endl << endl;
+
         jogo_da_velha->printTabuleiro();
+        
+        pair <int, int> jogada;
+        while (true) {
+            cout << endl << "Jogador(a) " << jogador_atual->getApelido() << "[" << jogo_da_velha->getTurno() << "]" << " insira um comando no formato <linha> <coluna>" << endl;
+            while (!(cin >> jogada.first >> jogada.second)) {
+                flush();
+                cout << "ERRO: Formato de entrada invalido, digite um inteiro" << endl;
+            }
+            cin.get();
+            if (jogo_da_velha->isJogadaValida(jogada)) {
+                break;
+            }
+
+        }
+        jogo_da_velha->fazerJogada(jogada);
+        rodada++;
     }
+
     finalizarPartida('V');
+}
+
+void Partida::executarMinado() {
+
+}
+
+void flush() {
+    cin.clear();
+    cin.ignore(10000, '\n');
 }
 
 void cls() {

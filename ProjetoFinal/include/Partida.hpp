@@ -24,7 +24,7 @@ private:
     void executarReversi();
     void executarLiga4();
     void executarVelha();
-    void executarMinado() {};
+    void executarMinado();
 
 public:
     Partida(Jogador* j1, Jogador* j2, Jogo* jogo);
