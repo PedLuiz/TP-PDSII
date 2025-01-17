@@ -149,6 +149,7 @@ void Reversi::fazerJogada(pair<int, int> jogada) {
 
     } else {
         cout << "ERRO: jogada invalida" << endl;
+        return;
     }
 }
 
@@ -241,35 +242,39 @@ void Reversi::printTabuleiroPossivel() {
     // Printa o tabuleiro com as jogadas possiveis do turno atual formatado
     vector<vector<char>> tabuleiro_possivel=getTabuleiroPossivel();
 
-    cout << "    ";
+    cout << "     ";
 
     for (int i=0; i<8; i++){
         cout << i+1 << "   ";
     }
     cout << endl;
 
+    cout << "   ---------------------------------" << endl;
     for (int i = 0; i < M; i++) {
-        cout<< i+1 << " ";
+        cout<< i+1 << "  ";
         for (int j = 0; j < N; j++) {
             cout<<  "| " << tabuleiro_possivel[i][j]  << " ";
         }
-        cout << "|" << endl << endl;
+        cout << "|" << endl;
+        cout << "   ---------------------------------" << endl;
     }
-};
+}
 
 void Reversi::printTabuleiro() {
-    cout << "    ";
+    cout << "     ";
 
     for (int i=0; i<8; i++){
         cout << i+1 << "   ";
     }
     cout << endl;
 
+    cout << "   ---------------------------------" << endl;
     for (int i = 0; i < M; i++) {
-        cout<< i+1 << " ";
+        cout<< i+1 << "  ";
         for (int j = 0; j < N; j++) {
             cout<<  "| " << tabuleiro[i][j]  << " ";
         }
-        cout << "|" << endl << endl;
+        cout << "|" << endl;
+        cout << "   ---------------------------------" << endl;
     }
 }

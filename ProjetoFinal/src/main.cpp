@@ -198,7 +198,7 @@ void toUpper(string& str) {
 }
 
 void pause() {
-    cout << endl << "Pressione [ENTER] para continuar..."<< std::flush;
+    cout << endl << "Pressione qualquer tecla para continuar..."<< std::flush;
     cin.get();
 }
 
