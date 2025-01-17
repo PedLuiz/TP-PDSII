@@ -151,9 +151,7 @@ Jogador* Sistema::getJogador(std::string apelido) {
                 return &jogador;
         }
     }
-    else {
-        std::cout << "ERRO: jogador <" << apelido  << "> inexistente" << std::endl;
-        return NULL;
-    }
+    std::cout << "ERRO: jogador <" << apelido  << "> inexistente" << std::endl;
+    return NULL;
 }
 
