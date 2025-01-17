@@ -41,8 +41,8 @@ char JogoDaVelha::getVencedor(){
         //diagonal secundária:
     if (tabuleiro[2][0] != ' '){
         bool vencedorFound = true;
+        int j=1;
         for (int i=1; i>=0; i--){
-            int j=1;
             char anterior = tabuleiro[i+1][j-1];
             if (tabuleiro[i][j] != anterior) vencedorFound = false;
             j++;
