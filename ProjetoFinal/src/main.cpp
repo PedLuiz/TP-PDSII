@@ -124,7 +124,7 @@ int main(){
                     if (apelido_j2 == "sair") {
                         break;
                     }
-                    jogador1 = sistema.getJogador(apelido_j2);
+                    jogador2 = sistema.getJogador(apelido_j2);
                     if (jogador2) {
                         break;
                     }
