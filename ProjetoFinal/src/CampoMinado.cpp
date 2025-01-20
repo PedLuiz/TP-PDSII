@@ -53,7 +53,26 @@ int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const
     return contador;
 }
 
-void CampoMinado::colocarSinalizador(pair<int, int>){}
+void CampoMinado::colocarSinalizador(pair<int, int> jogada) 
+{
+    int linha = jogada.first;
+    int coluna = jogada.second;
+
+    if (tabuleiro_visivel[linha][coluna] == ' ') 
+    {
+        tabuleiro_visivel[linha][coluna] = 'F'; 
+    } 
+    else if (tabuleiro_visivel[linha][coluna] == 'F') 
+    {
+        tabuleiro_visivel[linha][coluna] = ' ';
+    } 
+    else 
+    {
+        cout << "Não é possível colocar um sinalizador nesta célula." << endl;
+    }
+}
+
+
 
 char CampoMinado::getVencedor(){
     if(perdedor == ' ')  return ' ';//empate
