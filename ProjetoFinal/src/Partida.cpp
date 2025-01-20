@@ -260,9 +260,76 @@ void Partida::executarVelha() {
     finalizarPartida('V');
 }
 
-void Partida::executarMinado() {
+void Partida::executarMinado() 
+{
+    cout << endl << "========================== BEM VINDO AO CAMPO MINADO =============================" << endl << endl;
 
+    CampoMinado * jogo_campo_minado = dynamic_cast<CampoMinado*>(jogo);
+
+    atribuirPecas();
+
+    int rodada = 1;
+    while (!jogo_campo_minado->isEstadoFinal()) 
+    {
+        if (rodada > 1) 
+        {
+            cls(); 
+            cout << "========================== CAMPO MINADO =============================" << endl << endl;
+        }
+
+        jogador_atual = pecas_jogadores[jogo_campo_minado->getTurno()];
+        cout << endl << "Rodada " << rodada << ", vez do jogador(a) " << jogador_atual->getApelido() 
+             << "[" << jogo_campo_minado->getTurno() << "]:" << endl << endl;
+
+        jogo_campo_minado->printTabuleiro();
+
+        pair<int, int> jogada;
+        char comando;
+        while (true) 
+        {
+            cout << endl << "Jogador(a) " << jogador_atual->getApelido() 
+                 << "[" << jogo_campo_minado->getTurno() << "] insira um comando no formato <linha> <coluna> ou <linha> <coluna> F para sinalizar:" << endl;
+            
+            cin >> jogada.first >> jogada.second;
+            
+            if (cin.peek() == ' ') 
+            {
+                cin >> comando;
+            } 
+            else 
+            {
+                comando = ' ';
+            }
+            cin.get(); 
+
+            if (jogo_campo_minado->isJogadaValida(jogada)) 
+            {
+                if (comando == 'F' || comando == 'f') 
+                {
+                    jogo_campo_minado->colocarSinalizador(jogada);
+                } 
+                else 
+                {
+                    jogo_campo_minado->fazerJogada(jogada);
+                }
+                break;
+            } 
+            else 
+            {
+                cout << "Jogada inválida, tente novamente." << endl;
+            }
+        }
+
+        rodada++;
+    }
+
+    jogo_campo_minado->revelarTabuleiro();
+    cout << "Jogo encerrado!" << endl;
+
+    char vencedor = jogo_campo_minado->getVencedor();
+    finalizarPartida(vencedor);
 }
+
 
 void flush() {
     cin.clear();
