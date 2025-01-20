@@ -33,8 +33,25 @@ void CampoMinado::colocarBombas()
     }
 }
 
-
-int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const{}
+int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const 
+{
+    int contador = 0;
+    for (int i = -1; i <= 1; i++) 
+    {
+        for (int j = -1; j <= 1; j++) 
+        {
+            int novaLinha = linha + i;
+            int novaColuna = coluna + j;
+            if (novaLinha >= 0 && novaLinha < linhas &&
+                novaColuna >= 0 && novaColuna < colunas &&
+                tabuleiro_visivel[novaLinha][novaColuna] == 'B') 
+            {
+                contador++;
+            }
+        }
+    }
+    return contador;
+}
 
 void CampoMinado::colocarSinalizador(pair<int, int>){}
 
