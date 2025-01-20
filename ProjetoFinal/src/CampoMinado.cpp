@@ -15,7 +15,24 @@ CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) :
     tabuleiro_visivel(colunas, vector<char>(linhas, ' ')){
     }
 
-void CampoMinado::colocarBombas(){}
+void CampoMinado::colocarBombas() 
+{
+    srand(time(nullptr)); 
+    int bombasColocadas = 0;
+
+    while (bombasColocadas < numBombas) 
+    {
+        int linha = rand() % linhas;
+        int coluna = rand() % colunas;
+
+        if (tabuleiro_visivel[linha][coluna] != 'B') 
+        {
+            tabuleiro_visivel[linha][coluna] = 'B';
+            bombasColocadas++;
+        }
+    }
+}
+
 
 int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const{}
 
