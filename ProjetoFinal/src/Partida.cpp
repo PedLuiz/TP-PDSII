@@ -269,6 +269,12 @@ void Partida::executarMinado()
 
     CampoMinado * jogo_campo_minado = dynamic_cast<CampoMinado*>(jogo);
 
+    if (!jogo_campo_minado) 
+    {
+        cout << "Erro ao acessar o jogo Campo Minado!" << endl;
+        return;
+    }
+
     atribuirPecas();
 
     int rodada = 1;
@@ -281,6 +287,13 @@ void Partida::executarMinado()
         }
 
         jogador_atual = pecas_jogadores[jogo_campo_minado->getTurno()];
+
+        if (jogador_atual == nullptr) 
+        {
+            cout << "Erro: Jogador atual não foi inicializado corretamente!" << endl;
+            return;
+        }
+
         cout << endl << "Rodada " << rodada << ", vez do jogador(a) " << jogador_atual->getApelido() 
              << "[" << jogo_campo_minado->getTurno() << "]:" << endl << endl;
 
