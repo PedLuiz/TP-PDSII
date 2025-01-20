@@ -141,14 +141,24 @@ bool CampoMinado::isJogadaValida(pair<int, int> jogada){
     }
 }
 
-void CampoMinado::printTabuleiro(){//imprime o tabuleiro apenas com as já escolhidas pelos jogadores
+void CampoMinado::printTabuleiro() {
+    // Imprime os índices das colunas
+    cout << "    ";  // Espaço para os índices das linhas
+    for (int j = 0; j < colunas; j++) {
+        cout << j << "   ";  // Índice da coluna
+    }
+    cout << endl;
+
+    // Imprime o tabuleiro linha por linha, com os índices das linhas
     for (int i = 0; i < linhas; i++) {
+        cout << i << " ";  // Índice da linha
         for (int j = 0; j < colunas; j++) {
-            cout << "| " << tabuleiro_visivel[i][j]  << " ";
+            cout << "| " << tabuleiro_visivel[i][j] << " ";
         }
         cout << "|" << endl << endl;
     }
 }
+
 
 void CampoMinado::revelarTabuleiro(){//Revela o tabuleiro com todas as bombas
     for (int i = 0; i < linhas; i++) {
