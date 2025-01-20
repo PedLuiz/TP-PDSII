@@ -159,11 +159,19 @@ void CampoMinado::printTabuleiro() {
     }
 }
 
+void CampoMinado::revelarTabuleiro() {
+    // Imprime os índices das colunas
+    cout << "    ";  // Espaço para os índices das linhas
+    for (int j = 0; j < colunas; j++) {
+        cout << j << "   ";  // Índice da coluna
+    }
+    cout << endl;
 
-void CampoMinado::revelarTabuleiro(){//Revela o tabuleiro com todas as bombas
+    // Imprime o tabuleiro com as bombas reveladas
     for (int i = 0; i < linhas; i++) {
+        cout << i << " ";  // Índice da linha
         for (int j = 0; j < colunas; j++) {
-            cout << "| " << tabuleiro[i][j]  << " ";
+            cout << "| " << tabuleiro[i][j] << " ";
         }
         cout << "|" << endl << endl;
     }
