@@ -47,6 +47,9 @@ void Partida::iniciarPartida(char modelo) {
         case 'V':
             executarVelha();
             break;
+        case 'C':
+            executarMinado();
+            break;
         default:
             cout << "ERRO: jogo selecionado invalido" << endl; 
             break;
