@@ -267,7 +267,7 @@ void Partida::executarMinado()
 {
     cout << endl << "========================== BEM VINDO AO CAMPO MINADO =============================" << endl << endl;
 
-    CampoMinado * jogo_campo_minado = dynamic_cast<CampoMinado*>(jogo);
+    CampoMinado *jogo_campo_minado = new CampoMinado(7, 7, 10);
 
     if (!jogo_campo_minado) 
     {

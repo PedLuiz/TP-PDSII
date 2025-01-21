@@ -7,11 +7,12 @@ using namespace std;
 
 CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) :
     Jogo(colunas, linhas),
-    numBombas(numBombas),
+    turno_atual('X'),
     perdedor(' '),
+    numBombas(numBombas),
     jogoAtivo(true),
-    jogadasRestantes(linhas*colunas-numBombas),
     count_jogadas(0),
+    jogadasRestantes(linhas*colunas-numBombas),
     tabuleiro_visivel(colunas, vector<char>(linhas, ' ')){
     }
 
@@ -78,7 +79,7 @@ char CampoMinado::getVencedor(){
     if(perdedor == ' ')  return ' ';//empate
     else if(perdedor == 'O') return 'X';
     else if(perdedor == 'X') return 'O';
-    else cerr << "Perdedor está com um valor inválido: (" << perdedor << "). Corrigir erro!!!" << endl;
+    else {cerr << "Perdedor está com um valor inválido: (" << perdedor << "). Corrigir erro!!!" << endl; return ' ';}
 }
 
 bool CampoMinado::isEstadoFinal(){
@@ -144,13 +145,13 @@ bool CampoMinado::isJogadaValida(pair<int, int> jogada){
 void CampoMinado::printTabuleiro() {
     // Imprime os índices das colunas
     cout << "    ";  // Espaço para os índices das linhas
-    for (int j = 0; j < colunas; j++) {
+    for (int j = 0; j < M; j++) {
         cout << j << "   ";  // Índice da coluna
     }
     cout << endl;
 
     // Imprime o tabuleiro linha por linha, com os índices das linhas
-    for (int i = 0; i < linhas; i++) {
+    for (int i = 0; i < N; i++) {
         cout << i << " ";  // Índice da linha
         for (int j = 0; j < colunas; j++) {
             cout << "| " << tabuleiro_visivel[i][j] << " ";
