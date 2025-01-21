@@ -278,30 +278,30 @@ void Partida::executarMinado()
         case 1: //FÁCIL
             linhas = 5;
             colunas = 5;
-            numBombs = (rows * cols) * 10 / 100;
+            numBombs = (linhas * colunas) * 10 / 100;
             break;
         
         case 2: //MÉDIO
             linhas = 10;
             colunas = 10;
-            numBombs = (rows * cols) * 20 / 100;
+            numBombs = (linhas * colunas) * 20 / 100;
             break;
         
         case 3: //DIFÍCIL
             linhas = 20;
             colunas = 20;
-            numBombs = (rows * cols) * 35 / 100;
+            numBombs = (linhas * colunas) * 35 / 100;
             break;
         
         default:
             cout << "Modo inválido. Usando FACIL como padrão.\n";
             linhas = 5;
             colunas = 5;
-            numBombs = (rows * cols) * 10 / 100;
+            numBombs = (linhas * colunas) * 10 / 100;
             break;
     }
 
-std::shared_ptr<CampoMinado> jogo_campo_minado = std::make_shared<CampoMinado>(linhas, colunas, numBombs);
+    std::shared_ptr<CampoMinado> jogo_campo_minado = std::make_shared<CampoMinado>(linhas, colunas, numBombs);
 
     if (!jogo_campo_minado) 
     {
