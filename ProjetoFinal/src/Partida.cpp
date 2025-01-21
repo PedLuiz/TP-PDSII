@@ -267,24 +267,48 @@ void Partida::executarMinado()
 {
     cout << endl << "========================== BEM VINDO AO CAMPO MINADO =============================" << endl << endl;
 
-// Defina os valores necessários para o construtor
-    int linhas = 10;   // ou outro valor
-    int colunas = 10;  // ou outro valor
-    int numBombas = 20; // ou outro valor
+    int linhas, colunas, numBombs;
 
-    // Instanciação direta do objeto CampoMinado
-    CampoMinado* jogo_campo_minado = new CampoMinado(linhas, colunas, numBombas);
+    cout << "Escolha o modo de jogo (1 = FACIL, 2 = MEDIO, 3 = DIFICIL): ";
+    int choice;
+    cin >> choice;
 
-    // Associando o objeto à variável jogo
-    jogo = jogo_campo_minado;
+    switch (choice) 
+    {
+        case 1: //FÁCIL
+            linhas = 5;
+            colunas = 5;
+            numBombs = (rows * cols) * 10 / 100;
+            break;
+        
+        case 2: //MÉDIO
+            linhas = 10;
+            colunas = 10;
+            numBombs = (rows * cols) * 20 / 100;
+            break;
+        
+        case 3: //DIFÍCIL
+            linhas = 20;
+            colunas = 20;
+            numBombs = (rows * cols) * 35 / 100;
+            break;
+        
+        default:
+            cout << "Modo inválido. Usando FACIL como padrão.\n";
+            linhas = 5;
+            colunas = 5;
+            numBombs = (rows * cols) * 10 / 100;
+            break;
+    }
 
-    //CampoMinado * jogo_campo_minado = dynamic_cast<CampoMinado*>(jogo);
+std::shared_ptr<CampoMinado> jogo_campo_minado = std::make_shared<CampoMinado>(linhas, colunas, numBombs);
 
-    //if (!jogo_campo_minado) 
-    //{
-      //  cout << "Erro ao acessar o jogo Campo Minado!" << endl;
-       // return;
-    //}
+    if (!jogo_campo_minado) 
+    {
+        cout << "Erro ao acessar o jogo Campo Minado!" << endl;
+        return;
+    }
+
 
     atribuirPecas();
 
