@@ -4,6 +4,7 @@
 #include <thread> 
 #include <chrono>
 #include <ctime>
+#include <memory>
 
 #include "Partida.hpp"
 
@@ -267,7 +268,7 @@ void Partida::executarMinado()
 {
     cout << endl << "========================== BEM VINDO AO CAMPO MINADO =============================" << endl << endl;
 
-    CampoMinado *jogo_campo_minado = new CampoMinado(7, 7, 10);
+    std::shared_ptr<CampoMinado> jogo_campo_minado = std::make_shared<CampoMinado>(6, 7, 14);
 
     if (!jogo_campo_minado) 
     {
