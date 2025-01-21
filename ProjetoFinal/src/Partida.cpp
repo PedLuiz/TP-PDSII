@@ -267,13 +267,24 @@ void Partida::executarMinado()
 {
     cout << endl << "========================== BEM VINDO AO CAMPO MINADO =============================" << endl << endl;
 
-    CampoMinado * jogo_campo_minado = dynamic_cast<CampoMinado*>(jogo);
+// Defina os valores necessários para o construtor
+    int linhas = 10;   // ou outro valor
+    int colunas = 10;  // ou outro valor
+    int numBombas = 20; // ou outro valor
 
-    if (!jogo_campo_minado) 
-    {
-        cout << "Erro ao acessar o jogo Campo Minado!" << endl;
-        return;
-    }
+    // Instanciação direta do objeto CampoMinado
+    CampoMinado* jogo_campo_minado = new CampoMinado(linhas, colunas, numBombas);
+
+    // Associando o objeto à variável jogo
+    jogo = jogo_campo_minado;
+
+    //CampoMinado * jogo_campo_minado = dynamic_cast<CampoMinado*>(jogo);
+
+    //if (!jogo_campo_minado) 
+    //{
+      //  cout << "Erro ao acessar o jogo Campo Minado!" << endl;
+       // return;
+    //}
 
     atribuirPecas();
 
