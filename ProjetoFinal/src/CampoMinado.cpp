@@ -102,14 +102,14 @@ char CampoMinado::getTurno(){
 
 
 void CampoMinado::fazerJogada(pair<int, int> jogada){
-    int coluna_jogada, linha_jogada;
-    coluna_jogada = jogada.first;
-    linha_jogada = jogada.second;
+    int coluna, linha;
+    linha = jogada.first;
+    coluna = jogada.second;
     if(isJogadaValida(jogada)){
-        tabuleiro[coluna_jogada][linha_jogada] = tabuleiro_visivel[coluna_jogada][linha_jogada];
+        tabuleiro[linha][coluna] = tabuleiro_visivel[linha][coluna];
         jogadasRestantes -= 1;
         count_jogadas += 1;
-        if(tabuleiro[coluna_jogada][linha_jogada] == 'B'){
+        if(tabuleiro[linha][coluna] == 'B'){
             //Inicialmente perdedor = ' ', se um jogador perder na rodada anterior, o atributo perdedor vai ser setado como 'X' ou 'O'
             //Caso na próxima jogada o outro jogador perca, será considerado empate
             if(perdedor == 'O' || perdedor == 'X'){
@@ -124,11 +124,11 @@ void CampoMinado::fazerJogada(pair<int, int> jogada){
 }
 
 bool CampoMinado::isJogadaValida(pair<int, int> jogada){
-    int coluna_jogada, linha_jogada;
-    coluna_jogada = jogada.first;
-    linha_jogada = jogada.second;
-    if(coluna_jogada <= colunas && coluna_jogada >0 && linha_jogada <= linhas && linha_jogada > 0){
-        if(tabuleiro_visivel[coluna_jogada][linha_jogada] == ' ')
+    int coluna, linha;
+    coluna = jogada.first;
+    linha = jogada.second;
+    if(coluna <= colunas && coluna >0 && linha <= linhas && linha > 0){
+        if(tabuleiro_visivel[linha][coluna] == ' ')
             return true;
             else{
                 cout << "A coordenada já está revelada! Por favor escolha outra." << endl;
@@ -136,7 +136,7 @@ bool CampoMinado::isJogadaValida(pair<int, int> jogada){
             }
     }
     else{
-        cout << "Coordenada inválida! Por favor Escolha uma coluna entre 1 a " <<colunas<< " e linha entre 1 a " << linhas << "." << endl;
+        cout << "Coordenada inválida! Por favor Escolha uma coluna entre 1 a " << M << " e linha entre 1 a " << N << "." << endl;
         return false;
     }
 }
@@ -146,6 +146,8 @@ void CampoMinado::printTabuleiro() {
     cout << "    ";  // Espaço para os índices das linhas
     for (int j = 0; j < colunas; j++) {
         cout << j << "   ";  // Índice da coluna
+    for (int j = 0; j < M; j++) {
+        cout << j+1 << "   ";  // Índice da coluna
     }
     cout << endl;
 
@@ -154,6 +156,10 @@ void CampoMinado::printTabuleiro() {
         cout << i << " ";  // Índice da linha
         for (int j = 0; j < colunas; j++) {
             cout << "| " << tabuleiro_visivel[i][j] << " ";
+    for (int i = 0; i < N; i++) {
+        cout << i+1 << " ";  // Índice da linha
+        for (int j = 0; j < M; j++) {
+            cout << "| " << tabuleiro_visivel[j][i] << " ";
         }
         cout << "|" << endl << endl;
     }
@@ -162,16 +168,16 @@ void CampoMinado::printTabuleiro() {
 void CampoMinado::revelarTabuleiro() {
     // Imprime os índices das colunas
     cout << "    ";  // Espaço para os índices das linhas
-    for (int j = 0; j < colunas; j++) {
-        cout << j << "   ";  // Índice da coluna
+    for (int j = 0; j < M; j++) {
+        cout << j+1 << "   ";  // Índice da coluna
     }
     cout << endl;
 
-    // Imprime o tabuleiro com as bombas reveladas
-    for (int i = 0; i < linhas; i++) {
-        cout << i << " ";  // Índice da linha
-        for (int j = 0; j < colunas; j++) {
-            cout << "| " << tabuleiro[i][j] << " ";
+    // Imprime o tabuleiro linha por linha, com os índices das linhas
+    for (int i = 0; i < N; i++) {
+        cout << i+1 << " ";  // Índice da linha
+        for (int j = 0; j < M; j++) {
+            cout << "| " << tabuleiro_visivel[j][i] << " ";
         }
         cout << "|" << endl << endl;
     }
