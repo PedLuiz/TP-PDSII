@@ -20,6 +20,7 @@ private:
     vector<vector<char>> tabuleiro_visivel;
     void colocarBombas();
     int contarBombasAdjacentes(int linha, int coluna) const;
+    void atualizarTabuleiro();
 
 public:
     CampoMinado(int linhas, int colunas, int numBombas);

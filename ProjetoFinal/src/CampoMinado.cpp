@@ -18,7 +18,7 @@ CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) :
 
 void CampoMinado::colocarBombas() 
 {
-    srand(time(nullptr)); 
+    srand(time(NULL)); 
     int bombasColocadas = 0;
 
     while (bombasColocadas < numBombas) 
@@ -34,6 +34,31 @@ void CampoMinado::colocarBombas()
     }
 }
 
+void CampoMinado::atualizarTabuleiro() 
+{
+    for (int i = 0; i < linhas; i++) 
+    {
+        for (int j = 0; j < colunas; j++) 
+        {
+            if (tabuleiro[i][j] == 'B') continue;
+            int bombasVizinhas = 0;
+            for (int dx = -1; dx <= 1; dx++) 
+            {
+                for (int dy = -1; dy <= 1; dy++) 
+                {
+                    if (i + dx >= 0 && i + dx < linhas && j + dy >= 0 && j + dy < colunas) 
+                    {
+                        if (tabuleiro[i + dx][j + dy] == 'B') 
+                        {
+                            bombasVizinhas++;
+                        }
+                    }
+                }
+            }
+            tabuleiro[i][j] = '0' + bombasVizinhas;
+        }
+    }
+    
 int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const 
 {
     int contador = 0;
@@ -102,18 +127,23 @@ char CampoMinado::getTurno(){
 }
 
 
-void CampoMinado::fazerJogada(pair<int, int> jogada){
+void CampoMinado::fazerJogada(pair<int, int> jogada)
+{
     int coluna, linha;
     linha = jogada.first;
     coluna = jogada.second;
-    if(isJogadaValida(jogada)){
+    
+    if(isJogadaValida(jogada))
+    {
         tabuleiro[linha][coluna] = tabuleiro_visivel[linha][coluna];
         jogadasRestantes -= 1;
         count_jogadas += 1;
-        if(tabuleiro[linha][coluna] == 'B'){
+        if(tabuleiro[linha][coluna] == 'B')
+        {
             //Inicialmente perdedor = ' ', se um jogador perder na rodada anterior, o atributo perdedor vai ser setado como 'X' ou 'O'
             //Caso na próxima jogada o outro jogador perca, será considerado empate
-            if(perdedor == 'O' || perdedor == 'X'){
+            if(perdedor == 'O' || perdedor == 'X')
+            {
                 perdedor = ' ';
             }
             perdedor = turno_atual;
