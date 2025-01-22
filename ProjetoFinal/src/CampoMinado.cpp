@@ -5,16 +5,20 @@
 
 using namespace std;
 
-CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) :
-    Jogo(colunas, linhas),
-    turno_atual('X'),
-    perdedor(' '),
-    numBombas(numBombas),
-    jogoAtivo(true),
-    count_jogadas(0),
-    jogadasRestantes(linhas*colunas-numBombas),
-    tabuleiro_visivel(colunas, vector<char>(linhas, ' ')){
-    }
+CampoMinado::CampoMinado(int linhas, int colunas, int numBombas) 
+    :Jogo(colunas, linhas),
+     turno_atual('X'),
+     perdedor(' '),
+     numBombas(numBombas),
+     jogoAtivo(true),
+     count_jogadas(0),
+     jogadasRestantes(linhas*colunas-numBombas),
+     tabuleiro(linhas, vector<char>(colunas, ' ')),
+     tabuleiro_visivel(linhas, vector<char>(colunas, ' '))
+     {
+        colocarBombas();
+        atualizarTabuleiro();
+     }
 
 void CampoMinado::colocarBombas() 
 {
@@ -41,21 +45,8 @@ void CampoMinado::atualizarTabuleiro()
         for (int j = 0; j < colunas; j++) 
         {
             if (tabuleiro[i][j] == 'B') continue;
-            int bombasVizinhas = 0;
-            for (int dx = -1; dx <= 1; dx++) 
-            {
-                for (int dy = -1; dy <= 1; dy++) 
-                {
-                    if (i + dx >= 0 && i + dx < linhas && j + dy >= 0 && j + dy < colunas) 
-                    {
-                        if (tabuleiro[i + dx][j + dy] == 'B') 
-                        {
-                            bombasVizinhas++;
-                        }
-                    }
-                }
-            }
-            tabuleiro[i][j] = '0' + bombasVizinhas;
+            int bombasVizinhas = contarBombasAdjacentes(i, j);
+            tabuleiro[i][j] = bombasVizinhas > 0 ? '0' + bombasVizinhas : ' ';
         }
     }
 }
@@ -71,7 +62,7 @@ int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const
             int novaColuna = coluna + j;
             if (novaLinha >= 0 && novaLinha < linhas &&
                 novaColuna >= 0 && novaColuna < colunas &&
-                tabuleiro_visivel[novaLinha][novaColuna] == 'B') 
+                tabuleiro[novaLinha][novaColuna] == 'B') 
             {
                 contador++;
             }
