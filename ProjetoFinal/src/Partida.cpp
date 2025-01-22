@@ -4,6 +4,7 @@
 #include <thread> 
 #include <chrono>
 #include <ctime>
+#include <memory>
 
 #include "Partida.hpp"
 
