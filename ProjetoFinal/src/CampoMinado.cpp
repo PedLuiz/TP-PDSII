@@ -58,6 +58,7 @@ void CampoMinado::atualizarTabuleiro()
             tabuleiro[i][j] = '0' + bombasVizinhas;
         }
     }
+}
     
 int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const 
 {
@@ -158,15 +159,19 @@ bool CampoMinado::isJogadaValida(pair<int, int> jogada){
     int coluna, linha;
     coluna = jogada.first;
     linha = jogada.second;
-    if(coluna <= colunas && coluna >0 && linha <= linhas && linha > 0){
+    
+    if(coluna <= colunas && coluna >0 && linha <= linhas && linha > 0)
+    {
         if(tabuleiro_visivel[linha][coluna] == ' ')
             return true;
-            else{
+            else
+            {
                 cout << "A coordenada já está revelada! Por favor escolha outra." << endl;
                 return false;
             }
     }
-    else{
+    else
+    {
         cout << "Coordenada inválida! Por favor Escolha uma coluna entre 1 a " << M << " e linha entre 1 a " << N << "." << endl;
         return false;
     }
