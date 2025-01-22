@@ -1,7 +1,7 @@
 #include "Jogador.hpp"
 
 Jogador::Jogador(std::string nome, std::string apelido) : nome(nome), apelido(apelido) {
-    for (int i=0; i<3; i++){
+    for (int i=0; i<4; i++){
         for (int j=0; j<2; j++){
             this->stats[i][j] = 0;
         }
@@ -20,7 +20,7 @@ bool Jogador::comparaNome(Jogador & J1, Jogador & J2){
     std::string nome1 = J1.getNome();
     std::string nome2 = J2.getNome();
     unsigned int ultimo_index = std::min(nome1.size(), nome2.size());
-    for (int i=0; i<ultimo_index; i++){
+    for (unsigned int i=0; i<ultimo_index; i++){
         if (nome1[i] < nome2[i]) return true;
         if (nome1[i] > nome2[i]) return false;
     }
@@ -40,7 +40,7 @@ bool Jogador::comparaApelido(Jogador & J1, Jogador & J2){
     std::string apelido1 = J1.getApelido();
     std::string apelido2 = J2.getApelido();
     unsigned int ultimo_index = std::min(apelido1.size(), apelido2.size());
-    for (int i=0; i<ultimo_index; i++){
+    for (unsigned int i=0; i<ultimo_index; i++){
         if (apelido1[i] < apelido2[i]) return true;
         if (apelido1[i] > apelido2[i]) return false;
     }
@@ -73,6 +73,13 @@ bool Jogador::comparaStatsLig4(Jogador & J1, Jogador & J2){
 bool Jogador::comparaStatsVelha(Jogador & J1, Jogador & J2){ 
     int desempenho_J1 = J1.getStat(2, 0) - J1.getStat(2, 1); 
     int desempenho_J2 = J2.getStat(2, 0) - J2.getStat(2, 1);
+    if (desempenho_J1 >= desempenho_J2) return true;
+    else return false;
+}
+
+bool Jogador::comparaStatsCampo(Jogador & J1, Jogador & J2){ 
+    int desempenho_J1 = J1.getStat(3, 0) - J1.getStat(3, 1); 
+    int desempenho_J2 = J2.getStat(3, 0) - J2.getStat(3, 1);
     if (desempenho_J1 >= desempenho_J2) return true;
     else return false;
 }

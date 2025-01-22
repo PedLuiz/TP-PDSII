@@ -11,7 +11,7 @@ Sistema::~Sistema(){
     arq_jogadores.close();
 }
 
-std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA"};
+std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA", "CAMPO MINADO"};
 
 int Sistema::getNumJogadores() {
     return num_jogadores_cadastrados;
@@ -22,7 +22,7 @@ void Sistema::cadastrarJogador(std::string nome, std::string apelido){
         std::cout << "ERRO: dados incorretos " << nome << " | " << apelido <<std::endl;
         return;
     }
-    for (int i=0; i < vetor_jogadores.size(); i++){
+    for (unsigned int i=0; i < vetor_jogadores.size(); i++){
         if (vetor_jogadores[i].getApelido() == apelido) {
             std::cout << "ERRO: o apelido \"" << apelido  << "\" ja esta em uso" << std::endl;
             return;
@@ -51,7 +51,7 @@ void Sistema::loadSistema(){
         cadastrarJogador(nome, apelido);
         Jogador* adicionado = &vetor_jogadores.back();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 2; j++) {
                 if (!(arq_jogadores >> stat)) {
                     std::cout << "ERRO: informacoes ausentes em jogadores.txt" << std::endl;
@@ -68,9 +68,9 @@ void Sistema::loadSistema(){
 void Sistema::saveSistema(){
     std::ofstream output("jogadores.txt", std::ios::trunc);
 
-    for (int k=0; k < vetor_jogadores.size(); k++){
+    for (unsigned int k=0; k < vetor_jogadores.size(); k++){
         output << vetor_jogadores[k].getNome() << std::endl << vetor_jogadores[k].getApelido() << std::endl;
-        for (int i=0; i<3; i++){
+        for (int i=0; i<4; i++){
             for (int j=0; j<2; j++){
                 output << vetor_jogadores[k].getStat(i, j);
                 if(j == 0){
@@ -90,9 +90,9 @@ void Sistema::printSistema(char parametro){
     else if ((parametro == 'N') || (parametro == 'n')) {
         std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaNome);
     }
-    for (int i=0; i < vetor_jogadores.size(); i++){
+    for (unsigned int i=0; i < vetor_jogadores.size(); i++){
         std::cout << vetor_jogadores[i].getApelido() << " | " << vetor_jogadores[i].getNome() << std::endl;
-        for (int j=0; j<3; j++){
+        for (int j=0; j<4; j++){
             std::cout << nomes_jogos[j] << " - V: " << vetor_jogadores[i].getStat(j, 0) << " D: " << vetor_jogadores[i].getStat(j, 1) << std::endl;
         }
         std::cout << std::endl;
@@ -100,11 +100,12 @@ void Sistema::printSistema(char parametro){
 }
 
 void Sistema::printLeaderBoard(){
-    for (int i=0; i<3; i++){
+    for (int i=0; i<4; i++){
         if (i==0) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsReversi);
         if (i==1) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsLig4);
         if (i==2) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsVelha);
-        for (int j = 0; j != vetor_jogadores.size(); j++){
+        if (i==3) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsCampo);
+        for (unsigned int j = 0; j != vetor_jogadores.size(); j++){
             std::cout << nomes_jogos[i] << ":" << std::endl;
             std::cout << vetor_jogadores[j].getNome() << " [" << vetor_jogadores[j].getApelido() << "]:" << std::endl;
             std::cout << vetor_jogadores[j].getStat(i,0) << " VITÓRIAS" << std::endl;
@@ -124,7 +125,7 @@ bool Sistema::jogadorRegistrado(std::string apelido) {
 
 void Sistema::removerJogador(std::string apelido){
     if (jogadorRegistrado(apelido)) {
-        for (int i = 0; i != vetor_jogadores.size(); i++){
+        for (unsigned int i = 0; i != vetor_jogadores.size(); i++){
             if (vetor_jogadores[i].getApelido() == apelido){
                 vetor_jogadores.erase(vetor_jogadores.begin()+i);
                 num_jogadores_cadastrados--;
