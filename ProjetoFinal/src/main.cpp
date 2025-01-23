@@ -143,9 +143,9 @@ int main(){
                 else if (modelo == 'L') {
                     jogo = new Liga4();
                 }
-                else if (modelo == 'C') {
-                    jogo = new CampoMinado();
-                }
+                //else if (modelo == 'C') {
+                    //jogo = new CampoMinado();
+                //}
 
                 Partida* partida = new Partida (jogador1, jogador2, jogo);
 
