@@ -74,8 +74,8 @@ int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const
 
 void CampoMinado::colocarSinalizador(pair<int, int> jogada) 
 {
-    int linha = jogada.first;
-    int coluna = jogada.second;
+    int linha = jogada.first - 1;
+    int coluna = jogada.second - 1;
 
     if (tabuleiro_visivel[linha][coluna] == ' ') 
     {
