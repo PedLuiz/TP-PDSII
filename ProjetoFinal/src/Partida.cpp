@@ -61,6 +61,7 @@ void Partida::finalizarPartida(char modelo) {
     cls();
 
     cout << endl << "+=++=++=++=++=++=+ FIM DE JOGO +=++=++=++=++=++=+" << endl << endl;
+
     jogo->printTabuleiro();
 
     char peca_vencedor = jogo->getVencedor();
@@ -268,11 +269,16 @@ void Partida::executarVelha() {
 
 void Partida::executarMinado() 
 {
-    cout << endl << "========================== BEM VINDO AO CAMPO MINADO =============================" << endl << endl;
+    cout << endl << "============================ BEM VINDO AO CAMPO MINADO ===============================" << endl << endl;
+    cout << "Instrucoes: " << endl << "\t-Cada coordenada contem numeros de 0 a 8, esses numeros representam" << endl << 
+            "\ta quantidade de bombas adjacentes." <<endl << "\t-As bombas sao representadas pela letra 'B'." << endl <<
+            "\t-O primeiro que encontrar a bomba perdera se dois jogadores tiverem a mesma" << endl << "\tquantidade de jogadas, caso contrario, tera a ultima jogada do outro jogador."
+            << endl << "\t-Caso os dois encontrarem bombas, resultara em empate." << endl <<
+            "\t-Voce podera colocar um sinalizador 'F' onde suspeitar de uma bomba." << endl << "BOA SORTE!"
+    << endl << endl;
 
-    int linhas, colunas, numBombs;
 
-    cout << "Escolha o modo de jogo (1 = FACIL, 2 = MEDIO, 3 = DIFICIL): ";
+    /*cout << "Escolha o modo de jogo (1 = FACIL, 2 = MEDIO, 3 = DIFICIL): ";
     int choice;
     cin >> choice;
 
@@ -302,9 +308,9 @@ void Partida::executarMinado()
             colunas = 5;
             numBombs = (linhas * colunas) * 10 / 100;
             break;
-    }
+    } */
 
-    std::shared_ptr<CampoMinado> jogo_campo_minado = std::make_shared<CampoMinado>(linhas, colunas, numBombs);
+    CampoMinado* jogo_campo_minado = dynamic_cast<CampoMinado*> (jogo);
 
     if (!jogo_campo_minado) 
     {
@@ -321,7 +327,7 @@ void Partida::executarMinado()
         if (rodada > 1) 
         {
             cls(); 
-            cout << "========================== CAMPO MINADO =============================" << endl << endl;
+            cout << "============================ CAMPO MINADO ===============================" << endl << endl;
         }
 
         jogador_atual = pecas_jogadores[jogo_campo_minado->getTurno()];
@@ -373,9 +379,6 @@ void Partida::executarMinado()
 
         rodada++;
     }
-
-    jogo_campo_minado->revelarTabuleiro();
-    cout << "Jogo encerrado!" << endl;
 
     finalizarPartida('C');
 }
