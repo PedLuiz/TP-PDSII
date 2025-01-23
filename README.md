@@ -52,6 +52,8 @@ O tabuleiro exibe todas as posições válidas onde o jogador pode jogar, facili
 Contagem de Peças:
 Um método adicional conta e exibe o número de peças de cada jogador.
 
+
+
 ## Campo Minado
 
 ### Visão Geral
@@ -68,7 +70,8 @@ O programa é dividido em dois arquivos principais:
 CampoMinado.hpp: Contém a declaração da classe CampoMinado, que herda da classe Jogo. Define os métodos necessários para manipulação 
 do jogo, como posicionar bombas, fazer jogadas, verificar se o jogo terminou, entre outros.
 
-CampoMinado.cpp: Contém a implementação da classe CampoMinado, incluindo as funções que controlam o andamento do jogo, como a colocação das bombas, verificação de jogadas válidas, troca de turno, revelação de células e controle do estado final do jogo.
+CampoMinado.cpp: Contém a implementação da classe CampoMinado, incluindo as funções que controlam o andamento do jogo, como a colocação 
+das bombas, verificação de jogadas válidas, troca de turno, revelação de células e controle do estado final do jogo.
 
 ### Funcionamento
 
@@ -106,3 +109,48 @@ getVencedor: Retorna o vencedor da partida (baseado em quem perdeu ao clicar em 
 isEstadoFinal: Verifica se o jogo terminou (se todas as jogadas possíveis foram feitas ou se um jogador perdeu).
 setTurno: Alterna o turno entre os jogadores.
 
+
+
+## Liga 4
+
+### Visão Geral
+
+Este projeto é uma implementação do clássico jogo Liga 4 em C++, desenvolvido para ser jogado no terminal. 
+O objetivo do jogo é conectar quatro peças consecutivas em uma linha, coluna ou diagonal antes do oponente. 
+Ele oferece funcionalidades como verificação de vencedor, controle de turnos, validação de jogadas e exibição 
+do tabuleiro.
+
+### Estrutura do Programa
+
+O programa é dividido em dois arquivos principais:
+
+Liga4.hpp: Declara a classe Liga4, que herda de Jogo, e define os métodos necessários para implementar a lógica do jogo.
+
+Liga4.cpp: Implementa a classe Liga4, com foco nas regras do jogo, manipulação do tabuleiro e interações do jogador.
+
+### Funcionamento
+
+O jogo segue a seguinte sequência de ações:
+
+Inicialização do tabuleiro vazio e configuração do turno inicial.
+Cada jogador, no seu turno, escolhe uma coluna para inserir sua peça ('X' ou 'O').
+A peça cai na posição mais baixa disponível na coluna escolhida.
+O programa verifica se há um vencedor ou se o jogo atingiu o estado final (tabuleiro cheio ou vitória).
+Caso não haja um estado final, o turno é alternado e o próximo jogador realiza sua jogada.
+
+### Dificuldades Encontradas
+
+Verificação de Vitória: Implementar a lógica para verificar combinações horizontais, verticais e diagonais de peças 
+foi desafiador devido à necessidade de percorrer todas as posições possíveis do tabuleiro.
+
+### Métodos Implementados
+
+Liga4(): Construtor que inicializa o jogo com um tabuleiro 6x7 vazio e define as condições iniciais.
+getVencedor(): Verifica todas as linhas, colunas e diagonais do tabuleiro para determinar se algum jogador venceu.
+isEstadoFinal(): Retorna true se o jogo atingiu um estado final, seja por vitória de um jogador ou por o tabuleiro estar cheio.
+getTurno(): Retorna o jogador atual ('X' ou 'O').
+setTurno(): Alterna o turno entre os jogadores. Caso ocorra um erro inesperado, exibe uma mensagem.
+fazerJogada(): Realiza a jogada colocando a peça do jogador atual na coluna escolhida, se válida.
+isJogadaValida(): Verifica se a jogada é válida (coluna entre 1 e 7 e ainda não preenchida).
+printTabuleiro(): Imprime o estado atual do tabuleiro, mostrando as peças inseridas e os espaços vazios.
+~Liga4(): Destrutor para limpar qualquer recurso utilizado pelo jogo.
