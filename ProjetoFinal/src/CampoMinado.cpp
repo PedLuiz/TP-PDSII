@@ -130,28 +130,30 @@ void CampoMinado::fazerJogada(pair<int, int> jogada)
         jogadasRestantes -= 1;
         count_jogadas += 1;
         if(tabuleiro_oculto[linha][coluna] == 'B')
-        {
+        {   
             //o jogo só irá ser encerrado se um jogador encontrar uma primeira bomba e os dois jogadores tiverem a mesma quantidade de jogadas;
             if(count_jogadas%2==0) jogoAtivo = false;
             else{
             system("cls");
             printTabuleiro();
             cout << endl << "Atencao! Voce encontrou uma bomba, se o proximo jogador tambem encontrar sera empate." << endl << endl;
-            cout << endl << "Aguarde! Preparando a ultima rodada..." << endl;
-            system("timeout /t 7 >nul"); //pausa de 7 segundos para ler a mensagem
+            cout << endl << "Pressione qualquer tecla para continuar..."<< std::flush;
+            cin.get();
 
             }
-        }
         //Inicialmente perdedor = ' ', se um jogador perder na rodada anterior, o atributo perdedor vai ser setado como 'X' ou 'O'
             //Caso na próxima jogada o outro jogador perca, será considerado empate
-            if(perdedor == 'O' || perdedor == 'X')
+        }
+        
+        if(perdedor == 'O' || perdedor == 'X')
             {   
-                perdedor = ' ';
+                if(tabuleiro_oculto[linha][coluna] == 'B') perdedor = ' '; //define o empate
                 jogoAtivo = false;
                 return;
             }
-            perdedor = turno_atual;
-            
+
+        if(tabuleiro_oculto[linha][coluna] == 'B') perdedor = turno_atual;
+
         setTurno();
 }
 
