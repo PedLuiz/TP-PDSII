@@ -23,6 +23,7 @@ private:
     void colocarBombas();
     int contarBombasAdjacentes(int linha, int coluna) const;
     void atualizarTabuleiro();
+    void revelarCasasIniciais(int numCasasParaRevelar);
 
 public:
     CampoMinado(int linhas, int colunas, int numBombas);
