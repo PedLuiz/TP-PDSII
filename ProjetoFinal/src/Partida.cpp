@@ -352,6 +352,14 @@ void Partida::executarMinado()
                  << "[" << jogo_campo_minado->getTurno() << "] insira um comando no formato <linha> <coluna> ou <linha> <coluna> F para sinalizar:" << endl;
             
             cin >> jogada.first >> jogada.second;
+
+            if (cin.fail()) 
+            {
+                cout << "Entrada inválida. Tente novamente." << endl;
+                cin.clear(); // Limpa o estado de erro
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignora o restante da linha
+                continue; // Recomeça o loop para solicitar a entrada novamente
+            }
             
             if (cin.peek() == ' ') 
             {
@@ -361,7 +369,7 @@ void Partida::executarMinado()
             {
                 comando = ' ';
             }
-            cin.get(); 
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             if (jogo_campo_minado->isJogadaValida(jogada)) 
             {
