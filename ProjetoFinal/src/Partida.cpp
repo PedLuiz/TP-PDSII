@@ -101,6 +101,8 @@ void Partida::finalizarPartida(char modelo) {
             stat_jogo = 1;
         } else if (modelo == 'V') {
             stat_jogo = 2;
+        } else if (modelo == 'C') {
+            stat_jogo = 3;
         }
 
         vencedor->setStat(stat_jogo, 0, (vencedor->getStat(stat_jogo, 0) + 1)); // incrementa vitorias
