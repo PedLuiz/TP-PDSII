@@ -1,6 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
-#include "JogoDaVelha.hpp"
+#include "../include/JogoDaVelha.hpp"
 
 //Testando o método getVencedor:
 TEST_CASE("Não há vencedor"){
@@ -15,7 +15,7 @@ TEST_CASE("Não há vencedor"){
     jogo.fazerJogada({3,2});
     jogo.fazerJogada({1,3});
     jogo.fazerJogada({2,3});
-    CHECK(jogo.getVencedor == " ");
+    CHECK(jogo.getVencedor() == ' ');
 }
 
 TEST_CASE("Vitória por linha"){
@@ -26,7 +26,7 @@ TEST_CASE("Vitória por linha"){
     jogo.fazerJogada({1,2});
     jogo.fazerJogada({2,2});
     jogo.fazerJogada({1,3});
-    CHECK(jogo.getVencedor == "X");
+    CHECK(jogo.getVencedor() == 'X');
 }
 
 TEST_CASE("Vitória por coluna"){
@@ -38,7 +38,7 @@ TEST_CASE("Vitória por coluna"){
     jogo.fazerJogada({3,1});
     jogo.fazerJogada({3,2});
     jogo.fazerJogada({2,1});
-    CHECK(jogo.getVencedor == "O");
+    CHECK(jogo.getVencedor() == 'O');
 }
 
 TEST_CASE("Vitória pela diagonal principal"){
@@ -49,7 +49,7 @@ TEST_CASE("Vitória pela diagonal principal"){
     jogo.fazerJogada({3,3});
     jogo.fazerJogada({1,2});
     jogo.fazerJogada({2,2});
-    CHECK(jogo.getVencedor == "X");
+    CHECK(jogo.getVencedor() == 'X');
 }
 
 TEST_CASE("Vitória pela diagonal secundária"){
@@ -61,7 +61,7 @@ TEST_CASE("Vitória pela diagonal secundária"){
     jogo.fazerJogada({2,2});
     jogo.fazerJogada({1,2});
     jogo.fazerJogada({1,3});
-    CHECK(jogo.getVencedor == "O");
+    CHECK(jogo.getVencedor() == 'O');
 }
 
 //Testando o método isJogadaValida:
