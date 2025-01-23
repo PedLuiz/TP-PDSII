@@ -143,7 +143,7 @@ int main(){
                 else if (modelo == 'L') {
                     jogo = new Liga4();
                 }
-                else if (modelo == 'C'){
+                else if (modelo == 'C') {
                     jogo = new CampoMinado();
                 }
 
