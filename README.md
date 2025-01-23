@@ -52,3 +52,57 @@ O tabuleiro exibe todas as posições válidas onde o jogador pode jogar, facili
 Contagem de Peças:
 Um método adicional conta e exibe o número de peças de cada jogador.
 
+## Campo Minado
+
+### Visão Geral
+
+Este projeto é uma implementação do jogo Campo Minado em C++, onde o objetivo é localizar todas as células sem bombas, 
+evitando que o jogador clique em uma célula com bomba. O jogo é desenvolvido para ser jogado no terminal, com funcionalidades 
+para posicionamento de bombas, revelação de células, sinalização de células suspeitas e controle de turnos. Ele também oferece 
+validação de jogadas e atualização do estado do jogo conforme o progresso.
+
+### Estrutura do Programa
+
+O programa é dividido em dois arquivos principais:
+
+CampoMinado.hpp: Contém a declaração da classe CampoMinado, que herda da classe Jogo. Define os métodos necessários para manipulação 
+do jogo, como posicionar bombas, fazer jogadas, verificar se o jogo terminou, entre outros.
+
+CampoMinado.cpp: Contém a implementação da classe CampoMinado, incluindo as funções que controlam o andamento do jogo, como a colocação das bombas, verificação de jogadas válidas, troca de turno, revelação de células e controle do estado final do jogo.
+
+### Funcionamento
+
+O jogo segue a seguinte sequência de ações:
+
+O jogo inicia com a escolha do nível de dificuldade(fácil, médio, difícil).
+O tabuleiro sendo configurado com bombas e células vazias segundo nível de dificuldade selecionado.
+A cada turno, o jogador escolhe uma célula para revelar ou sinalizar.
+O tabuleiro é atualizado após cada jogada, mostrando as células reveladas e sinalizadas.
+O número de jogadas restantes diminui a cada movimento válido.
+O jogo termina quando um jogador revela uma bomba ou quando todas as células sem bomba são reveladas.
+O vencedor é determinado quando um jogador não perde ao revelar uma bomba ou se o jogo atinge um empate.
+
+### Dificuldades Encontradas
+
+Lógica de posicionamento e contagem de bombas adjacentes: Garantir que as bombas fossem distribuídas de maneira aleatória 
+sem repetição e contar corretamente o número de bombas adjacentes a cada célula foi um desafio.
+
+Validação de jogadas: A validação de jogadas (verificando se a coordenada já foi revelada ou se está fora do tabuleiro) 
+exigiu um código robusto para garantir uma boa experiência ao usuário.
+
+Controle de turnos e detecção de vencedor: A implementação de regras de turnos e detecção de vencedor ao encontrar uma bomba 
+foi complicada devido à necessidade de controlar o estado do jogo com base nas jogadas feitas por ambos os jogadores.
+
+### Métodos Implementados
+
+colocarBombas: Coloca aleatoriamente as bombas no tabuleiro.
+contarBombasAdjacentes: Conta o número de bombas nas células adjacentes a uma célula específica.
+colocarSinalizador: Coloca ou remove um sinalizador ('F') em uma célula.
+fazerJogada: Realiza a jogada de um jogador, revelando a célula selecionada ou marcando-a com um sinalizador.
+isJogadaValida: Verifica se a jogada é válida (se a célula está dentro do tabuleiro e ainda não foi revelada).
+printTabuleiro: Imprime o tabuleiro visível (com células já reveladas e sinalizadas).
+revelarTabuleiro: Revela todo o tabuleiro, mostrando as bombas e os números nas células.
+getVencedor: Retorna o vencedor da partida (baseado em quem perdeu ao clicar em uma bomba).
+isEstadoFinal: Verifica se o jogo terminou (se todas as jogadas possíveis foram feitas ou se um jogador perdeu).
+setTurno: Alterna o turno entre os jogadores.
+
