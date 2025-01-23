@@ -13,7 +13,7 @@ CampoMinado::CampoMinado(int linhas, int colunas, int numBombas)
      jogoAtivo(true),
      count_jogadas(0),
      jogadasRestantes(linhas*colunas-numBombas),
-     tabuleiro(linhas, vector<char>(colunas, ' ')),
+     tabuleiro_oculto(linhas, vector<char>(colunas, ' ')),
      tabuleiro_visivel(linhas, vector<char>(colunas, ' '))
      {
         colocarBombas();
@@ -27,26 +27,27 @@ void CampoMinado::colocarBombas()
 
     while (bombasColocadas < numBombas) 
     {
-        int linha = rand() % linhas;
-        int coluna = rand() % colunas;
+        int linha = rand() % this->M;  // Gera índice aleatório para linha
+        int coluna = rand() % this->N;  // Gera índice aleatório para coluna
 
-        if (tabuleiro_visivel[linha][coluna] != 'B') 
+        if (tabuleiro_oculto[linha][coluna] != 'B') 
         {
-            tabuleiro_visivel[linha][coluna] = 'B';
+            tabuleiro_oculto[linha][coluna] = 'B';
             bombasColocadas++;
         }
     }
 }
 
+
 void CampoMinado::atualizarTabuleiro() 
 {
-    for (int i = 0; i < linhas; i++) 
+    for (int i = 0; i < this->M; i++) 
     {
-        for (int j = 0; j < colunas; j++) 
+        for (int j = 0; j < this->N; j++) 
         {
-            if (tabuleiro[i][j] == 'B') continue;
+            if (tabuleiro_oculto[i][j] == 'B') continue;
             int bombasVizinhas = contarBombasAdjacentes(i, j);
-            tabuleiro[i][j] = bombasVizinhas > 0 ? '0' + bombasVizinhas : ' ';
+            tabuleiro_oculto[i][j] = bombasVizinhas > 0 ? '0' + bombasVizinhas : 'O';
         }
     }
 }
@@ -60,9 +61,9 @@ int CampoMinado::contarBombasAdjacentes(int linha, int coluna) const
         {
             int novaLinha = linha + i;
             int novaColuna = coluna + j;
-            if (novaLinha >= 0 && novaLinha < linhas &&
-                novaColuna >= 0 && novaColuna < colunas &&
-                tabuleiro[novaLinha][novaColuna] == 'B') 
+            if (novaLinha >= 0 && novaLinha < this->M &&
+                novaColuna >= 0 && novaColuna < this->N &&
+                tabuleiro_oculto[novaLinha][novaColuna] == 'B') 
             {
                 contador++;
             }
@@ -122,48 +123,56 @@ char CampoMinado::getTurno(){
 void CampoMinado::fazerJogada(pair<int, int> jogada)
 {
     int coluna, linha;
-    linha = jogada.first;
-    coluna = jogada.second;
+    linha = jogada.first-1;
+    coluna = jogada.second-1;
     
-    if(isJogadaValida(jogada))
-    {
-        tabuleiro[linha][coluna] = tabuleiro_visivel[linha][coluna];
+        tabuleiro_visivel[linha][coluna] = tabuleiro_oculto[linha][coluna];
         jogadasRestantes -= 1;
         count_jogadas += 1;
-        if(tabuleiro[linha][coluna] == 'B')
+        if(tabuleiro_oculto[linha][coluna] == 'B')
         {
-            //Inicialmente perdedor = ' ', se um jogador perder na rodada anterior, o atributo perdedor vai ser setado como 'X' ou 'O'
-            //Caso na próxima jogada o outro jogador perca, será considerado empate
-            if(perdedor == 'O' || perdedor == 'X')
-            {
-                perdedor = ' ';
-            }
-            perdedor = turno_atual;
             //o jogo só irá ser encerrado se um jogador encontrar uma primeira bomba e os dois jogadores tiverem a mesma quantidade de jogadas;
             if(count_jogadas%2==0) jogoAtivo = false;
+            else{
+            system("cls");
+            printTabuleiro();
+            cout << endl << "Atencao! Voce encontrou uma bomba, se o proximo jogador tambem encontrar sera empate." << endl << endl;
+            cout << endl << "Aguarde! Preparando a ultima rodada..." << endl;
+            system("timeout /t 7 >nul"); //pausa de 7 segundos para ler a mensagem
+
+            }
         }
+        //Inicialmente perdedor = ' ', se um jogador perder na rodada anterior, o atributo perdedor vai ser setado como 'X' ou 'O'
+            //Caso na próxima jogada o outro jogador perca, será considerado empate
+            if(perdedor == 'O' || perdedor == 'X')
+            {   
+                perdedor = ' ';
+                jogoAtivo = false;
+                return;
+            }
+            perdedor = turno_atual;
+            
         setTurno();
-    }
 }
 
 bool CampoMinado::isJogadaValida(pair<int, int> jogada){
     int coluna, linha;
-    coluna = jogada.first;
-    linha = jogada.second;
+    linha = jogada.first-1;
+    coluna = jogada.second-1;
     
-    if(coluna <= colunas && coluna >0 && linha <= linhas && linha > 0)
+    if(coluna < this->M && coluna >=0 && linha < this->N && linha >= 0)
     {
         if(tabuleiro_visivel[linha][coluna] == ' ')
             return true;
             else
             {
-                cout << "A coordenada já está revelada! Por favor escolha outra." << endl;
+                cout << "A coordenada ja esta revelada! Por favor escolha outra." << endl;
                 return false;
             }
     }
     else
     {
-        cout << "Coordenada inválida! Por favor Escolha uma coluna entre 1 a " << M << " e linha entre 1 a " << N << "." << endl;
+        cout << "Coordenada invalida! Por favor Escolha uma coluna de 1 a " << M << " e linha de 1 a " << N << "." << endl;
         return false;
     }
 }
@@ -181,13 +190,13 @@ void CampoMinado::printTabuleiro() {
     cout << endl;
 
     // Imprime o tabuleiro linha por linha, com os índices das linhas
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < M; i++) {
         if(i<9)
             cout << " " << i+1 << " ";  // Índice da linha abaixo do numero 10
         else
             cout << i+1 << " ";  // Índice da linha acima do numero 9
-        for (int j = 0; j < M; j++) {
-            cout << "| " << tabuleiro_visivel[j][i] << " ";
+        for (int j = 0; j < N; j++) {
+            cout << "| " << tabuleiro_visivel[i][j] << " ";
         }
         cout << "|" << endl << endl;
     }
@@ -206,14 +215,14 @@ void CampoMinado::revelarTabuleiro() {
     cout << endl;
 
     // Imprime o tabuleiro linha por linha, com os índices das linhas
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < M; i++) {
         if(i<9)
             cout << " " << i+1 << " ";  // Índice da linha abaixo do numero 10
         else
             cout << i+1 << " ";  // Índice da linha acima do numero 9
             
-        for (int j = 0; j < M; j++) {
-            cout << "| " << tabuleiro[j][i] << " ";
+        for (int j = 0; j < N; j++) {
+            cout << "| " << tabuleiro_oculto[i][j] << " ";
         }
         cout << "|" << endl << endl;
     }

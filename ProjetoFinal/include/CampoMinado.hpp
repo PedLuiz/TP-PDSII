@@ -17,8 +17,8 @@ private:
     int count_jogadas;
     int jogadasRestantes;
 
+    vector<vector<char>> tabuleiro_oculto;
     vector<vector<char>> tabuleiro_visivel;
-    vector<vector<char>> tabuleiro;
 
     void colocarBombas();
     int contarBombasAdjacentes(int linha, int coluna) const;

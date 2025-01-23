@@ -334,6 +334,7 @@ void Partida::executarMinado()
              << "[" << jogo_campo_minado->getTurno() << "]:" << endl << endl;
 
         jogo_campo_minado->printTabuleiro();
+        jogo_campo_minado->revelarTabuleiro();//exluir depois dos testes!!!
 
         pair<int, int> jogada;
         char comando;
@@ -365,10 +366,6 @@ void Partida::executarMinado()
                     jogo_campo_minado->fazerJogada(jogada);
                 }
                 break;
-            } 
-            else 
-            {
-                cout << "Jogada inválida, tente novamente." << endl;
             }
         }
 
@@ -378,8 +375,7 @@ void Partida::executarMinado()
     jogo_campo_minado->revelarTabuleiro();
     cout << "Jogo encerrado!" << endl;
 
-    char vencedor = jogo_campo_minado->getVencedor();
-    finalizarPartida(vencedor);
+    finalizarPartida('C');
 }
 
 
