@@ -11,7 +11,7 @@ Sistema::~Sistema(){
     arq_jogadores.close();
 }
 
-std::vector<std::string> nomes_jogos = {"REVERSI", "LIG4", "VELHA", "CAMPO MINADO"};
+std::vector<std::string> nomes_jogos = {"REVERSI", "LIGA4", "VELHA", "CAMPO MINADO"};
 
 int Sistema::getNumJogadores() {
     return num_jogadores_cadastrados;
