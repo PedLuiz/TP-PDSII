@@ -143,9 +143,40 @@ int main(){
                 else if (modelo == 'L') {
                     jogo = new Liga4();
                 }
-                //else if (modelo == 'C') {
-                    //jogo = new CampoMinado();
-                //}
+                else if (modelo == 'C') {
+                    cout << "Escolha o modo de jogo (1 = FACIL, 2 = MEDIO, 3 = DIFICIL): ";
+    int choice, linhas, colunas,numBombs;
+    cin >> choice;
+
+    switch (choice) 
+    {
+        case 1: //FÁCIL
+            linhas = 5;
+            colunas = 5;
+            numBombs = (linhas * colunas) * 10 / 100;
+            break;
+        
+        case 2: //MÉDIO
+            linhas = 10;
+            colunas = 10;
+            numBombs = (linhas * colunas) * 20 / 100;
+            break;
+        
+        case 3: //DIFÍCIL
+            linhas = 20;
+            colunas = 20;
+            numBombs = (linhas * colunas) * 35 / 100;
+            break;
+        
+        default:
+            cout << "Modo inválido. Usando FACIL como padrão.\n";
+            linhas = 5;
+            colunas = 5;
+            numBombs = (linhas * colunas) * 10 / 100;
+            break;
+    }
+                    jogo = new CampoMinado(linhas, colunas, numBombs);
+                }
 
                 Partida* partida = new Partida (jogador1, jogador2, jogo);
 
