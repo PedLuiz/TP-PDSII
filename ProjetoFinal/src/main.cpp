@@ -52,6 +52,12 @@ int main(){
         }
 
         else if (comando=="LJ"){
+            int num_jogadores = sistema.getNumJogadores();
+            if (num_jogadores == 0){
+                cout << "NENHUM JOGADOR CADASTRADO NO SISTEMA" << endl << endl;
+                pause();
+                continue;
+            }
             string opcao;
             char op;
             while(true) {
@@ -71,28 +77,28 @@ int main(){
                 cout << "ERRO, por favor insira um modo de ordenacao valido" << endl;
             }
 
-            int num_jogadores = sistema.getNumJogadores();
             clear();
-            if (num_jogadores > 0) {
-                cout << "------------------------------------------------------------------------------" << endl;
-                if (op == 'C') {
-                    cout << "\t\t\t\tLEADERBOARD" << endl << endl;
-                    sistema.printLeaderBoard();
-                }
-
-                else {
-                    cout <<  "\t\t\tJOGADORES CADASTRADOS  [" << num_jogadores << "]" << endl << endl;
-                    cout << "APELIDO  |  NOME" << endl << endl;
-                    sistema.printSistema(op);
-                }
-                cout << "------------------------------------------------------------------------------" << endl;
-            } else {
-                cout << "NENHUM JOGADOR CADASTRADO NO SISTEMA" << endl << endl;
+            cout << "------------------------------------------------------------------------------" << endl;
+            if (op == 'C') {
+                cout << "\t\t\t\tLEADERBOARD" << endl << endl;
+                sistema.printLeaderBoard();
             }
+
+            else {
+                cout <<  "\t\t\tJOGADORES CADASTRADOS  [" << num_jogadores << "]" << endl << endl;
+                cout << "APELIDO  |  NOME" << endl << endl;
+                sistema.printSistema(op);
+            }
+            cout << "------------------------------------------------------------------------------" << endl;
             pause();
         }
 
         else if (comando=="EP"){
+            if (sistema.getNumJogadores() == 0) {
+                cout << "NENHUM JOGADOR CADASTRADO, ABORTANDO PARTIDA...";
+                pause();
+                continue;
+            }
             string jogo;
             cout << "Insira o jogo a ser jogado([R]eversi, Jogo da [V]elha, [L]iga4, [C]ampo Minado): ";
             getline(cin, jogo);
@@ -204,7 +210,7 @@ int main(){
                 sistema.saveSistema();
                 pause();
 
-                delete partida, jogo, jogador1, jogador2;
+                delete partida, jogo;
             }
         }
 
