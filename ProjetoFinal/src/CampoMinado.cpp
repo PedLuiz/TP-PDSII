@@ -18,6 +18,7 @@ CampoMinado::CampoMinado(int linhas, int colunas, int numBombas)
      {
         colocarBombas();
         atualizarTabuleiro();
+        revelarCasasIniciais(6);
      }
 
 void CampoMinado::colocarBombas() 
@@ -164,7 +165,7 @@ bool CampoMinado::isJogadaValida(pair<int, int> jogada){
     
     if(coluna < this->M && coluna >=0 && linha < this->N && linha >= 0)
     {
-        if(tabuleiro_visivel[linha][coluna] == ' ')
+        if(tabuleiro_visivel[linha][coluna] == ' ' || tabuleiro_visivel[linha][coluna] == 'F')
             return true;
             else
             {
@@ -227,6 +228,24 @@ void CampoMinado::revelarTabuleiro() {
             cout << "| " << tabuleiro_oculto[i][j] << " ";
         }
         cout << "|" << endl << endl;
+    }
+}
+
+void CampoMinado::revelarCasasIniciais(int numCasasParaRevelar)
+{
+    srand(time(NULL)); 
+    int casasReveladas = 0;
+
+    while (casasReveladas < numCasasParaRevelar) 
+    {
+        int linha = rand() % this->M;  // Gera índice aleatório para linha
+        int coluna = rand() % this->N;  // Gera índice aleatório para coluna
+
+        if (tabuleiro_oculto[linha][coluna] != 'B' && tabuleiro_visivel[linha][coluna] == ' ') 
+        {
+            tabuleiro_visivel[linha][coluna] = tabuleiro_oculto[linha][coluna];
+            casasReveladas++;
+        }
     }
 }
 

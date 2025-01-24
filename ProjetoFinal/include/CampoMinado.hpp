@@ -66,6 +66,7 @@ private:
      * uma jogada é feita.
      */
     void atualizarTabuleiro();
+    void revelarCasasIniciais(int numCasasParaRevelar);
 
 public:
     /**

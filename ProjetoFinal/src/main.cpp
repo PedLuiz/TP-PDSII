@@ -183,19 +183,18 @@ int main(){
                             break;
                         
                         case 3: //DIFÍCIL
-                            linhas = 20;
-                            colunas = 20;
-                            numBombs = (linhas * colunas) * 35 / 100;
+                            linhas = 15;
+                            colunas = 15;
+                            numBombs = (linhas * colunas) * 30 / 100;
                             break;
-                        
-                        default:
-                            cout << "Modo inválido. Usando FACIL como padrão.\n";
-                            linhas = 5;
-                            colunas = 5;
-                            numBombs = (linhas * colunas) * 10 / 100;
-                            break;
-                    }
-
+        
+        default:
+            cout << "Modo inválido. Usando FACIL como padrão.\n";
+            linhas = 5;
+            colunas = 5;
+            numBombs = (linhas * colunas) * 10 / 100;
+            break;
+    }
                     jogo = new CampoMinado(linhas, colunas, numBombs);
                 }
 
