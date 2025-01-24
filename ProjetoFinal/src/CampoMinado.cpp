@@ -165,7 +165,7 @@ bool CampoMinado::isJogadaValida(pair<int, int> jogada){
     
     if(coluna < this->M && coluna >=0 && linha < this->N && linha >= 0)
     {
-        if(tabuleiro_visivel[linha][coluna] == ' ')
+        if(tabuleiro_visivel[linha][coluna] == ' ' || tabuleiro_visivel[linha][coluna] == 'F')
             return true;
             else
             {
