@@ -277,39 +277,6 @@ void Partida::executarMinado()
             "\t-Voce podera colocar um sinalizador 'F' onde suspeitar de uma bomba." << endl << "BOA SORTE!"
     << endl << endl;
 
-
-    /*cout << "Escolha o modo de jogo (1 = FACIL, 2 = MEDIO, 3 = DIFICIL): ";
-    int choice;
-    cin >> choice;
-
-    switch (choice) 
-    {
-        case 1: //FÁCIL
-            linhas = 5;
-            colunas = 5;
-            numBombs = (linhas * colunas) * 10 / 100;
-            break;
-        
-        case 2: //MÉDIO
-            linhas = 10;
-            colunas = 10;
-            numBombs = (linhas * colunas) * 20 / 100;
-            break;
-        
-        case 3: //DIFÍCIL
-            linhas = 20;
-            colunas = 20;
-            numBombs = (linhas * colunas) * 35 / 100;
-            break;
-        
-        default:
-            cout << "Modo inválido. Usando FACIL como padrão.\n";
-            linhas = 5;
-            colunas = 5;
-            numBombs = (linhas * colunas) * 10 / 100;
-            break;
-    } */
-
     CampoMinado* jogo_campo_minado = dynamic_cast<CampoMinado*> (jogo);
 
     if (!jogo_campo_minado) 
@@ -342,7 +309,6 @@ void Partida::executarMinado()
              << "[" << jogo_campo_minado->getTurno() << "]:" << endl << endl;
 
         jogo_campo_minado->printTabuleiro();
-        jogo_campo_minado->revelarTabuleiro();//exluir depois dos testes!!!
 
         pair<int, int> jogada;
         char comando;
