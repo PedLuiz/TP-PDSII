@@ -5,15 +5,18 @@
 #include <chrono>
 
 Reversi::Reversi() : isTurnoX(true), Jogo(8, 8) {
-    // Construtor e inicialização da posição inicial do jogo
     tabuleiro[3][3] = 'X';
     tabuleiro[4][4] = 'X';
     tabuleiro[3][4] = 'O';
     tabuleiro[4][3] = 'O';
 }
 
+/** 
+ * A função percorre o tabuleiro e verifica todas as posições vazias que são válidas 
+ * para o jogador atual, ou seja, que permitem capturar pelo menos uma peça adversária 
+ * ao fazer a jogada.
+ */
 vector<pair<int,int>> Reversi::getPossiveisJogadas() {
-    // Retorna um vetor de todas as jogadas válidas possíveis no estado atual do tabuleiro
     vector<pair <int, int>> jogadas_possiveis;
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
@@ -25,8 +28,13 @@ vector<pair<int,int>> Reversi::getPossiveisJogadas() {
     return jogadas_possiveis;
 }
 
+/**
+ * A função verifica todas as direções ao redor da posição da jogada e retorna 
+ * as peças que seriam convertidas de acordo com as regras do Reversi. A captura 
+ * só é válida se houver pelo menos uma sequência de peças adversárias entre a 
+ * jogada e uma peça do jogador.
+ */
 vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
-    // Retorna uma lista de pecas adversarias que serao convertidas ao fazer determinada jogada;
     int x_start = jogada.first;
     int y_start = jogada.second;
 
@@ -43,8 +51,6 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
         adversario = 'X';
     }
 
-    // valores a serem somados para ir para uma das 8 direções apartir de uma entrada da matriz
-    // começando na pela direita e caminhando no sentido horário (L SE S SO O NO N NE) 
     vector<pair<int, int>> directions = {
         {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
     
@@ -75,8 +81,6 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
                 continue;
 
         if (tabuleiro[x][y] == jogador) {
-            // Encontramos a outra peca do mesmo tipo, agora fazemos o caminho inverso e adicionando as
-            //  coordenadas ao vetor de pecas convertidas
             while (true) {
                 x -= next_x;
                 y -= next_y;
@@ -94,17 +98,13 @@ vector<pair<int, int>> Reversi::getPecasConvertidas(pair<int,int> jogada) {
 
 
 bool Reversi::isEstadoFinal() {
-    // Retorna verdadeiro se o jogo acabou (nenhum jogador possui movimentos disponíveis) 
-    // checando se o jogador atual possui jogadas disponíveis
-
     bool sem_jogadas_atual = getPossiveisJogadas().empty();
 
-    trocaTurno(); // temporariamente troca o turno para checar a possibilidade do próximo jogador
+    trocaTurno(); 
     bool advesario_sem_jogadas = getPossiveisJogadas().empty();
     trocaTurno();
 
     if ((sem_jogadas_atual) && (advesario_sem_jogadas)) {
-        // Nenhum dos jogadores possui jogadas disponíveis, jogo acabou
         return true;
     }
 
@@ -112,8 +112,6 @@ bool Reversi::isEstadoFinal() {
 }
 
 char Reversi::getTurno() {
-    // Retorna qual jogador tem o turno atual
-
     if (isTurnoX) 
         return 'X';
     else
@@ -121,14 +119,11 @@ char Reversi::getTurno() {
 }
 
 void Reversi::trocaTurno() {
-    // Troca o turno entre os jogadores
 
     isTurnoX = !isTurnoX;
 }
 
 void Reversi::fazerJogada(pair<int, int> jogada) { 
-    // Após a validação, realiza a jogada (x, y), fazendo as alterações do tabuleiro de forma condizente
-    // e trocando o turno posteriormente
 
     int x = jogada.first;
     int y = jogada.second;
@@ -154,7 +149,6 @@ void Reversi::fazerJogada(pair<int, int> jogada) {
 }
 
 bool Reversi::isJogadaValida(pair<int,int> jogada) {
-    // retorna verdadeiro se para o estado atual do tabuleiro a jogada (x, y) é válida
 
     int curr_x = jogada.first;
     int curr_y = jogada.second;
@@ -174,9 +168,6 @@ bool Reversi::isJogadaValida(pair<int,int> jogada) {
 }
 
 map<char, int> Reversi::countPieces() const {
-    // Conta a quantidade de peças de cada jogador
-    // resultado = {countX, countO}
-
     map<char, int> resultado {{'X', 0}, {'O', 0}};
 
     for (const auto &linha : tabuleiro) { 
@@ -193,7 +184,6 @@ map<char, int> Reversi::countPieces() const {
 }
 
 bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
-    // Verifica se uma jogada (x, y) está dentro dos limites do tabuleiro
 
     int x = jogada.first;  
     int y = jogada.second; 
@@ -206,7 +196,6 @@ bool Reversi::estaNoTabuleiro(pair<int, int> jogada) {
 }
 
 char Reversi::getVencedor() {
-    // Compara o vetor resultado = {countX, countO}  
 
     map <char, int> resultado = countPieces();
 
@@ -224,7 +213,6 @@ char Reversi::getVencedor() {
 }
 
 vector<vector<char>> Reversi::getTabuleiroPossivel(){
-    // Marca no tabuleiro com '+' as coordenadas das possíveis jogadas
     vector<vector<char>> tabuleiro_possivel = tabuleiro;
 
     vector<pair<int, int>> jogadas_possiveis = getPossiveisJogadas();
@@ -239,7 +227,6 @@ vector<vector<char>> Reversi::getTabuleiroPossivel(){
 }
 
 void Reversi::printTabuleiroPossivel() {
-    // Printa o tabuleiro com as jogadas possiveis do turno atual formatado
     vector<vector<char>> tabuleiro_possivel=getTabuleiroPossivel();
 
     cout << "     ";
