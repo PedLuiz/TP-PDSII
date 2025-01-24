@@ -101,16 +101,18 @@ void Sistema::printSistema(char parametro){
 
 void Sistema::printLeaderBoard(){
     for (int i=0; i<4; i++){
+        std::cout << nomes_jogos[i] << ":" << std::endl;
         if (i==0) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsReversi);
         if (i==1) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsLig4);
         if (i==2) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsVelha);
         if (i==3) std::sort(vetor_jogadores.begin(), vetor_jogadores.end(), Jogador::comparaStatsCampo);
         for (unsigned int j = 0; j != vetor_jogadores.size(); j++){
-            std::cout << nomes_jogos[i] << ":" << std::endl;
-            std::cout << vetor_jogadores[j].getNome() << " [" << vetor_jogadores[j].getApelido() << "]:" << std::endl;
-            std::cout << vetor_jogadores[j].getStat(i,0) << " VITÓRIAS" << std::endl;
-            std::cout << vetor_jogadores[j].getStat(i,1) << " DERROTAS" << std::endl;
+            std::cout << j+1 << "o - " << vetor_jogadores[j].getApelido() << " [" << vetor_jogadores[j].getNome() << "]:" << std::endl;
+            std::cout << vetor_jogadores[j].getStat(i,0) << " VITORIAS" << std::endl;
+            std::cout << vetor_jogadores[j].getStat(i,1) << " DERROTAS" << std::endl << std::endl;
         }
+        if (i < 3)
+            std::cout << "------------------------------------------------" << std::endl;
     }
 }
 

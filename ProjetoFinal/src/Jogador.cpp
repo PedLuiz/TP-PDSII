@@ -59,14 +59,14 @@ void Jogador::setStat(int jogo, int stat, int value){
 bool Jogador::comparaStatsReversi(Jogador & J1, Jogador & J2){ //o critério de colocação considerado será a diferença de vitórias e derrotas de cada jogador em cada jogo
     int desempenho_J1 = J1.getStat(0, 0) - J1.getStat(0, 1); 
     int desempenho_J2 = J2.getStat(0, 0) - J2.getStat(0, 1);
-    if (desempenho_J1 <= desempenho_J2) return true;
+    if (desempenho_J1 >= desempenho_J2) return true;
     else return false;
 }
 
 bool Jogador::comparaStatsLig4(Jogador & J1, Jogador & J2){ 
     int desempenho_J1 = J1.getStat(1, 0) - J1.getStat(1, 1); 
     int desempenho_J2 = J2.getStat(1, 0) - J2.getStat(1, 1);
-    if (desempenho_J1 <= desempenho_J2) return true;
+    if (desempenho_J1 >= desempenho_J2) return true;
     else return false;
 }
 

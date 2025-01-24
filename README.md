@@ -26,8 +26,8 @@ O jogo começa com o tabuleiro inicializado com as quatro peças centrais config
 A cada rodada:
 O jogador é informado sobre o turno atual.
 O tabuleiro mostra as jogadas possíveis (representadas por +).
-O jogador insere as coordenadas da jogada no formato (<linha> <coluna>).
-Após validação da jogada, o tabuleiro é atualizado, e as peças adversárias são convertidas.
+O jogador insere as coordenadas da jogada válida no formato (<linha> <coluna>).
+    - Uma jogada é considerada válida quando cerca entre peças aliadas, em alguma das 8 direções, alguma peça adversária.
 O jogo continua até nenhum jogador possuir jogadas válidas disponíveis
 O programa declara o vencedor baseado no número de peças no tabuleiro.
 
@@ -44,15 +44,13 @@ A implementação de uma interface de texto intuitiva foi essencial para uma boa
 Validação de jogadas: 
 Implementar uma verificação robusta e eficiente.
 
-Extras Implementados
+### Extras Implementados
 
 Visualização de Jogadas Possíveis:
 O tabuleiro exibe todas as posições válidas onde o jogador pode jogar, facilitando a tomada de decisão.
 
 Contagem de Peças:
 Um método adicional conta e exibe o número de peças de cada jogador.
-
-
 
 ## Campo Minado
 
@@ -108,8 +106,6 @@ revelarTabuleiro: Revela todo o tabuleiro, mostrando as bombas e os números nas
 getVencedor: Retorna o vencedor da partida (baseado em quem perdeu ao clicar em uma bomba).
 isEstadoFinal: Verifica se o jogo terminou (se todas as jogadas possíveis foram feitas ou se um jogador perdeu).
 setTurno: Alterna o turno entre os jogadores.
-
-
 
 ## Liga 4
 

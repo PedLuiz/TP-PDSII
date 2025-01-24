@@ -53,18 +53,38 @@ int main(){
 
         else if (comando=="LJ"){
             string opcao;
-            cout << "Deseja ordenar por nome(n) ou apelido(a)?"<< endl;
-            getline(cin, opcao);
-            toUpper(opcao);
+            char op;
+            while(true) {
+                cout << "Selecione o modo de ordenacao" << endl;
+                cout << "\t-[N] para ordernar por nome" << endl;
+                cout << "\t-[A] para ordernar por apelido" << endl;
+                cout << "\t-[C] para exibir a Tabela de Classificacao" << endl;
+                
+                cout << "Comando: ";
+                cin >> opcao; cin.get();
+                toUpper(opcao);
 
-            char op = opcao[0]; 
+                op = opcao[0]; 
+                if ((op == 'N') || (op == 'A') || (op == 'C')) 
+                    break;
+                
+                cout << "ERRO, por favor insira um modo de ordenacao valido" << endl;
+            }
+
             int num_jogadores = sistema.getNumJogadores();
             clear();
             if (num_jogadores > 0) {
                 cout << "------------------------------------------------------------------------------" << endl;
-                cout <<  "\t\t\tJOGADORES CADASTRADOS  [" << num_jogadores << "]" << endl << endl;
-                cout << "APELIDO  |  NOME" << endl << endl;
-                sistema.printSistema(op);
+                if (op == 'C') {
+                    cout << "\t\t\t\tLEADERBOARD" << endl << endl;
+                    sistema.printLeaderBoard();
+                }
+
+                else {
+                    cout <<  "\t\t\tJOGADORES CADASTRADOS  [" << num_jogadores << "]" << endl << endl;
+                    cout << "APELIDO  |  NOME" << endl << endl;
+                    sistema.printSistema(op);
+                }
                 cout << "------------------------------------------------------------------------------" << endl;
             } else {
                 cout << "NENHUM JOGADOR CADASTRADO NO SISTEMA" << endl << endl;
@@ -145,36 +165,37 @@ int main(){
                 }
                 else if (modelo == 'C') {
                     cout << "Escolha o modo de jogo (1 = FACIL, 2 = MEDIO, 3 = DIFICIL): ";
-    int choice, linhas, colunas,numBombs;
-    cin >> choice;
+                    int choice, linhas, colunas,numBombs;
+                    cin >> choice;
 
-    switch (choice) 
-    {
-        case 1: //FÁCIL
-            linhas = 5;
-            colunas = 5;
-            numBombs = (linhas * colunas) * 10 / 100;
-            break;
-        
-        case 2: //MÉDIO
-            linhas = 10;
-            colunas = 10;
-            numBombs = (linhas * colunas) * 20 / 100;
-            break;
-        
-        case 3: //DIFÍCIL
-            linhas = 20;
-            colunas = 20;
-            numBombs = (linhas * colunas) * 35 / 100;
-            break;
-        
-        default:
-            cout << "Modo inválido. Usando FACIL como padrão.\n";
-            linhas = 5;
-            colunas = 5;
-            numBombs = (linhas * colunas) * 10 / 100;
-            break;
-    }
+                    switch (choice) 
+                    {
+                        case 1: //FÁCIL
+                            linhas = 5;
+                            colunas = 5;
+                            numBombs = (linhas * colunas) * 10 / 100;
+                            break;
+                        
+                        case 2: //MÉDIO
+                            linhas = 10;
+                            colunas = 10;
+                            numBombs = (linhas * colunas) * 20 / 100;
+                            break;
+                        
+                        case 3: //DIFÍCIL
+                            linhas = 20;
+                            colunas = 20;
+                            numBombs = (linhas * colunas) * 35 / 100;
+                            break;
+                        
+                        default:
+                            cout << "Modo inválido. Usando FACIL como padrão.\n";
+                            linhas = 5;
+                            colunas = 5;
+                            numBombs = (linhas * colunas) * 10 / 100;
+                            break;
+                    }
+
                     jogo = new CampoMinado(linhas, colunas, numBombs);
                 }
 
@@ -205,6 +226,8 @@ int main(){
     cout << "Sistema finalizado com sucesso!" << endl;
 }
 
+
+/// @brief Menu de comandos básicos do sistema
 void Menu() {
     clear();
     cout << "============================================================SISTEMA DE JOGOS============================================================" << endl;
@@ -219,7 +242,7 @@ void Menu() {
     cout << "\t\tExibe uma lista dos jogadores cadastrados no sistema e suas estatisticas" << endl << endl;
 
     cout << "\tEP - EXECUTAR PARTIDA" << endl;
-    cout << "\t\tInsira o jogo a ser jogado (R)eversi, (L)iga4, Jogo da (V)elha e os apelidos dos dois jogadores" << endl << endl;
+    cout << "\t\tInsira o jogo a ser jogado (R)eversi, (L)iga4, Jogo da (V)elha ou (C)ampo Minado e os apelidos dos dois jogadores" << endl << endl;
 
     cout << "\tFS - FINALIZAR SISTEMA" << endl;
     cout << "\t\tEncerra a execucao do programa" << endl << endl;
@@ -227,15 +250,19 @@ void Menu() {
     cout << "=========================================================================================================================================" << endl;
 }
 
+/// @brief Converte uma string para caixa alta
+/// @param str 
 void toUpper(string& str) {
     transform(str.begin(), str.end(), str.begin(), ::toupper);
 }
 
+/// @brief Pausa a tela do terminal esperando confirmação
 void pause() {
-    cout << endl << "Pressione qualquer tecla para continuar..."<< std::flush;
+    cout << endl << "Pressione qualquer [ENTER] para continuar..."<< std::flush;
     cin.get();
 }
 
+/// @brief Limpa o terminal
 void clear() {
     #ifdef _WIN32
         system("cls");
