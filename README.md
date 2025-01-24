@@ -154,3 +154,44 @@ fazerJogada(): Realiza a jogada colocando a peça do jogador atual na coluna esc
 isJogadaValida(): Verifica se a jogada é válida (coluna entre 1 e 7 e ainda não preenchida).
 printTabuleiro(): Imprime o estado atual do tabuleiro, mostrando as peças inseridas e os espaços vazios.
 ~Liga4(): Destrutor para limpar qualquer recurso utilizado pelo jogo.
+
+
+
+## Jogo da Velha
+
+### Visão Geral
+
+Uma implementação do clássico Jogo da Velha em C++. Nele, dois jogadores competem entre qual será o primeiro a completar uma linha, coluna ou diagonal de um tabuleiro 3x3 com suas respectivas peças, alternadamente. O programa constrói a experiência realizando alternância de turnos, validação e execução de jogadas por meio do terminal e verificação de estados do tabuleiro.
+
+### Estrutura do Programa
+
+O Jogo da Velha é uma classe derivada da classe abstrata "Jogo", definida nos arquivos Jogo.hpp e Jogo.cpp, que contém atributos e métodos comuns aos jogos implementados.
+A própria classe "JogoDaVelha", por outro lado, definida em JogoDaVelha.hpp e JogoDaVelha.cpp, possui um atributo a mais que a classe mãe - um caractere "turno", correspondente à peça do jogador da vez -, além de sobrescrever métodos virtuais e definir novos, responsáveis por:
+Determinar o vencedor e o estado final do jogo, alternar o turno entre jogadores, validar e fazer jogadas e imprimir o tabuleiro.
+
+### Funcionamento
+
+Ao se iniciar uma partida do Jogo da Velha, o construtor da classe gera o tabuleiro vazio e inicializa o atributo "turno" com a peça 'X', por convenção.
+Em seguida, em um loop, recebe entradas dos usuários com as posições do tabuleiro sobre as quais são feitas as jogadas, avalia se a jogada é válida (i. e. não é uma casa ocupada ou uma posição fora do tabuleiro) e, por fim, realiza a jogada alterando o espaço correspondente no tabuleiro e alternando o turno. O programa sai do loop quando o tabuleiro está em seu estado final, isto é, quando um dos jogadores completou uma linha, coluna ou diagonal (vitória), ou quando não houverem mais jogadas possíveis (empate).
+
+### Dificuldades Encontradas
+
+Uma parte desafiadora dessa parte do projeto foi a programação defensiva, uma vez que houve momentos em que incoerências nas entradas do usuário faziam com que o programa fornecesse outputs incorretos (por exemplo, antes de ser tratada a "case sesitivity", alguns métodos não eram executados quando o usuário fornecia a entrada em letra minúscula).
+
+### Métodos Implementados
+
+JogoDaVelha(): Construtor. Instancia um objeto "Jogo" com um tabuleiro 3x3 e define o primeiro turno como 'X', por convenção.
+
+getVencedor(): Itera sobre colunas, linhas e diagonais. Caso uma das entradas em uma das direções do tabuleiro seja diferente da entrada anterior, não há vencedor e o método retorna ' '. Caso contrário, ou seja, todas as peças na direção são iguais, o método retorna a peça.
+
+isEstadoFinal(): Avalia, primeiramente, se há um vencedor. Se sim, o jogo chegou ao seu estado final e a função retorna true. Caso contrário, a função checa o tabuleiro em busca de casas não ocupadas. Caso existam, retorna false.
+
+alternaTurno(): Existem dois jogadores. Quando o turno tem valor 'X', altera para 'O'. Caso contrário, altera para 'X'.
+
+getTurno(): Retorna o turno atual.
+
+isJogadaValida(): Recebe um par de inteiros na forma de uma coordenada do tabuleiro. Se for uma coordenada dentro do tabuleiro (i. e. com valores entre 1 e 3) e essa não estiver ocupada, a jogada é válida e é retornado true. Caso contrário, é imprimida uma mensagem de erro e retorna false.
+
+fazerJogada(): Confere se a jogada é valida por meio do método anterior. Caso positivo, altera a posição no tabuleiro com a peça correspondente ao jogador da vez.
+
+printTabuleiro(): Imprime o tabuleiro resultante da jogada.
