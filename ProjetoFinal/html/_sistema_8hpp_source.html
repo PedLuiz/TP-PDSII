@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TP - PDSII: Código-Fonte de include/Sistema.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">TP - PDSII
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Busca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('_sistema_8hpp_source.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Sistema.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_sistema_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SISTEMA_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SISTEMA_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_jogador_8hpp.html">Jogador.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_sistema.html">   27</a></span><span class="keyword">class </span><a class="code hl_function" href="class_sistema.html#a815b07845ef6b03247b239333fe75e28">Sistema</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    std::vector&lt;Jogador&gt; vetor_jogadores;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    std::fstream arq_jogadores;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">int</span> num_jogadores_cadastrados;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_function" href="class_sistema.html#a815b07845ef6b03247b239333fe75e28">Sistema</a>();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_function" href="class_sistema.html#aafc86e0f2c3d734fb4c0985f70c27a1a">~Sistema</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sistema.html#a232b3837b533d0938d33bdada07c3f9f">loadSistema</a>();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sistema.html#aed7eec54489b29d215fa1b78876b5a65">saveSistema</a>();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_sistema.html#ae8b76cfc4720f4bac5823e819119fb90">getNumJogadores</a>();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sistema.html#a658514eeaf1b2d3f2066e9537e03bd8a">cadastrarJogador</a>(std::string nome, std::string apelido);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sistema.html#ac52e59673843b12cfdf251dc094436fe">printSistema</a>(<span class="keywordtype">char</span> parametro);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sistema.html#a083ae5eccfbef291820ce6a17184a4a2">printLeaderBoard</a>();</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sistema.html#ab29cb67d1586393a544a30f582c2bd22">removerJogador</a>(std::string apelido);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_sistema.html#a3dcb8caab441cbd97253bf74d7d0066b">jogadorRegistrado</a>(std::string apelido);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_class" href="class_jogador.html">Jogador</a>* <a class="code hl_function" href="class_sistema.html#aa8e89639534adff50d23232241ad803e">getJogador</a>(std::string apelido);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>};</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor">#endif </span></div>
+<div class="ttc" id="a_jogador_8hpp_html"><div class="ttname"><a href="_jogador_8hpp.html">Jogador.hpp</a></div><div class="ttdoc">Declaração da classe Jogador .</div></div>
+<div class="ttc" id="aclass_jogador_html"><div class="ttname"><a href="class_jogador.html">Jogador</a></div><div class="ttdoc">Classe base de Jogador.</div><div class="ttdef"><b>Definição</b> Jogador.hpp:20</div></div>
+<div class="ttc" id="aclass_sistema_html_a083ae5eccfbef291820ce6a17184a4a2"><div class="ttname"><a href="class_sistema.html#a083ae5eccfbef291820ce6a17184a4a2">Sistema::printLeaderBoard</a></div><div class="ttdeci">void printLeaderBoard()</div><div class="ttdoc">Exibe a classificação (leaderboard) dos jogadores.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:102</div></div>
+<div class="ttc" id="aclass_sistema_html_a232b3837b533d0938d33bdada07c3f9f"><div class="ttname"><a href="class_sistema.html#a232b3837b533d0938d33bdada07c3f9f">Sistema::loadSistema</a></div><div class="ttdeci">void loadSistema()</div><div class="ttdoc">Carrega o sistema de jogadores a partir de um arquivo.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:38</div></div>
+<div class="ttc" id="aclass_sistema_html_a3dcb8caab441cbd97253bf74d7d0066b"><div class="ttname"><a href="class_sistema.html#a3dcb8caab441cbd97253bf74d7d0066b">Sistema::jogadorRegistrado</a></div><div class="ttdeci">bool jogadorRegistrado(std::string apelido)</div><div class="ttdoc">Verifica se um jogador está registrado no sistema.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:119</div></div>
+<div class="ttc" id="aclass_sistema_html_a658514eeaf1b2d3f2066e9537e03bd8a"><div class="ttname"><a href="class_sistema.html#a658514eeaf1b2d3f2066e9537e03bd8a">Sistema::cadastrarJogador</a></div><div class="ttdeci">void cadastrarJogador(std::string nome, std::string apelido)</div><div class="ttdoc">Cadastra um novo jogador no sistema.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:20</div></div>
+<div class="ttc" id="aclass_sistema_html_a815b07845ef6b03247b239333fe75e28"><div class="ttname"><a href="class_sistema.html#a815b07845ef6b03247b239333fe75e28">Sistema::Sistema</a></div><div class="ttdeci">Sistema()</div><div class="ttdoc">Construtor.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:5</div></div>
+<div class="ttc" id="aclass_sistema_html_aa8e89639534adff50d23232241ad803e"><div class="ttname"><a href="class_sistema.html#aa8e89639534adff50d23232241ad803e">Sistema::getJogador</a></div><div class="ttdeci">Jogador * getJogador(std::string apelido)</div><div class="ttdoc">Obtém um ponteiro para o jogador registrado com o apelido fornecido.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:150</div></div>
+<div class="ttc" id="aclass_sistema_html_aafc86e0f2c3d734fb4c0985f70c27a1a"><div class="ttname"><a href="class_sistema.html#aafc86e0f2c3d734fb4c0985f70c27a1a">Sistema::~Sistema</a></div><div class="ttdeci">~Sistema()</div><div class="ttdoc">Destrutor da classe Sistema.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:10</div></div>
+<div class="ttc" id="aclass_sistema_html_ab29cb67d1586393a544a30f582c2bd22"><div class="ttname"><a href="class_sistema.html#ab29cb67d1586393a544a30f582c2bd22">Sistema::removerJogador</a></div><div class="ttdeci">void removerJogador(std::string apelido)</div><div class="ttdoc">Remove um jogador do sistema com base no apelido.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:128</div></div>
+<div class="ttc" id="aclass_sistema_html_ac52e59673843b12cfdf251dc094436fe"><div class="ttname"><a href="class_sistema.html#ac52e59673843b12cfdf251dc094436fe">Sistema::printSistema</a></div><div class="ttdeci">void printSistema(char parametro)</div><div class="ttdoc">Exibe o sistema de jogadores de acordo com o ordenação fornecido.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:86</div></div>
+<div class="ttc" id="aclass_sistema_html_ae8b76cfc4720f4bac5823e819119fb90"><div class="ttname"><a href="class_sistema.html#ae8b76cfc4720f4bac5823e819119fb90">Sistema::getNumJogadores</a></div><div class="ttdeci">int getNumJogadores()</div><div class="ttdef"><b>Definição</b> Sistema.cpp:16</div></div>
+<div class="ttc" id="aclass_sistema_html_aed7eec54489b29d215fa1b78876b5a65"><div class="ttname"><a href="class_sistema.html#aed7eec54489b29d215fa1b78876b5a65">Sistema::saveSistema</a></div><div class="ttdeci">void saveSistema()</div><div class="ttdoc">Salva os dados dos jogadores no arquivo.</div><div class="ttdef"><b>Definição</b> Sistema.cpp:68</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="_sistema_8hpp.html">Sistema.hpp</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

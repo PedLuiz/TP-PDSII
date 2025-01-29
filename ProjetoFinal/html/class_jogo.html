@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TP - PDSII: Referência da Classe Jogo</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">TP - PDSII
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Busca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('class_jogo.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Membros Públicos</a> &#124;
+<a href="#pro-attribs">Atributos Protegidos</a> &#124;
+<a href="class_jogo-members.html">Lista de todos os Membros</a>  </div>
+  <div class="headertitle"><div class="title">Referência da Classe Jogo<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Classe abstrata para jogos de tabuleiro.  
+ <a href="#details">Mais...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_jogo_8hpp_source.html">Jogo.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Diagrama de hierarquia da classe Jogo:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_jogo.png" usemap="#Jogo_map" alt=""/>
+  <map id="Jogo_map" name="Jogo_map">
+<area href="class_campo_minado.html" title="Classe que implmenta a lógica do Campo Minado." alt="CampoMinado" shape="rect" coords="0,56,93,80"/>
+<area href="class_jogo_da_velha.html" title="Classe que implementa a lógica do Jogo da Velha." alt="JogoDaVelha" shape="rect" coords="103,56,196,80"/>
+<area href="class_liga4.html" title="Classe que implementa a lógica do jogo Liga4." alt="Liga4" shape="rect" coords="206,56,299,80"/>
+<area href="class_reversi.html" title="Classe que implementa a lógica do jogo Reversi." alt="Reversi" shape="rect" coords="309,56,402,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Membros Públicos</h2></td></tr>
+<tr class="memitem:acf06dd42df736d0658a3f41a881b1d72" id="r_acf06dd42df736d0658a3f41a881b1d72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf06dd42df736d0658a3f41a881b1d72">Jogo</a> (int <a class="el" href="#a62a9014d5cc06ec65a69a0cd8eed1156">M</a>, int <a class="el" href="#a07cbbdce59b0d1eac2309bd222098f37">N</a>)</td></tr>
+<tr class="memdesc:acf06dd42df736d0658a3f41a881b1d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor.  <br /></td></tr>
+<tr class="separator:acf06dd42df736d0658a3f41a881b1d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d828bc989a1d6521f4ea8ea24b84e8c" id="r_a6d828bc989a1d6521f4ea8ea24b84e8c"><td class="memItemLeft" align="right" valign="top">virtual char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d828bc989a1d6521f4ea8ea24b84e8c">getVencedor</a> ()=0</td></tr>
+<tr class="memdesc:a6d828bc989a1d6521f4ea8ea24b84e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metodo que determina o vencedor do <a class="el" href="class_jogo.html" title="Classe abstrata para jogos de tabuleiro.">Jogo</a>.  <br /></td></tr>
+<tr class="separator:a6d828bc989a1d6521f4ea8ea24b84e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01c759c449df74701ef28b862049d155" id="r_a01c759c449df74701ef28b862049d155"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01c759c449df74701ef28b862049d155">isEstadoFinal</a> ()=0</td></tr>
+<tr class="memdesc:a01c759c449df74701ef28b862049d155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checa se o jogo terminou.  <br /></td></tr>
+<tr class="separator:a01c759c449df74701ef28b862049d155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10b47d800fac6a019467114cc0bda10f" id="r_a10b47d800fac6a019467114cc0bda10f"><td class="memItemLeft" align="right" valign="top">virtual char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10b47d800fac6a019467114cc0bda10f">getTurno</a> ()=0</td></tr>
+<tr class="memdesc:a10b47d800fac6a019467114cc0bda10f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna qual jogador possui o turno atual.  <br /></td></tr>
+<tr class="separator:a10b47d800fac6a019467114cc0bda10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b087b709233a21a85be6525ee7bcc9a" id="r_a0b087b709233a21a85be6525ee7bcc9a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b087b709233a21a85be6525ee7bcc9a">fazerJogada</a> (pair&lt; int, int &gt; jogada)=0</td></tr>
+<tr class="memdesc:a0b087b709233a21a85be6525ee7bcc9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recebe um par de coordenadas (i, j) e, se for uma jogada valida, atualiza o tabuleiro conforme o jogador que tem o turno.  <br /></td></tr>
+<tr class="separator:a0b087b709233a21a85be6525ee7bcc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87d6f661b3a863d258a2d845858b3613" id="r_a87d6f661b3a863d258a2d845858b3613"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87d6f661b3a863d258a2d845858b3613">isJogadaValida</a> (pair&lt; int, int &gt; jogada)=0</td></tr>
+<tr class="memdesc:a87d6f661b3a863d258a2d845858b3613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna, a depender das regras específicas de cada jogo, se uma jogada é válida.  <br /></td></tr>
+<tr class="separator:a87d6f661b3a863d258a2d845858b3613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8967d01e5d59cdbf23e7bef7da3d789" id="r_ab8967d01e5d59cdbf23e7bef7da3d789"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8967d01e5d59cdbf23e7bef7da3d789">printTabuleiro</a> ()</td></tr>
+<tr class="memdesc:ab8967d01e5d59cdbf23e7bef7da3d789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impressão no terminal do tabuleiro do jogo.  <br /></td></tr>
+<tr class="separator:ab8967d01e5d59cdbf23e7bef7da3d789"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Atributos Protegidos</h2></td></tr>
+<tr class="memitem:a62a9014d5cc06ec65a69a0cd8eed1156" id="r_a62a9014d5cc06ec65a69a0cd8eed1156"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62a9014d5cc06ec65a69a0cd8eed1156">M</a></td></tr>
+<tr class="memdesc:a62a9014d5cc06ec65a69a0cd8eed1156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Número de linhas.  <br /></td></tr>
+<tr class="separator:a62a9014d5cc06ec65a69a0cd8eed1156"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07cbbdce59b0d1eac2309bd222098f37" id="r_a07cbbdce59b0d1eac2309bd222098f37"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07cbbdce59b0d1eac2309bd222098f37">N</a></td></tr>
+<tr class="memdesc:a07cbbdce59b0d1eac2309bd222098f37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Número de colunas.  <br /></td></tr>
+<tr class="separator:a07cbbdce59b0d1eac2309bd222098f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2675f631e4696aec32f1c2c857adef64" id="r_a2675f631e4696aec32f1c2c857adef64"><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2675f631e4696aec32f1c2c857adef64">tabuleiro</a></td></tr>
+<tr class="memdesc:a2675f631e4696aec32f1c2c857adef64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matriz de armazenamento do tabuleiro.  <br /></td></tr>
+<tr class="separator:a2675f631e4696aec32f1c2c857adef64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Classe abstrata para jogos de tabuleiro. </p>
+<p>Estabelece a interface e interações básicas esperadas de um jogo de tabuleiro. </p>
+</div><h2 class="groupheader">Construtores e Destrutores</h2>
+<a id="acf06dd42df736d0658a3f41a881b1d72" name="acf06dd42df736d0658a3f41a881b1d72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf06dd42df736d0658a3f41a881b1d72">&#9670;&#160;</a></span>Jogo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Jogo::Jogo </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>M</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>N</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construtor. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>Dimensão das linhas. </td></tr>
+    <tr><td class="paramname">N</td><td>Dimensão das colunas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentação das funções</h2>
+<a id="a0b087b709233a21a85be6525ee7bcc9a" name="a0b087b709233a21a85be6525ee7bcc9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b087b709233a21a85be6525ee7bcc9a">&#9670;&#160;</a></span>fazerJogada()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Jogo::fazerJogada </td>
+          <td>(</td>
+          <td class="paramtype">pair&lt; int, int &gt;</td>          <td class="paramname"><span class="paramname"><em>jogada</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recebe um par de coordenadas (i, j) e, se for uma jogada valida, atualiza o tabuleiro conforme o jogador que tem o turno. </p>
+
+<p>Implementado por <a class="el" href="class_campo_minado.html#a8f34c1727d1e9daf1298c995595a29f9">CampoMinado</a>, <a class="el" href="class_liga4.html#a845b2ea4b74697e142562b382fb51504">Liga4</a> e <a class="el" href="class_reversi.html#a944a83d5ec9d6ed10f9a01bd6295d737">Reversi</a>.</p>
+
+</div>
+</div>
+<a id="a10b47d800fac6a019467114cc0bda10f" name="a10b47d800fac6a019467114cc0bda10f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10b47d800fac6a019467114cc0bda10f">&#9670;&#160;</a></span>getTurno()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual char Jogo::getTurno </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retorna qual jogador possui o turno atual. </p>
+<dl class="section return"><dt>Retorna</dt><dd>'X' ou 'O'. </dd></dl>
+
+<p>Implementado por <a class="el" href="class_campo_minado.html#acec09f5875f447cf45da1c97ce42c859">CampoMinado</a>, <a class="el" href="class_jogo_da_velha.html#a177cf1a9f26c40294b428f4ca86af776">JogoDaVelha</a>, <a class="el" href="class_liga4.html#a5fbf26717578e6fb6715f4e82be6f88e">Liga4</a> e <a class="el" href="class_reversi.html#a0397c909f6e0e760053c4e1b8a8fb043">Reversi</a>.</p>
+
+</div>
+</div>
+<a id="a6d828bc989a1d6521f4ea8ea24b84e8c" name="a6d828bc989a1d6521f4ea8ea24b84e8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d828bc989a1d6521f4ea8ea24b84e8c">&#9670;&#160;</a></span>getVencedor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual char Jogo::getVencedor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Metodo que determina o vencedor do <a class="el" href="class_jogo.html" title="Classe abstrata para jogos de tabuleiro.">Jogo</a>. </p>
+<dl class="section return"><dt>Retorna</dt><dd>Caracteres 'X' ou 'O' relativos a peça do jogador vencedor ou ' ' em caso de empate. </dd></dl>
+
+<p>Implementado por <a class="el" href="class_campo_minado.html#aacdf5a82299531764c5265db1a05656a">CampoMinado</a>, <a class="el" href="class_jogo_da_velha.html#a8bc000f2bc145d2b676023afa7080f18">JogoDaVelha</a>, <a class="el" href="class_liga4.html#ae65a87508a5c704dc6bce535fd8e374f">Liga4</a> e <a class="el" href="class_reversi.html#abaea947c02bc3c225d87cd1c48d9daf6">Reversi</a>.</p>
+
+</div>
+</div>
+<a id="a01c759c449df74701ef28b862049d155" name="a01c759c449df74701ef28b862049d155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01c759c449df74701ef28b862049d155">&#9670;&#160;</a></span>isEstadoFinal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Jogo::isEstadoFinal </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checa se o jogo terminou. </p>
+<dl class="section return"><dt>Retorna</dt><dd><code>true</code> se não existem jogadas disponíveis, <code>false</code> caso contrário </dd></dl>
+
+<p>Implementado por <a class="el" href="class_campo_minado.html#abc519bb61872104b10eebdb56de8c708">CampoMinado</a>, <a class="el" href="class_jogo_da_velha.html#a9bb39ec6027bf4802cbc653c6bbf7038">JogoDaVelha</a>, <a class="el" href="class_liga4.html#a6c6058880ba799009e460de8db32efb6">Liga4</a> e <a class="el" href="class_reversi.html#ac2c7ec18335e99b34cf65d2a88a2f96f">Reversi</a>.</p>
+
+</div>
+</div>
+<a id="a87d6f661b3a863d258a2d845858b3613" name="a87d6f661b3a863d258a2d845858b3613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d6f661b3a863d258a2d845858b3613">&#9670;&#160;</a></span>isJogadaValida()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Jogo::isJogadaValida </td>
+          <td>(</td>
+          <td class="paramtype">pair&lt; int, int &gt;</td>          <td class="paramname"><span class="paramname"><em>jogada</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retorna, a depender das regras específicas de cada jogo, se uma jogada é válida. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jogada</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implementado por <a class="el" href="class_campo_minado.html#a102f7346fe19317b6dca07cb92f601c8">CampoMinado</a>, <a class="el" href="class_liga4.html#a94042fc43e343c2c8dda2a3208bc9495">Liga4</a> e <a class="el" href="class_reversi.html#a12a28e0432942749944d2c2377935e43">Reversi</a>.</p>
+
+</div>
+</div>
+<a id="ab8967d01e5d59cdbf23e7bef7da3d789" name="ab8967d01e5d59cdbf23e7bef7da3d789"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8967d01e5d59cdbf23e7bef7da3d789">&#9670;&#160;</a></span>printTabuleiro()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Jogo::printTabuleiro </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Impressão no terminal do tabuleiro do jogo. </p>
+
+<p>Reimplementado por <a class="el" href="class_campo_minado.html#af808716643ac37d8af6fca7b0ac1efae">CampoMinado</a>, <a class="el" href="class_jogo_da_velha.html#aa5ad32a358969d403658f6ea7d800936">JogoDaVelha</a>, <a class="el" href="class_liga4.html#ae141a830583e77e2f6e74881beeb261d">Liga4</a> e <a class="el" href="class_reversi.html#a8cb32aa27e597e73358e7369c9d9c454">Reversi</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Atributos</h2>
+<a id="a62a9014d5cc06ec65a69a0cd8eed1156" name="a62a9014d5cc06ec65a69a0cd8eed1156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62a9014d5cc06ec65a69a0cd8eed1156">&#9670;&#160;</a></span>M</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Jogo::M</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Número de linhas. </p>
+
+</div>
+</div>
+<a id="a07cbbdce59b0d1eac2309bd222098f37" name="a07cbbdce59b0d1eac2309bd222098f37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07cbbdce59b0d1eac2309bd222098f37">&#9670;&#160;</a></span>N</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Jogo::N</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Número de colunas. </p>
+
+</div>
+</div>
+<a id="a2675f631e4696aec32f1c2c857adef64" name="a2675f631e4696aec32f1c2c857adef64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2675f631e4696aec32f1c2c857adef64">&#9670;&#160;</a></span>tabuleiro</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;vector&lt;char&gt; &gt; Jogo::tabuleiro</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Matriz de armazenamento do tabuleiro. </p>
+
+</div>
+</div>
+<hr/>A documentação para essa classe foi gerada a partir dos seguintes arquivos:<ul>
+<li>include/<a class="el" href="_jogo_8hpp_source.html">Jogo.hpp</a></li>
+<li>src/<a class="el" href="_jogo_8cpp.html">Jogo.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_jogo.html">Jogo</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>
